@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Broome Pediatrics — Patient Portal (Demo)</title>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   BROOME PEDIATRICS PATIENT PORTAL — DEMO VERSION
+   De-identified fictional data only. Not for real patient use.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --ocean:#0e7fa3;--ocean-light:#dff3fb;--ocean-dark:#085a76;
+  --teal:#00c9b1;--teal-light:#d8fff9;--teal-dark:#007d6e;
+  --coral:#ff5252;--coral-light:#ffe8e8;
+  --green:#4cbb6a;--green-light:#dcf5e5;--green-dark:#2a7a45;
+  --purple:#9b59b6;--purple-light:#f3e9ff;--purple-dark:#6c3483;
+  --orange:#ff8c00;--orange-light:#fff3dc;--orange-dark:#b85e00;
+  --yellow:#ffd600;--yellow-light:#fffbd0;
+  --pink:#ff4da6;--pink-light:#ffe0f3;
+  --red:#e53935;--red-light:#ffebee;--red-dark:#8b1a1a;
+  --blue:#1976d2;--blue-light:#e3f2fd;
+  --navy:#0f2d48;
+  --text:#1a1a2e;--muted:#5c6675;--border:#d4e6ef;
+  --white:#ffffff;--bg:#f0fbff;
+  --r:18px;--rs:10px;--sh:0 4px 18px rgba(0,0,0,.1);--shhov:0 8px 32px rgba(0,0,0,.18);
+  --font:'Comic Sans MS','Comic Sans',cursive,'Patrick Hand',sans-serif;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
+
+/* DEMO BANNER */
+.demo-banner{background:#1a1a2e;color:#ffd600;padding:8px 16px;text-align:center;font-size:12px;font-weight:900;letter-spacing:.3px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap}
+.demo-banner span{color:rgba(255,255,255,.7);font-weight:400}
+
+/* FISH ANIMATIONS */
+@keyframes brise{0%{transform:translateY(0);opacity:.5}100%{transform:translateY(-90px);opacity:0}}
+@keyframes fishSwimLR{0%{left:-120px;transform:scaleX(1)}49%{left:110%}50%{left:110%;transform:scaleX(-1)}99%{left:-120px;transform:scaleX(-1)}100%{left:-120px;transform:scaleX(1)}}
+@keyframes fishSwimRL{0%{left:110%;transform:scaleX(-1)}49%{left:-120px}50%{left:-120px;transform:scaleX(1)}99%{left:110%;transform:scaleX(1)}100%{left:110%;transform:scaleX(-1)}}
+@keyframes fishWobble{0%{transform:translateY(0) rotate(-2deg)}100%{transform:translateY(-4px) rotate(2deg)}}
+@keyframes tailWag{0%{transform:rotate(-20deg)}100%{transform:rotate(20deg)}}
+@keyframes finWave{0%{transform:rotate(-15deg)}100%{transform:rotate(15deg)}}
+@keyframes shimmer{0%{opacity:.04}100%{opacity:.12}}
+@keyframes starSpin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes starFloat{0%{transform:translateY(0)}100%{transform:translateY(-8px)}}
+@keyframes pageIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sway1{0%{transform:rotate(-12deg)}50%{transform:rotate(10deg)}100%{transform:rotate(-12deg)}}
+@keyframes sway2{0%{transform:rotate(10deg)}50%{transform:rotate(-14deg)}100%{transform:rotate(10deg)}}
+@keyframes sway3{0%{transform:rotate(-8deg)}50%{transform:rotate(12deg)}100%{transform:rotate(-8deg)}}
+@keyframes waveSurface{0%{transform:scaleY(1)}100%{transform:scaleY(1.5)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+@keyframes fadein{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+/* ===== LOGIN SCREEN ===== */
+#loginScreen{min-height:100vh;background:var(--ocean);display:flex;align-items:center;justify-content:center;padding:20px;position:relative;overflow:hidden}
+.login-tank{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.login-card{background:var(--white);border-radius:20px;padding:36px;width:100%;max-width:420px;position:relative;z-index:2;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.login-logo{text-align:center;margin-bottom:22px}
+.login-logo-icon{width:64px;height:64px;background:var(--ocean);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.login-logo h1{font-family:var(--font);font-size:24px;color:var(--ocean);font-weight:900}
+.login-logo p{font-size:12px;color:var(--muted);margin-top:3px}
+.login-notice{background:var(--ocean-light);border:2px solid var(--ocean-dark);border-radius:var(--rs);padding:10px 13px;font-size:12px;color:var(--ocean-dark);font-weight:700;margin-bottom:16px;text-align:center;line-height:1.5}
+.lf-group{margin-bottom:14px}
+.lf-group label{display:block;font-size:12px;font-weight:900;margin-bottom:5px}
+.lf-group input{width:100%;padding:12px 13px;border:2px solid var(--border);border-radius:var(--rs);font-size:14px;font-family:var(--font);outline:none;transition:border .18s}
+.lf-group input:focus{border-color:var(--ocean)}
+.login-btn{width:100%;padding:14px;background:var(--ocean);border:none;border-radius:var(--rs);color:white;font-weight:900;font-size:15px;cursor:pointer;font-family:var(--font);transition:all .2s;margin-bottom:12px}
+.login-btn:hover{background:var(--ocean-dark)}
+.login-links{display:flex;justify-content:space-between;font-size:12px}
+.login-links a{color:var(--ocean);font-weight:700;cursor:pointer}
+.login-footer{text-align:center;margin-top:18px;font-size:10px;color:rgba(255,255,255,.55);position:relative;z-index:2}
+.demo-note{background:var(--yellow-light);border:2px solid var(--yellow);border-radius:var(--rs);padding:9px 12px;font-size:11px;color:#7a5500;font-weight:700;margin-top:12px;line-height:1.5}
+
+/* ===== APP ===== */
+#appScreen{display:none}
+
+/* AQUARIUM HEADER */
+.aquarium-header{background:linear-gradient(180deg,#0a4f6e 0%,#0e7fa3 40%,#1aa8cc 100%);min-height:192px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+.water-surface{position:absolute;top:0;left:0;right:0;height:8px;background:rgba(255,255,255,.18);animation:waveSurface 3s ease-in-out infinite alternate}
+.tank-glass{position:absolute;inset:0;overflow:hidden}
+.bubble{position:absolute;border-radius:50%;border:2px solid rgba(255,255,255,.45);background:rgba(255,255,255,.12);animation:brise linear infinite}
+.fish-wrap{position:absolute;animation:fishSwimLR linear infinite}
+.fish-wrap.rtl{animation:fishSwimRL linear infinite}
+.fish-body{animation:fishWobble .6s ease-in-out infinite alternate}
+.fish-tail{transform-origin:right center;animation:tailWag .3s ease-in-out infinite alternate}
+.fish-fin{transform-origin:center bottom;animation:finWave .5s ease-in-out infinite alternate}
+.sand-floor{height:24px;background:linear-gradient(to top,#e8d5a0,#f5e8c0);position:absolute;bottom:0;left:0;right:0}
+.sand-ripple{position:absolute;bottom:16px;left:0;right:0;height:8px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.15) 0 20px,transparent 20px 40px)}
+.header-content{position:relative;z-index:10;padding:14px 18px 0}
+.header-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.logo-area{display:flex;align-items:center;gap:10px}
+.logo-icon{width:44px;height:44px;background:rgba(255,255,255,.22);border-radius:13px;display:flex;align-items:center;justify-content:center;border:2px solid rgba(255,255,255,.35)}
+.logo-text{font-family:var(--font);font-size:20px;font-weight:900;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.3)}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.8);font-weight:700;display:block;margin-top:-2px}
+.header-right{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.child-badge{background:rgba(255,255,255,.2);border:2px solid rgba(255,255,255,.4);border-radius:18px;padding:5px 13px;display:flex;align-items:center;gap:7px;color:#fff;font-size:12px;font-weight:900}
+.child-dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);box-shadow:0 0 6px var(--yellow)}
+.signout-btn{background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);border-radius:11px;padding:5px 13px;color:#fff;font-size:12px;font-weight:900;cursor:pointer;font-family:var(--font)}
+.signout-btn:hover{background:rgba(255,255,255,.3)}
+.welcome-banner{padding:12px 18px 22px;position:relative;z-index:10}
+.welcome-text{font-size:19px;font-weight:900;color:#fff;text-shadow:0 2px 6px rgba(0,0,0,.25);margin-bottom:4px}
+.welcome-sub{font-size:12px;color:rgba(255,255,255,.9);margin-bottom:11px}
+.welcome-stats{display:flex;gap:18px;flex-wrap:wrap}
+.wstat-val{font-size:23px;font-weight:900;color:#fff}
+.wstat-lbl{font-size:9px;font-weight:900;color:rgba(255,255,255,.75);text-transform:uppercase;letter-spacing:.4px}
+
+/* NAV WITH ARROWS */
+.nav-section{background:var(--white);border-bottom:3px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 3px 14px rgba(0,0,0,.08)}
+.nav-outer{display:flex;align-items:stretch}
+.nav-arrow{width:42px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:var(--white);border:none;cursor:pointer;font-size:20px;color:var(--ocean);transition:all .18s;border-bottom:3px solid var(--border);font-family:var(--font)}
+.nav-arrow:hover{background:var(--ocean-light);color:var(--ocean-dark)}
+.nav-arrow:active{transform:scale(.9)}
+.nav-arrow.left{border-right:1.5px solid var(--border)}
+.nav-arrow.right{border-left:1.5px solid var(--border)}
+.nav-arrow:disabled{color:var(--border);cursor:not-allowed}
+.nav-tabs-scroll{flex:1;overflow-x:hidden;position:relative}
+.nav-tabs{display:flex;gap:0;transition:transform .3s ease}
+.nav-tab{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 14px;cursor:pointer;border:none;background:none;font-family:var(--font);font-size:12px;font-weight:900;color:var(--muted);transition:all .2s;border-bottom:4px solid transparent;white-space:nowrap;min-width:78px;flex-shrink:0}
+.nav-tab:hover{color:var(--ocean);background:var(--ocean-light)}
+.nav-tab.active{color:var(--ocean-dark);border-bottom-color:var(--ocean)}
+.nav-tab .tab-icon{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:17px;transition:all .2s}
+.nav-tab:hover .tab-icon,.nav-tab.active .tab-icon{transform:scale(1.12) translateY(-2px)}
+.nav-tab-label{font-size:11px;font-weight:900}
+#tabDots{display:flex;justify-content:center;gap:5px;padding:4px 0 6px;background:var(--white)}
+
+/* PAGES */
+.page{display:none;padding:20px 16px;max-width:980px;margin:0 auto;animation:pageIn .25s ease}
+.page.active{display:block}
+.section-header{margin-bottom:16px}
+.section-header h1{font-family:var(--font);font-size:24px;font-weight:900}
+.section-header p{font-size:12px;color:var(--muted);margin-top:3px}
+.card{background:var(--white);border-radius:var(--r);padding:17px;box-shadow:var(--sh);border:2.5px solid var(--border)}
+.badge{display:inline-block;font-size:11px;font-weight:900;padding:3px 9px;border-radius:6px;font-family:var(--font)}
+.badge.green{background:var(--green-light);color:var(--green-dark)}.badge.orange{background:var(--orange-light);color:var(--orange-dark)}.badge.blue{background:var(--blue-light);color:var(--blue)}.badge.teal{background:var(--teal-light);color:var(--teal-dark)}.badge.purple{background:var(--purple-light);color:var(--purple-dark)}.badge.red{background:var(--red-light);color:var(--red-dark)}.badge.yellow{background:var(--yellow-light);color:#7a5500}.badge.gray{background:#f1f5f9;color:var(--muted)}.badge.navy{background:#e8f2fa;color:var(--navy)}.badge.pink{background:var(--pink-light);color:#8b0046}
+.alert-strip{border-radius:var(--rs);padding:11px 13px;display:flex;align-items:center;gap:9px;margin-bottom:12px;font-size:13px;font-weight:900;border:2.5px solid}
+.alert-strip.orange{background:var(--orange-light);border-color:var(--orange);color:var(--orange-dark)}
+.alert-strip.red{background:var(--red-light);border-color:var(--red);color:var(--red-dark)}
+.alert-strip.teal{background:var(--teal-light);border-color:var(--teal);color:var(--teal-dark)}
+.alert-strip.green{background:var(--green-light);border-color:var(--green);color:var(--green-dark)}
+.alert-strip.blue{background:var(--blue-light);border-color:var(--blue);color:var(--blue)}
+.action-btn{width:100%;padding:10px;border-radius:var(--rs);border:2.5px dashed var(--ocean);background:var(--ocean-light);color:var(--ocean-dark);font-weight:900;font-size:13px;cursor:pointer;font-family:var(--font);transition:all .2s;margin-top:9px}
+.action-btn:hover{background:var(--ocean);color:white;border-style:solid}
+.fish-fact{background:var(--ocean-light);border-radius:var(--r);padding:14px;display:flex;align-items:center;gap:12px;border:2.5px solid var(--ocean);margin-top:14px}
+.fish-fact p{font-size:12px;color:var(--ocean-dark);line-height:1.5;font-weight:700}
+
+/* DASHBOARD */
+.dash-grid-4{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px;margin-bottom:14px}
+.dash-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:13px;margin-bottom:13px}
+.dash-card{background:var(--white);border-radius:var(--r);padding:16px;box-shadow:var(--sh);border:2.5px solid var(--border);transition:all .2s;cursor:pointer;position:relative;overflow:hidden}
+.dash-card:hover{transform:translateY(-4px);box-shadow:var(--shhov)}
+.dash-card .dc-accent{position:absolute;top:0;left:0;right:0;height:5px}
+.dash-card .dc-icon{font-size:26px;margin-bottom:7px;display:block}
+.dash-card .dc-val{font-family:var(--font);font-size:29px;font-weight:900;margin-bottom:2px}
+.dash-card .dc-label{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+.dash-card .dc-sub{font-size:11px;color:var(--muted);margin-top:3px}
+.feature-card{background:var(--white);border-radius:var(--r);padding:17px;box-shadow:var(--sh);border:2.5px solid var(--border)}
+.feature-card h3{font-family:var(--font);font-size:14px;font-weight:900;margin-bottom:11px;display:flex;align-items:center;gap:8px}
+.fc-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.list-item{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:2px dashed var(--border)}
+.list-item:last-child{border-bottom:none;padding-bottom:0}
+.li-date{text-align:center;background:var(--teal-light);border-radius:9px;padding:5px 9px;min-width:40px;flex-shrink:0}
+.li-day{font-size:16px;font-weight:900;color:var(--teal-dark);line-height:1;font-family:var(--font)}
+.li-mon{font-size:9px;font-weight:900;color:var(--teal-dark);text-transform:uppercase}
+.li-title{font-size:13px;font-weight:900}
+.li-sub{font-size:11px;color:var(--muted)}
+.mcheck{width:16px;height:16px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:8px;flex-shrink:0;font-weight:900}
+.mcheck.g{background:var(--green-light);color:var(--green-dark)}.mcheck.gr{background:#f1f5f9;color:var(--muted)}
+.msg-thread{padding:9px 0;border-bottom:2px dashed var(--border);cursor:pointer;transition:all .15s;border-radius:var(--rs)}
+.msg-thread:hover{background:var(--ocean-light);padding:9px 7px}
+.msg-thread:last-child{border-bottom:none}
+.mt-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:2px}
+.mt-from{font-size:12px;font-weight:900}
+.mt-time{font-size:10px;color:var(--muted);font-weight:700}
+.mt-preview{font-size:11px;color:var(--muted)}
+.unread-dot{width:7px;height:7px;border-radius:50%;background:var(--ocean);display:inline-block;margin-left:4px;animation:pulse 1.5s ease-in-out infinite}
+.mc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mc{background:var(--white);border-radius:var(--rs);padding:10px;box-shadow:var(--sh);border:2.5px solid var(--border);position:relative;overflow:hidden}
+.mc::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.mc.achieved::before{background:var(--green)}.mc.pending::before{background:var(--border)}
+.mc-cat{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.3px;color:var(--muted);margin-bottom:3px}
+.mc-text{font-size:12px;font-weight:900}
+.mc-status{display:flex;align-items:center;gap:4px;margin-top:7px;font-size:10px;font-weight:900}
+.mc.achieved .mc-status{color:var(--green-dark)}.mc.pending .mc-status{color:var(--muted)}
+
+/* GROWTH */
+.growth-tabs{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap}
+.gtab{padding:8px 18px;border-radius:20px;font-size:13px;font-weight:900;cursor:pointer;border:2.5px solid var(--border);background:white;color:var(--muted);font-family:var(--font);transition:all .18s}
+.gtab.active{background:var(--coral);border-color:var(--coral);color:white}
+.who-tab-row{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
+.wtab{padding:6px 13px;border-radius:15px;font-size:12px;font-weight:900;cursor:pointer;border:2.5px solid var(--border);background:white;color:var(--muted);font-family:var(--font);transition:all .18s}
+.wtab.active{background:var(--ocean);border-color:var(--ocean);color:white}
+.chart-wrap{position:relative;height:260px;margin-bottom:10px}
+.chart-source-badge{display:inline-flex;align-items:center;gap:6px;background:var(--navy);color:white;border-radius:8px;padding:5px 12px;font-size:11px;font-weight:900;margin-bottom:10px}
+.percentile-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.pl-item{display:flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--muted)}
+.pl-line{width:22px;height:3px;border-radius:2px}
+.gstat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.gstat{background:var(--white);border-radius:var(--r);padding:13px;box-shadow:var(--sh);border:2.5px solid var(--border);text-align:center}
+.gstat-val{font-family:var(--font);font-size:27px;font-weight:900;margin-top:3px}
+.gstat-lbl{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;color:var(--muted)}
+.gstat-pct{display:inline-block;margin-top:5px;font-size:11px;font-weight:900;padding:2px 7px;border-radius:5px}
+
+/* SCREENINGS */
+.scr-tab-row{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap}
+.scr-tab{padding:7px 14px;border-radius:14px;font-size:12px;font-weight:900;cursor:pointer;border:2.5px solid var(--border);background:white;color:var(--muted);font-family:var(--font);transition:all .18s}
+.scr-tab.active{background:var(--purple);border-color:var(--purple);color:white}
+.screen-card{background:var(--white);border-radius:var(--r);padding:14px;box-shadow:var(--sh);margin-bottom:10px}
+.screen-card.due{border:2.5px solid var(--orange)}
+.screen-card.done{border:2.5px solid var(--green);opacity:.85}
+.sc-tag{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;padding:3px 7px;border-radius:5px;display:inline-block;margin-bottom:7px}
+.sc-name{font-size:13px;font-weight:900;margin-bottom:3px}
+.sc-sub{font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.sc-btn{padding:8px 16px;border-radius:var(--rs);border:none;font-family:var(--font);font-size:12px;font-weight:900;cursor:pointer;background:var(--ocean);color:white;transition:all .18s}
+.sc-btn:hover{background:var(--ocean-dark)}
+.sc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:11px}
+
+/* QUESTIONNAIRE */
+.q-panel{background:var(--white);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:2.5px solid var(--border);margin-bottom:13px;display:none;animation:fadein .2s ease}
+.q-panel.open{display:block}
+.q-tag{font-size:10px;font-weight:900;text-transform:uppercase;padding:3px 7px;border-radius:5px;display:inline-block;margin-bottom:5px}
+.q-prog-bar{height:6px;background:var(--border);border-radius:3px;overflow:hidden;margin:7px 0 14px}
+.q-prog-fill{height:100%;border-radius:3px;background:var(--purple);transition:width .3s}
+.q-sec-lbl{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;color:var(--purple-dark);background:var(--purple-light);padding:4px 9px;border-radius:var(--rs);margin-bottom:9px;display:inline-block}
+.q-item{background:#f9f3e3;border-radius:var(--rs);padding:12px;margin-bottom:8px;border:2.5px solid transparent;transition:border .15s}
+.q-item.answered{border-color:var(--purple);background:var(--purple-light)}
+.q-num{font-size:9px;font-weight:900;color:var(--muted);margin-bottom:3px;text-transform:uppercase}
+.q-text{font-size:13px;font-weight:900;margin-bottom:9px;line-height:1.4}
+.q-note{font-size:11px;color:var(--muted);margin-bottom:7px;font-style:italic}
+.q-opts{display:flex;gap:6px;flex-wrap:wrap}
+.q-opt{padding:6px 11px;border-radius:13px;border:2.5px solid var(--border);background:white;font-size:12px;font-weight:900;cursor:pointer;font-family:var(--font);color:var(--text);transition:all .15s}
+.q-opt:hover{border-color:var(--purple);background:var(--purple-light);color:var(--purple-dark)}
+.q-opt.sel{background:var(--purple);border-color:var(--purple);color:white}
+.q-opt.sel-flag{background:var(--red);border-color:var(--red);color:white}
+.q-nav-row{display:flex;gap:8px;margin-top:12px}
+.q-btn{padding:8px 17px;border-radius:var(--rs);border:none;font-family:var(--font);font-size:12px;font-weight:900;cursor:pointer}
+.q-prev{background:var(--border);color:var(--muted)}.q-next{background:var(--purple);color:white}.q-submit{background:var(--green);color:white}
+.q-result{background:var(--white);border-radius:var(--r);padding:20px;box-shadow:var(--sh);border:2.5px solid var(--border);margin-bottom:13px;display:none;animation:fadein .2s ease}
+.q-result.open{display:block}
+.rb{border-radius:var(--rs);padding:12px 14px;display:flex;align-items:center;gap:11px;margin-bottom:12px;border:2.5px solid}
+.rb.pass{background:var(--green-light);border-color:var(--green)}.rb.monitor{background:var(--orange-light);border-color:var(--orange)}.rb.refer{background:var(--red-light);border-color:var(--red)}
+.rb-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.rb-icon.pass{background:var(--green);color:white}.rb-icon.monitor{background:var(--orange);color:white}.rb-icon.refer{background:var(--red);color:white}
+
+/* VACCINES */
+.vage-lbl{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);margin-bottom:7px;display:flex;align-items:center;gap:7px}
+.vage-lbl::after{content:'';flex:1;height:1.5px;background:var(--border)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:8px;margin-bottom:15px}
+.vcard{background:var(--white);border-radius:var(--rs);padding:11px;box-shadow:var(--sh);border-left:4px solid transparent}
+.vcard.given{border-left-color:var(--green)}.vcard.upcoming{border-left-color:var(--blue)}
+.vn{font-size:12px;font-weight:900}.vd{font-size:11px;color:var(--muted);margin-top:2px}
+.vstatus{display:inline-block;margin-top:6px;font-size:9px;font-weight:900;padding:2px 7px;border-radius:4px}
+.vstatus.given{background:var(--green-light);color:var(--green-dark)}.vstatus.upcoming{background:var(--blue-light);color:var(--blue)}
+
+/* MILESTONES */
+.mage-hdr{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.mage-badge{font-family:var(--font);font-size:12px;font-weight:900;padding:5px 13px;border-radius:15px;color:white;white-space:nowrap}
+.mpbar-wrap{flex:1;height:7px;background:var(--border);border-radius:4px;overflow:hidden}
+.mpbar{height:100%;border-radius:4px;transition:width .5s}
+.mpct{font-size:11px;font-weight:900}
+.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px;margin-bottom:16px}
+
+/* CONTACT */
+.contact-hero{background:var(--ocean);border-radius:var(--r);padding:22px 22px 22px 225px;min-height:140px;position:relative;overflow:hidden;margin-bottom:16px}
+.contact-fish-scene{position:absolute;left:0;top:0;bottom:0;width:213px;background:#0d4f6b;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.contact-hero h2{font-family:var(--font);font-size:20px;color:#fff;margin-bottom:12px;font-weight:900}
+.contact-row{display:flex;align-items:center;gap:9px;margin-bottom:8px}
+.contact-row:last-child{margin-bottom:0}
+.contact-icon{width:28px;height:28px;border-radius:7px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.contact-label{font-size:9px;font-weight:900;text-transform:uppercase;letter-spacing:.4px;color:rgba(255,255,255,.6);margin-bottom:1px}
+.contact-value{font-size:13px;font-weight:900;color:#fff}
+.hours-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:8px}
+.hday{background:var(--bg);border-radius:var(--rs);padding:8px 4px;text-align:center;border:2px solid var(--border)}
+.hday.today{background:var(--ocean-light);border-color:var(--ocean)}
+.hday.closed{opacity:.45}
+.hd-name{font-size:9px;font-weight:900;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.hd-hours{font-size:9px;font-weight:900;color:var(--text);line-height:1.3}
+.hd-closed{color:var(--red)}
+.sick-badge{display:block;background:var(--orange-light);color:var(--orange-dark);border-radius:3px;font-size:8px;font-weight:900;padding:1px 3px;margin-top:2px;line-height:1.3}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.team-card{background:var(--white);border-radius:var(--r);padding:13px;box-shadow:var(--sh);border:2.5px solid var(--border);text-align:center;cursor:pointer;transition:all .2s}
+.team-card:hover{transform:translateY(-3px);border-color:var(--ocean)}
+.team-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;margin:0 auto 7px;border:3px solid var(--border)}
+.team-name{font-size:12px;font-weight:900;margin-bottom:2px}
+.team-role{font-size:10px;color:var(--muted);margin-bottom:6px}
+
+/* MESSAGES */
+.msg-layout{display:grid;grid-template-columns:270px 1fr;gap:0;background:var(--white);border-radius:var(--r);box-shadow:var(--sh);border:2.5px solid var(--border);overflow:hidden;min-height:500px}
+.msg-sidebar{border-right:1.5px solid var(--border);display:flex;flex-direction:column}
+.msg-sidebar-hdr{padding:12px 14px;border-bottom:1.5px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.msg-list{flex:1;overflow-y:auto}
+.msg-thread-item{padding:10px 13px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .12s}
+.msg-thread-item:hover,.msg-thread-item.active{background:var(--ocean-light)}
+.msg-thread-item.active{border-left:3px solid var(--ocean)}
+.msg-main{display:flex;flex-direction:column}
+.msg-main-hdr{padding:13px 16px;border-bottom:1.5px solid var(--border)}
+.msg-body{flex:1;padding:14px 16px;display:flex;flex-direction:column;gap:10px;max-height:320px;overflow-y:auto}
+.msg-bubble{max-width:75%;padding:10px 13px;border-radius:var(--r);font-size:12px;line-height:1.5}
+.msg-bubble.recv{background:#f1f5f9;align-self:flex-start;border-bottom-left-radius:3px}
+.msg-bubble.sent{background:var(--ocean);color:white;align-self:flex-end;border-bottom-right-radius:3px}
+.mb-from{font-size:9px;font-weight:900;margin-bottom:3px;opacity:.65}
+.mb-time{font-size:9px;margin-top:4px;opacity:.55;text-align:right}
+.msg-compose{padding:12px 14px;border-top:1.5px solid var(--border);display:flex;gap:8px;align-items:flex-end}
+.msg-compose textarea{flex:1;padding:9px 11px;border:2px solid var(--border);border-radius:var(--rs);font-size:12px;font-family:var(--font);resize:none;height:56px;outline:none}
+.msg-compose textarea:focus{border-color:var(--ocean)}
+.msg-send-btn{background:var(--ocean);border:none;border-radius:var(--rs);padding:8px 15px;color:white;font-weight:900;font-size:11px;cursor:pointer;font-family:var(--font);height:38px}
+.compose-select{width:100%;padding:8px 10px;border:2px solid var(--border);border-radius:var(--rs);font-size:12px;font-family:var(--font);outline:none;margin-bottom:8px}
+.compose-input{width:100%;padding:8px 10px;border:2px solid var(--border);border-radius:var(--rs);font-size:12px;font-family:var(--font);outline:none;margin-bottom:8px}
+.compose-textarea{width:100%;padding:9px 10px;border:2px solid var(--border);border-radius:var(--rs);font-size:12px;font-family:var(--font);resize:none;height:80px;outline:none;margin-bottom:8px}
+
+/* DOSAGE */
+.dose-table{width:100%;border-collapse:collapse;font-size:12px;margin-top:9px}
+.dose-table th{padding:8px 9px;text-align:left;font-size:10px;font-weight:900;color:white}
+.dose-table td{padding:8px 9px;border-bottom:2px dashed var(--border)}
+.dose-table tr:last-child td{border-bottom:none}
+.dose-table tr:nth-child(even) td{background:var(--orange-light)}
+.dose-calc{background:var(--white);border-radius:var(--r);padding:18px;box-shadow:var(--sh);border:2.5px solid var(--border)}
+.dc-label{display:block;font-size:11px;font-weight:900;margin-bottom:4px}
+.dc-input{width:100%;padding:9px 11px;border:2px solid var(--border);border-radius:var(--rs);font-size:13px;font-family:var(--font);outline:none;margin-bottom:10px}
+.dc-input:focus{border-color:var(--orange)}
+.dc-result{background:var(--orange-light);border:2px solid var(--orange);border-radius:var(--r);padding:14px;margin-top:10px;display:none}
+.dc-result.show{display:block}
+
+/* FORMS */
+.forms-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:11px}
+.form-card{background:var(--white);border-radius:var(--r);padding:14px;box-shadow:var(--sh);border:2.5px solid var(--border);display:flex;gap:10px;align-items:flex-start;cursor:pointer;transition:all .2s}
+.form-card:hover{transform:translateY(-2px);box-shadow:var(--shhov);border-color:var(--ocean)}
+.form-icon{width:38px;height:38px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:2px solid var(--border)}
+.form-dl{display:inline-flex;align-items:center;gap:3px;margin-top:6px;font-size:10px;font-weight:900;color:var(--ocean-dark);background:var(--ocean-light);padding:3px 8px;border-radius:4px;border:1.5px solid var(--ocean)}
+.form-sec-lbl{font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:16px 0 9px;display:flex;align-items:center;gap:8px}
+.form-sec-lbl::after{content:'';flex:1;height:2px;background:var(--border)}
+.state-card{background:var(--white);border-radius:var(--r);padding:16px;box-shadow:var(--sh);border:2.5px solid var(--border);margin-bottom:12px}
+.state-card.ny{border-top:5px solid #003DA5}.state-card.pa{border-top:5px solid #002868}.state-card.dc{border-top:5px solid var(--orange)}
+.state-hdr{display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.state-flag{width:42px;height:28px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;border:2px solid var(--border)}
+.state-name{font-size:14px;font-weight:900}
+.state-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.state-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.sf{background:var(--bg);border-radius:var(--rs);padding:11px;border:2px solid var(--border);cursor:pointer;transition:all .18s}
+.sf:hover{border-color:var(--ocean);background:var(--ocean-light);transform:translateY(-2px)}
+.sf-name{font-size:12px;font-weight:900;margin-bottom:2px}
+.sf-desc{font-size:10px;color:var(--muted);margin-bottom:6px;line-height:1.4}
+.sf-dl{font-size:10px;font-weight:900;color:var(--ocean-dark);background:var(--ocean-light);padding:2px 7px;border-radius:4px;border:1.5px solid var(--ocean);display:inline-block}
+
+/* APPOINTMENTS */
+.appt-card{background:var(--white);border-radius:var(--r);padding:14px;box-shadow:var(--sh);border:2.5px solid var(--border);display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:11px;margin-bottom:9px;cursor:pointer;transition:all .2s}
+.appt-card:hover{transform:translateX(4px);box-shadow:var(--shhov)}
+.ac-date{text-align:center;background:var(--teal-light);border-radius:9px;padding:6px;border:2.5px solid var(--teal)}
+.ac-day{font-family:var(--font);font-size:20px;font-weight:900;color:var(--teal-dark);line-height:1}
+.ac-mon{font-size:9px;font-weight:900;color:var(--teal-dark);text-transform:uppercase}
+.ac-time{font-family:var(--font);font-size:16px;font-weight:900;color:var(--ocean);text-align:right}
+.ac-sub{font-size:10px;color:var(--muted);text-align:right;font-weight:700}
+
+/* RESOURCES */
+.res-hero{background:var(--ocean);border-radius:var(--r);padding:22px 22px 22px 218px;min-height:130px;position:relative;overflow:hidden;margin-bottom:16px}
+.res-fish-scene{position:absolute;left:0;top:0;bottom:0;width:206px;background:#083f58;display:flex;align-items:center;justify-content:center;border-radius:var(--r) 0 0 var(--r)}
+.res-hero h2{font-family:var(--font);font-size:19px;color:#fff;margin-bottom:5px;font-weight:900}
+.res-hero p{font-size:12px;color:rgba(255,255,255,.88);line-height:1.5;margin-bottom:10px;font-weight:700}
+.res-cat-pills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.res-cat-pill{padding:5px 13px;border-radius:15px;font-size:11px;font-weight:900;cursor:pointer;border:2.5px solid var(--border);background:white;color:var(--muted);font-family:var(--font);transition:all .18s}
+.res-cat-pill.active{border-color:var(--ocean);background:var(--ocean-light);color:var(--ocean-dark)}
+.res-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:13px;margin-bottom:16px}
+.res-card{background:var(--white);border-radius:var(--r);box-shadow:var(--sh);border:2.5px solid var(--border);overflow:hidden;transition:all .22s;cursor:pointer;display:flex;flex-direction:column}
+.res-card:hover{transform:translateY(-4px);box-shadow:var(--shhov);border-color:var(--ocean)}
+.res-card.featured{border-color:var(--ocean);border-width:3px}
+.featured-ribbon{background:var(--ocean);color:white;font-size:10px;font-weight:900;padding:3px 12px;display:inline-block;border-radius:0 0 8px 8px;margin-bottom:7px;letter-spacing:.4px;text-transform:uppercase}
+.res-card-hdr{padding:16px 16px 12px;display:flex;gap:12px;align-items:flex-start}
+.res-logo{width:54px;height:54px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;border:2.5px solid var(--border);background:var(--bg)}
+.res-name{font-size:14px;font-weight:900;margin-bottom:2px}
+.res-org{font-size:11px;color:var(--ocean-dark);font-weight:800;margin-bottom:4px}
+.res-desc{font-size:11px;color:var(--muted);line-height:1.5}
+.res-card-ftr{padding:11px 16px;border-top:2px dashed var(--border);display:flex;align-items:center;justify-content:space-between;gap:9px;flex-wrap:wrap}
+.res-tags{display:flex;gap:5px;flex-wrap:wrap}
+.res-tag{font-size:9px;font-weight:900;padding:2px 8px;border-radius:4px;background:var(--ocean-light);color:var(--ocean-dark)}
+.res-visit-btn{padding:7px 14px;border-radius:var(--rs);background:var(--ocean);color:white;border:none;font-family:var(--font);font-size:11px;font-weight:900;cursor:pointer;display:inline-flex;align-items:center;gap:5px;transition:all .18s;text-decoration:none}
+.res-visit-btn:hover{background:var(--ocean-dark)}
+.res-placeholder{background:var(--bg);border-radius:var(--r);border:2.5px dashed var(--border);padding:20px;text-align:center}
+.ph-icon{font-size:30px;margin-bottom:7px;opacity:.45}
+.ph-text{font-size:12px;font-weight:900;color:var(--muted);margin-bottom:3px}
+.ph-sub{font-size:10px;color:var(--border)}
+.suggest-box{background:var(--yellow-light);border:2.5px solid var(--yellow);border-radius:var(--r);padding:16px;display:flex;align-items:flex-start;gap:13px;margin-top:16px}
+.suggest-box p{font-size:12px;font-weight:700;line-height:1.6}
+.suggest-btn{padding:7px 16px;border-radius:var(--rs);background:var(--ocean);color:white;border:none;font-family:var(--font);font-size:12px;font-weight:900;cursor:pointer;margin-top:8px}
+
+/* ACCOUNT */
+.qr-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:2px dashed var(--border);font-size:12px;flex-wrap:wrap;gap:8px}
+.qr-row:last-child{border-bottom:none}
+.qr-label{font-weight:900;color:var(--muted)}
+.qr-value{font-weight:900;color:var(--ocean-dark)}
+.notif-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:2px dashed var(--border)}
+.notif-row:last-child{border-bottom:none}
+.notif-on{background:var(--green);border-radius:9px;padding:3px 10px;color:white;font-size:9px;font-weight:900}
+
+/* HEALTH INFO */
+.health-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:11px}
+.health-card{background:var(--white);border-radius:var(--r);padding:15px;box-shadow:var(--sh);border:2.5px solid var(--border);cursor:pointer;transition:all .2s}
+.health-card:hover{transform:translateY(-3px);box-shadow:var(--shhov)}
+.health-icon{font-size:28px;margin-bottom:7px}
+.health-name{font-size:13px;font-weight:900;margin-bottom:5px}
+.health-sub{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* SECTION DIVIDER */
+.res-sec-lbl{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin:16px 0 9px;display:flex;align-items:center;gap:8px}
+.res-sec-lbl::after{content:'';flex:1;height:2px;background:var(--border)}
+</style>
+</head>
+<body>
+
+<!-- DEMO BANNER -->
+<div class="demo-banner">
+  🧪 DEMO VERSION — De-identified fictional data only &nbsp;|&nbsp;
+  <span>Not for real patient use · Broome Pediatrics Portal Prototype</span>
+</div>
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="loginScreen">
+  <div class="login-tank" id="loginTank"></div>
+  <div style="display:flex;flex-direction:column;align-items:center;width:100%;padding:20px">
+    <div class="login-card">
+      <div class="login-logo">
+        <div class="login-logo-icon">
+          <svg width="38" height="38" viewBox="0 0 38 38">
+            <ellipse cx="19" cy="22" rx="10" ry="7" fill="#fff" opacity=".9"/>
+            <ellipse cx="26" cy="22" rx="3.8" ry="4.5" fill="#fff" opacity=".65"/>
+            <circle cx="13" cy="21" r="1.8" fill="#1a6b8a"/>
+          </svg>
+        </div>
+        <h1>Broome Pediatrics</h1>
+        <p>Patient &amp; Family Portal</p>
+      </div>
+      <div class="login-notice">
+        🔒 Access by invitation only<br>
+        Login is linked to your registered email address
+      </div>
+      <div class="lf-group">
+        <label>Registered email</label>
+        <input type="email" id="loginEmail" placeholder="parent@email.com" value="demo@broomepediatrics.com">
+      </div>
+      <div class="lf-group">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••" value="DemoPass1!">
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px">
+        <input type="checkbox" id="rememberMe" checked style="width:auto">
+        <label for="rememberMe" style="font-size:12px;color:var(--muted);cursor:pointer">Remember me on this device</label>
+      </div>
+      <button class="login-btn" onclick="doLogin()">Sign in to portal →</button>
+      <div class="login-links">
+        <a onclick="alert('Password reset link sent to your registered email.')">Forgot password?</a>
+        <a onclick="alert('Portal access requires an invitation from Broome Pediatrics. Call (607) 770-1988.')">No invitation?</a>
+      </div>
+      <div class="demo-note">
+        🧪 <strong>Demo mode:</strong> Credentials are pre-filled. Click Sign in to explore the portal. All data is fictional and de-identified — no real patient information is shown.
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:18px;font-size:10px;color:rgba(255,255,255,.55)">
+      © 2026 Broome Pediatrics · 639 Main St, Johnson City, NY 13790 · (607) 770-1988<br>
+      Invitation-only portal · Demo version
+    </div>
+  </div>
+</div>
+
+<!-- ===== APP SCREEN ===== -->
+<div id="appScreen">
+
+  <!-- AQUARIUM HEADER -->
+  <div class="aquarium-header" id="aquariumHeader">
+    <div class="water-surface"></div>
+    <div class="tank-glass" id="tankGlass"></div>
+    <div class="sand-floor"><div class="sand-ripple"></div></div>
+    <div class="header-content">
+      <div class="header-top">
+        <div class="logo-area">
+          <div class="logo-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32">
+              <ellipse cx="16" cy="19" rx="8.5" ry="5.5" fill="#fff" opacity=".9"/>
+              <ellipse cx="22" cy="19" rx="3.2" ry="3.8" fill="#fff" opacity=".65"/>
+              <circle cx="11.5" cy="18" r="1.5" fill="#085a76"/>
+            </svg>
+          </div>
+          <div>
+            <span class="logo-text">Broome Pediatrics</span>
+            <span class="logo-sub">Patient &amp; Family Portal</span>
+          </div>
+        </div>
+        <div class="header-right">
+          <div class="child-badge"><div class="child-dot"></div>Child A, 18 months</div>
+          <button class="signout-btn" onclick="doLogout()">Sign out</button>
+        </div>
+      </div>
+      <div class="welcome-banner">
+        <div class="welcome-text">Welcome back, Demo Family! 🎉</div>
+        <div class="welcome-sub">Tuesday, March 24, 2026 · Well visit coming up in 4 days — March 28 at 9:30 AM</div>
+        <div class="welcome-stats">
+          <div class="wstat"><div class="wstat-val">18</div><div class="wstat-lbl">Months old</div></div>
+          <div class="wstat"><div class="wstat-val">4</div><div class="wstat-lbl">Screenings due</div></div>
+          <div class="wstat"><div class="wstat-val">2</div><div class="wstat-lbl">New messages</div></div>
+          <div class="wstat"><div class="wstat-val">31.5"</div><div class="wstat-lbl">Height</div></div>
+          <div class="wstat"><div class="wstat-val">24 lbs</div><div class="wstat-lbl">Weight</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAV WITH ARROWS -->
+  <div class="nav-section">
+    <div class="nav-outer">
+      <button class="nav-arrow left" id="navLeft" onclick="scrollTabs(-1)" disabled>&#8592;</button>
+      <div class="nav-tabs-scroll" id="navScrollArea">
+        <div class="nav-tabs" id="navTabs">
+          <button class="nav-tab active" onclick="showPage('home',this)"><div class="tab-icon" style="background:#dff3fb">🏠</div><span class="nav-tab-label">Home</span></button>
+          <button class="nav-tab" onclick="showPage('appointments',this)"><div class="tab-icon" style="background:#d8fff9">📅</div><span class="nav-tab-label">Appointments</span></button>
+          <button class="nav-tab" onclick="showPage('screenings',this)"><div class="tab-icon" style="background:#ffe8e8">📋</div><span class="nav-tab-label">Screenings</span></button>
+          <button class="nav-tab" onclick="showPage('growth',this)"><div class="tab-icon" style="background:#dcf5e5">📏</div><span class="nav-tab-label">Growth</span></button>
+          <button class="nav-tab" onclick="showPage('vaccines',this)"><div class="tab-icon" style="background:#e3f2fd">💉</div><span class="nav-tab-label">Vaccines</span></button>
+          <button class="nav-tab" onclick="showPage('milestones',this)"><div class="tab-icon" style="background:#f3e9ff">⭐</div><span class="nav-tab-label">Milestones</span></button>
+          <button class="nav-tab" onclick="showPage('messages',this)"><div class="tab-icon" style="background:#fff3dc">✉️</div><span class="nav-tab-label">Messages</span></button>
+          <button class="nav-tab" onclick="showPage('dosage',this)"><div class="tab-icon" style="background:#ffe8e8">💊</div><span class="nav-tab-label">Dosage</span></button>
+          <button class="nav-tab" onclick="showPage('health',this)"><div class="tab-icon" style="background:#dcf5e5">📖</div><span class="nav-tab-label">Health Info</span></button>
+          <button class="nav-tab" onclick="showPage('forms',this)"><div class="tab-icon" style="background:#f3e9ff">📄</div><span class="nav-tab-label">Forms</span></button>
+          <button class="nav-tab" onclick="showPage('contact',this)"><div class="tab-icon" style="background:#dff3fb">📞</div><span class="nav-tab-label">Contact Us</span></button>
+          <button class="nav-tab" onclick="showPage('resources',this)"><div class="tab-icon" style="background:#fff3dc;position:relative">🔗<span style="position:absolute;top:-4px;right:-4px;background:var(--green);color:white;border-radius:50%;width:14px;height:14px;font-size:8px;display:flex;align-items:center;justify-content:center;font-weight:900;line-height:1">!</span></div><span class="nav-tab-label">Resources</span></button>
+          <button class="nav-tab" onclick="showPage('account',this)"><div class="tab-icon" style="background:#e8f2fa">👤</div><span class="nav-tab-label">My Account</span></button>
+        </div>
+      </div>
+      <button class="nav-arrow right" id="navRight" onclick="scrollTabs(1)">&#8594;</button>
+    </div>
+    <div id="tabDots" style="display:flex;justify-content:center;gap:5px;padding:4px 0 6px;background:var(--white)"></div>
+  </div>
+
+  <!-- ===== HOME ===== -->
+  <div class="page active" id="page-home">
+    <div class="alert-strip orange"><span>⚡</span>4 screenings are due before Child A's visit on March 28! Complete them in the Screenings tab.</div>
+    <div class="dash-grid-4">
+      <div class="dash-card" onclick="showPage('appointments',nthTab(1))"><div class="dc-accent" style="background:var(--teal)"></div><span class="dc-icon">📅</span><div class="dc-val" style="color:var(--teal-dark)">2</div><div class="dc-label">Appointments</div><div class="dc-sub">Next: Mar 28</div></div>
+      <div class="dash-card" onclick="showPage('screenings',nthTab(2))"><div class="dc-accent" style="background:var(--coral)"></div><span class="dc-icon">📋</span><div class="dc-val" style="color:var(--coral)">4</div><div class="dc-label">Screenings Due</div><div class="dc-sub">Before visit</div></div>
+      <div class="dash-card" onclick="showPage('growth',nthTab(3))"><div class="dc-accent" style="background:var(--green)"></div><span class="dc-icon">📏</span><div class="dc-val" style="color:var(--green-dark)">31.5"</div><div class="dc-label">Height</div><div class="dc-sub">65th percentile</div></div>
+      <div class="dash-card" onclick="showPage('messages',nthTab(6))"><div class="dc-accent" style="background:var(--orange)"></div><span class="dc-icon">✉️</span><div class="dc-val" style="color:var(--orange-dark)">2</div><div class="dc-label">Messages</div><div class="dc-sub">From Dr. Patel</div></div>
+    </div>
+    <div class="dash-grid-2">
+      <div class="feature-card">
+        <h3><div class="fc-icon" style="background:var(--teal-light)">📅</div>Upcoming Appointments</h3>
+        <div class="list-item"><div class="li-date"><div class="li-day">28</div><div class="li-mon">Mar</div></div><div style="flex:1"><div class="li-title">Child A — 18-Month Well Visit</div><div class="li-sub">Dr. Patel · 9:30 AM · Well visit + vaccines</div></div><span class="badge orange">4 days!</span></div>
+        <div class="list-item"><div class="li-date"><div class="li-day">14</div><div class="li-mon">Apr</div></div><div style="flex:1"><div class="li-title">Child B — Sick Visit Follow-up</div><div class="li-sub">Dr. Carter · 2:00 PM</div></div><span class="badge green">Booked</span></div>
+        <button class="action-btn" onclick="showPage('appointments',nthTab(1))">View all appointments →</button>
+      </div>
+      <div class="feature-card">
+        <h3><div class="fc-icon" style="background:var(--purple-light)">📋</div>Screenings to Complete</h3>
+        <div class="list-item"><span style="font-size:17px">📝</span><div style="flex:1"><div class="li-title">ASQ-3 (18 months)</div><div class="li-sub">Ages &amp; Stages · ~10 min</div></div><span class="badge orange">Due</span></div>
+        <div class="list-item"><span style="font-size:17px">🔍</span><div style="flex:1"><div class="li-title">M-CHAT-R/F</div><div class="li-sub">Autism screening · ~5 min</div></div><span class="badge orange">Due</span></div>
+        <div class="list-item"><span style="font-size:17px">✅</span><div style="flex:1"><div class="li-title">CDC Milestones (18 mo)</div><div class="li-sub">Developmental checklist</div></div><span class="badge orange">Due</span></div>
+        <div class="list-item"><span style="font-size:17px">💛</span><div style="flex:1"><div class="li-title">EPDS (caregiver)</div><div class="li-sub">Wellbeing screen · ~3 min</div></div><span class="badge orange">Due</span></div>
+        <button class="action-btn" style="background:var(--purple-light);color:var(--purple-dark);border-color:var(--purple)" onclick="showPage('screenings',nthTab(2))">Start screenings →</button>
+      </div>
+    </div>
+    <div class="dash-grid-2">
+      <div class="feature-card">
+        <h3><div class="fc-icon" style="background:var(--green-light)">⭐</div>Recent Milestones</h3>
+        <div class="mc-grid">
+          <div class="mc achieved"><div class="mc-cat">Language</div><div class="mc-text">Says 10+ words</div><div class="mc-status"><div class="mcheck g">✓</div>16 months</div></div>
+          <div class="mc achieved"><div class="mc-cat">Motor</div><div class="mc-text">Walks alone</div><div class="mc-status"><div class="mcheck g">✓</div>14 months</div></div>
+          <div class="mc pending"><div class="mc-cat">Self-care</div><div class="mc-text">Uses spoon/fork</div><div class="mc-status"><div class="mcheck gr">○</div>In progress</div></div>
+          <div class="mc pending"><div class="mc-cat">Language</div><div class="mc-text">2-step directions</div><div class="mc-status"><div class="mcheck gr">○</div>In progress</div></div>
+        </div>
+        <button class="action-btn" style="background:var(--green-light);color:var(--green-dark);border-color:var(--green)" onclick="showPage('milestones',nthTab(5))">View all milestones →</button>
+      </div>
+      <div class="feature-card">
+        <h3><div class="fc-icon" style="background:var(--orange-light)">✉️</div>Latest Messages</h3>
+        <div class="msg-thread"><div class="mt-row"><span class="mt-from">Dr. Patel <span class="unread-dot" style="display:inline-block"></span></span><span class="mt-time">Today 9:12 AM</span></div><div class="mt-preview">Pre-visit reminder — please complete the 18-month screenings before Friday's visit...</div></div>
+        <div class="msg-thread"><div class="mt-row"><span class="mt-from">Heather, RN <span class="unread-dot" style="display:inline-block"></span></span><span class="mt-time">Yesterday</span></div><div class="mt-preview">Lab results available — Child A's hemoglobin results are ready to view...</div></div>
+        <div class="msg-thread"><div class="mt-row"><span class="mt-from">Dr. Carter</span><span class="mt-time">Mar 18</span></div><div class="mt-preview">Re: Fever question — for temps under 102°F at this age, give Tylenol per weight...</div></div>
+        <button class="action-btn" style="background:var(--orange-light);color:var(--orange-dark);border-color:var(--orange)" onclick="showPage('messages',nthTab(6))">Open all messages →</button>
+      </div>
+    </div>
+    <!-- RESOURCES TEASER -->
+    <div class="feature-card" style="border-color:var(--green);background:var(--green-light)">
+      <h3><div class="fc-icon" style="background:white">🔗</div>Useful Resources <span class="badge green" style="margin-left:6px">New!</span></h3>
+      <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+        <div style="display:flex;align-items:center;gap:9px;background:white;border-radius:var(--rs);padding:11px;flex:1;min-width:180px;cursor:pointer;border:2.5px solid var(--border);transition:all .18s" onclick="showPage('resources',nthTab(11))" onmouseover="this.style.borderColor='var(--ocean)'" onmouseout="this.style.borderColor='var(--border)'">
+          <div style="width:38px;height:38px;background:var(--ocean-light);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0">🏥</div>
+          <div><div style="font-size:13px;font-weight:900">Mount Sinai Parenting Center</div><div style="font-size:10px;color:var(--ocean-dark);font-weight:700">mountsinai.org · Expert parenting resources</div></div>
+        </div>
+        <button class="action-btn" style="width:auto;margin-top:0;padding:8px 16px" onclick="showPage('resources',nthTab(11))">See all resources →</button>
+      </div>
+    </div>
+    <div class="fish-fact">
+      <svg width="52" height="32" viewBox="0 0 52 32"><ellipse cx="26" cy="16" rx="15" ry="10" fill="#00c9b1"/><path d="M11 16 L1 10 L1 22Z" fill="#007d6e"/><circle cx="34" cy="12" r="2.8" fill="#fff"/><circle cx="34.4" cy="12" r="1.4" fill="#0a4f6e"/></svg>
+      <p>🐠 <strong>Like our aquarium fish</strong>, every child grows at their own unique pace! See you at your visit on March 28!</p>
+    </div>
+  </div>
+
+  <!-- ===== APPOINTMENTS ===== -->
+  <div class="page" id="page-appointments">
+    <div class="section-header"><h1>📅 Appointments</h1><p>Upcoming and past visits</p></div>
+    <div class="alert-strip teal"><span>🎉</span>Child A's 18-month well visit is on March 28 at 9:30 AM with Dr. Patel!</div>
+    <div class="appt-card"><div class="ac-date"><div class="ac-day">28</div><div class="ac-mon">Mar</div></div><div><div style="font-size:13px;font-weight:900">Child A — 18-Month Well Visit</div><p style="font-size:11px;color:var(--muted)">Dr. Patel · Well visit + vaccines + screenings</p><div style="margin-top:5px"><span class="badge teal">Well visit</span> <span class="badge orange">Screenings due</span></div></div><div><div class="ac-time">9:30</div><div class="ac-sub">AM · 45 min</div></div></div>
+    <div class="appt-card"><div class="ac-date"><div class="ac-day">14</div><div class="ac-mon">Apr</div></div><div><div style="font-size:13px;font-weight:900">Child B — Sick Visit Follow-up</div><p style="font-size:11px;color:var(--muted)">Dr. Carter · Cough follow-up</p><div style="margin-top:5px"><span class="badge green">Confirmed</span></div></div><div><div class="ac-time">2:00</div><div class="ac-sub">PM · 20 min</div></div></div>
+    <div class="appt-card"><div class="ac-date"><div class="ac-day">22</div><div class="ac-mon">Apr</div></div><div><div style="font-size:13px;font-weight:900">Child A — Vaccine Follow-up</div><p style="font-size:11px;color:var(--muted)">Dr. Patel · HepA booster check</p><div style="margin-top:5px"><span class="badge green">Confirmed</span></div></div><div><div class="ac-time">11:00</div><div class="ac-sub">AM · 15 min</div></div></div>
+    <button class="action-btn">+ Request New Appointment ↗</button>
+  </div>
+
+  <!-- ===== SCREENINGS ===== -->
+  <div class="page" id="page-screenings">
+    <div class="section-header"><h1>📋 Screenings</h1><p>AAP-recommended questionnaires for Child A</p></div>
+    <div class="scr-tab-row">
+      <button class="scr-tab active" onclick="switchScrCat('dev',this)">🌱 Developmental</button>
+      <button class="scr-tab" onclick="switchScrCat('mental',this)">🧠 Mental Health</button>
+      <button class="scr-tab" onclick="switchScrCat('adhd',this)">⚡ ADHD</button>
+      <button class="scr-tab" onclick="switchScrCat('safety',this)">🔴 Safety &amp; Crisis</button>
+      <button class="scr-tab" onclick="switchScrCat('eating',this)">🌸 Eating Disorders</button>
+    </div>
+    <div id="scat-dev">
+      <div class="alert-strip orange"><span>⚡</span>4 screenings are due before Child A's March 28 visit!</div>
+      <div class="sc-grid">
+        <div class="screen-card due"><div class="sc-tag" style="background:#eef0ff;color:#4a42b5">ASQ-3</div><div class="sc-name">Ages &amp; Stages Questionnaire — 18 months</div><div class="sc-sub">5 developmental domains · 30 questions · ~10–15 min</div><button class="sc-btn" onclick="openQ('asq18')">Start now →</button></div>
+        <div class="screen-card due"><div class="sc-tag" style="background:#fce8ff;color:#8b2fa3">M-CHAT-R/F</div><div class="sc-name">Autism Screening — 18 months</div><div class="sc-sub">AAP-required · 20 yes/no questions · ~5 min</div><button class="sc-btn" onclick="openQ('mchat')">Start now →</button></div>
+        <div class="screen-card due"><div class="sc-tag" style="background:var(--green-light);color:var(--green-dark)">CDC</div><div class="sc-name">CDC Milestone Checklist — 18 months</div><div class="sc-sub">Updated 2022 · Social, language, cognitive, motor</div><button class="sc-btn" onclick="openQ('cdc18')">Start now →</button></div>
+        <div class="screen-card due"><div class="sc-tag" style="background:var(--orange-light);color:var(--orange-dark)">EPDS</div><div class="sc-name">Edinburgh Postnatal Depression Scale</div><div class="sc-sub">For caregivers · 10 questions · ~3 min</div><button class="sc-btn" onclick="openQ('epds')">Start now →</button></div>
+        <div class="screen-card done"><div class="sc-tag" style="background:var(--green-light);color:var(--green-dark)">ASQ-3 ✓</div><div class="sc-name">Ages &amp; Stages — 9 months</div><div class="sc-sub">Completed at 9-month visit · All domains clear</div><button class="sc-btn" style="background:var(--green)">View results →</button></div>
+      </div>
+    </div>
+    <div id="scat-mental" style="display:none">
+      <div class="alert-strip blue"><span>ℹ️</span>Mental health tools are for ages 8–18. Available for older children in your family.</div>
+      <div class="sc-grid">
+        <div class="screen-card due" style="border-color:var(--blue)"><div class="sc-tag" style="background:var(--blue-light);color:var(--blue)">GAD-7</div><div class="sc-name">Generalized Anxiety Disorder Scale</div><div class="sc-sub">7 questions · Ages 13+ · ~3 min</div><button class="sc-btn" style="background:var(--blue)" onclick="openQ('gad7')">Start →</button></div>
+        <div class="screen-card due" style="border-color:var(--blue)"><div class="sc-tag" style="background:var(--blue-light);color:var(--blue)">SCARED</div><div class="sc-name">Screen for Child Anxiety</div><div class="sc-sub">41 items · Ages 8–18 · Child &amp; parent versions</div><button class="sc-btn" style="background:var(--blue)" onclick="openQ('scared')">Start →</button></div>
+        <div class="screen-card due" style="border-color:var(--purple)"><div class="sc-tag" style="background:var(--purple-light);color:var(--purple-dark)">PHQ-9/A</div><div class="sc-name">Depression Screen (Adolescent)</div><div class="sc-sub">9 items · Ages 12+ · ~5 min</div><button class="sc-btn" style="background:var(--purple-dark)" onclick="openQ('phq9')">Start →</button></div>
+      </div>
+    </div>
+    <div id="scat-adhd" style="display:none">
+      <div class="alert-strip blue"><span>ℹ️</span>Vanderbilt for ages 6–12 · ASRS v1.1 for adults 18+</div>
+      <div style="font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Children ages 6–12 (Vanderbilt)</div>
+      <div class="sc-grid" style="margin-bottom:16px">
+        <div class="screen-card due" style="border-color:var(--pink)"><div class="sc-tag" style="background:var(--pink-light);color:#8b0046">Vanderbilt</div><div class="sc-name">Vanderbilt ADHD — Parent Rating</div><div class="sc-sub">55 items · Ages 6–12 · ADHD + anxiety, depression, conduct</div><button class="sc-btn" style="background:var(--purple-dark)" onclick="openQ('vand_parent')">Start →</button></div>
+        <div class="screen-card due" style="border-color:var(--pink)"><div class="sc-tag" style="background:var(--pink-light);color:#8b0046">Vanderbilt</div><div class="sc-name">Vanderbilt ADHD — Teacher Rating</div><div class="sc-sub">43 items · Ages 6–12 · Teacher completes</div><button class="sc-btn" style="background:var(--purple-dark)" onclick="openQ('vand_teacher')">Start →</button></div>
+      </div>
+      <div style="font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Adults &amp; adolescents 18+ (ASRS-v1.1)</div>
+      <div class="sc-grid">
+        <div class="screen-card due" style="border-color:var(--navy)"><div class="sc-tag" style="background:#e8f2fa;color:var(--navy)">ASRS-v1.1</div><div class="sc-name">Adult ADHD Self-Report Scale — Part A (Screener)</div><div class="sc-sub">6 questions · WHO-developed · Ages 18+ · ~2 min · Validated screener</div><button class="sc-btn" style="background:var(--navy)" onclick="openQ('asrs_a')">Start Part A →</button></div>
+        <div class="screen-card due" style="border-color:var(--navy)"><div class="sc-tag" style="background:#e8f2fa;color:var(--navy)">ASRS-v1.1</div><div class="sc-name">Adult ADHD Self-Report Scale — Full (18 questions)</div><div class="sc-sub">18 questions · Part A + Part B · Inattention &amp; hyperactivity · ~8 min</div><button class="sc-btn" style="background:var(--navy)" onclick="openQ('asrs_full')">Start full scale →</button></div>
+        <div class="card" style="background:#e8f2fa;border-color:var(--navy)"><div style="font-size:13px;font-weight:900;color:var(--navy);margin-bottom:7px">About ASRS v1.1</div><p style="font-size:11px;color:var(--muted);line-height:1.6">Developed by WHO for adults 18+. Part A (6 items) is the validated screener — score of 4+ suggests ADHD symptoms warranting follow-up. Part B gives additional detail. Not a standalone diagnosis — reviewed by Dr. Patel or Dr. Carter.</p></div>
+      </div>
+    </div>
+    <div id="scat-safety" style="display:none">
+      <div class="alert-strip red"><span>⚠️</span>If anyone is in immediate danger call 911. Crisis line: 988. Do not wait for portal response.</div>
+      <div class="sc-grid">
+        <div class="screen-card due" style="border-color:var(--red)"><div class="sc-tag" style="background:var(--red-light);color:var(--red-dark)">ASQ</div><div class="sc-name">Ask Suicide-Screening Questions</div><div class="sc-sub">4 questions · NIH-validated · Ages 10+ · ~1 min</div><button class="sc-btn" style="background:var(--red)" onclick="openQ('asq_suicide')">Start →</button></div>
+        <div class="screen-card due" style="border-color:var(--red)"><div class="sc-tag" style="background:var(--red-light);color:var(--red-dark)">C-SSRS</div><div class="sc-name">Columbia Suicide Severity Rating Scale</div><div class="sc-sub">Screener version · Ages 12+ · ~5 min</div><button class="sc-btn" style="background:var(--red)" onclick="openQ('cssrs')">Start →</button></div>
+        <div class="card" style="background:var(--red-light);border-color:var(--red)"><div style="font-size:12px;font-weight:900;color:var(--red-dark);margin-bottom:7px">Crisis Resources</div><div style="font-size:12px;line-height:1.8"><strong>988</strong> — Suicide &amp; Crisis Lifeline (call or text)<br><strong>741741</strong> — Crisis Text Line (text HOME)<br><strong>911</strong> — Immediate danger<br><strong>(607) 770-1988</strong> — Broome Pediatrics</div></div>
+      </div>
+    </div>
+    <div id="scat-eating" style="display:none">
+      <div class="alert-strip pink" style="background:var(--pink-light);border-color:var(--pink);color:#8b0046"><span>💛</span>Support: National Alliance for Eating Disorders Helpline (866) 662-1235</div>
+      <div class="sc-grid">
+        <div class="screen-card due" style="border-color:var(--pink)"><div class="sc-tag" style="background:var(--pink-light);color:#8b0046">SCOFF</div><div class="sc-name">SCOFF Questionnaire</div><div class="sc-sub">5 questions · Ages 10+ · Rapid eating disorder screen</div><button class="sc-btn" style="background:var(--pink)" onclick="openQ('scoff')">Start →</button></div>
+        <div class="screen-card due" style="border-color:var(--pink)"><div class="sc-tag" style="background:var(--pink-light);color:#8b0046">EDE-Q</div><div class="sc-name">Eating Disorder Exam — Brief</div><div class="sc-sub">12 items · Ages 12+ · Dietary restraint &amp; weight concerns</div><button class="sc-btn" style="background:var(--pink)" onclick="openQ('edeq')">Start →</button></div>
+        <div class="screen-card due" style="border-color:var(--pink)"><div class="sc-tag" style="background:var(--pink-light);color:#8b0046">ARFID</div><div class="sc-name">ARFID Brief Screen</div><div class="sc-sub">6 items · Ages 8+ · Avoidant / restrictive food intake</div><button class="sc-btn" style="background:var(--pink)" onclick="openQ('arfid')">Start →</button></div>
+      </div>
+    </div>
+    <!-- Q PANEL -->
+    <div class="q-panel" id="qPanel">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:11px;gap:9px">
+        <div><div class="q-tag" id="qTag"></div><h2 style="font-family:var(--font);font-size:18px;font-weight:900" id="qTitle"></h2><p style="font-size:12px;color:var(--muted);margin-top:2px;line-height:1.4" id="qSub"></p></div>
+        <button onclick="closeQ()" style="background:var(--border);border:none;border-radius:6px;width:27px;height:27px;cursor:pointer;font-size:13px;font-family:var(--font);color:var(--muted)">✕</button>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:2px"><span id="qProgLbl">Section 1</span><span id="qProgPct">0%</span></div>
+      <div class="q-prog-bar"><div class="q-prog-fill" id="qProgFill" style="width:0%"></div></div>
+      <div id="qBody"></div>
+      <div class="q-nav-row"><button class="q-btn q-prev" id="qPrevBtn" onclick="qNav(-1)">← Back</button><div style="flex:1"></div><button class="q-btn q-next" id="qNextBtn" onclick="qNav(1)">Next →</button></div>
+    </div>
+    <div class="q-result" id="qResult">
+      <div class="rb" id="rBanner"><div class="rb-icon" id="rIcon"></div><div><div style="font-size:14px;font-weight:900" id="rTitle"></div><div style="font-size:12px;color:var(--muted);margin-top:2px" id="rSub"></div></div></div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:12px" id="rDetails"></div>
+      <div id="rFlagged"></div>
+      <div style="display:flex;gap:8px;margin-top:12px">
+        <button class="sc-btn">Discuss with Dr. Patel ↗</button>
+        <button class="q-btn" style="background:var(--border);color:var(--text)" onclick="closeResult()">Back</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== GROWTH ===== -->
+  <div class="page" id="page-growth">
+    <div class="section-header"><h1>📏 Growth Tracking</h1><p>WHO charts for 0–24 months · CDC charts for 2–20 years</p></div>
+    <div class="gstat-grid">
+      <div class="gstat"><div class="gstat-lbl">Height</div><div class="gstat-val" style="color:var(--coral)">31.5"</div><div style="font-size:11px;color:var(--muted)">79.9 cm</div><span class="gstat-pct" style="background:var(--coral-light);color:var(--coral)">65th %ile</span></div>
+      <div class="gstat"><div class="gstat-lbl">Weight</div><div class="gstat-val" style="color:var(--teal-dark)">24.2 lbs</div><div style="font-size:11px;color:var(--muted)">11.0 kg</div><span class="gstat-pct" style="background:var(--teal-light);color:var(--teal-dark)">55th %ile</span></div>
+      <div class="gstat"><div class="gstat-lbl">Head Circ.</div><div class="gstat-val" style="color:var(--purple-dark)">18.2"</div><div style="font-size:11px;color:var(--muted)">46.2 cm</div><span class="gstat-pct" style="background:var(--purple-light);color:var(--purple-dark)">70th %ile</span></div>
+    </div>
+    <div class="growth-tabs">
+      <button class="gtab active" onclick="switchGrowthMode('who',this)">🌍 WHO (0–24 months)</button>
+      <button class="gtab" onclick="switchGrowthMode('cdc',this)">🇺🇸 CDC (2–20 years)</button>
+    </div>
+    <div id="who-section">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:9px">
+        <div class="chart-source-badge">🌍 WHO Child Growth Standards · Girls · 0–24 months</div>
+        <div class="who-tab-row">
+          <button class="wtab active" onclick="switchWHO('length',this)">Length</button>
+          <button class="wtab" onclick="switchWHO('weight',this)">Weight</button>
+          <button class="wtab" onclick="switchWHO('hcfa',this)">Head Circ.</button>
+          <button class="wtab" onclick="switchWHO('bmi',this)">BMI</button>
+        </div>
+      </div>
+      <div class="card" style="padding:14px">
+        <div class="chart-wrap"><canvas id="whoChart"></canvas></div>
+        <div class="percentile-legend">
+          <div class="pl-item"><div class="pl-line" style="background:#e53935"></div>3rd / 97th</div>
+          <div class="pl-item"><div class="pl-line" style="background:#ff8c00"></div>15th / 85th</div>
+          <div class="pl-item"><div class="pl-line" style="background:#4cbb6a"></div>50th</div>
+          <div class="pl-item"><div class="pl-line" style="background:#9b59b6;border-top:2px dashed #9b59b6;height:0"></div>Child A</div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;font-weight:700">Source: WHO Child Growth Standards (2006) · For children birth–24 months per AAP recommendation</div>
+      </div>
+    </div>
+    <div id="cdc-section" style="display:none">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:9px">
+        <div class="chart-source-badge" style="background:var(--blue)">🇺🇸 CDC Growth Charts · Girls · 2–20 years</div>
+        <div class="who-tab-row">
+          <button class="wtab active" onclick="switchCDC('stature',this)">Stature</button>
+          <button class="wtab" onclick="switchCDC('weight',this)">Weight</button>
+          <button class="wtab" onclick="switchCDC('bmi',this)">BMI</button>
+        </div>
+      </div>
+      <div class="card" style="padding:14px">
+        <div class="chart-wrap"><canvas id="cdcChart"></canvas></div>
+        <div class="percentile-legend">
+          <div class="pl-item"><div class="pl-line" style="background:#e53935"></div>5th / 95th</div>
+          <div class="pl-item"><div class="pl-line" style="background:#ff8c00"></div>10th / 90th</div>
+          <div class="pl-item"><div class="pl-line" style="background:#ffd600"></div>25th / 75th</div>
+          <div class="pl-item"><div class="pl-line" style="background:#4cbb6a"></div>50th</div>
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;font-weight:700">Source: CDC/NCHS Growth Charts (2000) · For children ages 2–20 years per AAP recommendation</div>
+      </div>
+      <div class="alert-strip blue" style="margin-top:10px"><span>ℹ️</span>CDC charts will be used for Child A starting at the 24-month visit (Sep 2026) per AAP guidelines.</div>
+    </div>
+    <button class="action-btn">+ Log New Measurement ↗</button>
+    <div class="fish-fact">
+      <svg width="50" height="32" viewBox="0 0 50 32"><ellipse cx="25" cy="16" rx="14" ry="9" fill="#00c9b1"/><path d="M11 16 L1 10 L1 22Z" fill="#007d6e"/><circle cx="32" cy="12" r="2.5" fill="#fff"/><circle cx="32.4" cy="12" r="1.2" fill="#0a4f6e"/></svg>
+      <p>🌍 <strong>WHO vs CDC:</strong> WHO charts are used birth–24 months. CDC charts from age 2+. The switch happens at the 24-month visit per AAP recommendation!</p>
+    </div>
+  </div>
+
+  <!-- ===== VACCINES ===== -->
+  <div class="page" id="page-vaccines">
+    <div class="section-header"><h1>💉 Vaccine Schedule</h1><p>Child A's immunization record</p></div>
+    <div class="alert-strip green"><span>✅</span>Child A is up to date on all vaccines! Next vaccines due at the 24-month visit.</div>
+    <div class="vage-lbl">Completed vaccines</div>
+    <div class="vgrid">
+      <div class="vcard given"><div class="vn">Hepatitis B</div><div class="vd">At birth visit</div><div class="vstatus given">✓ Given</div></div>
+      <div class="vcard given"><div class="vn">DTaP (1st, 2nd)</div><div class="vd">2-month &amp; 4-month visits</div><div class="vstatus given">✓ Given</div></div>
+      <div class="vcard given"><div class="vn">MMR</div><div class="vd">12-month visit</div><div class="vstatus given">✓ Given</div></div>
+      <div class="vcard given"><div class="vn">Varicella</div><div class="vd">12-month visit</div><div class="vstatus given">✓ Given</div></div>
+      <div class="vcard given"><div class="vn">Hepatitis A</div><div class="vd">18-month visit</div><div class="vstatus given">✓ Given</div></div>
+      <div class="vcard given"><div class="vn">Influenza</div><div class="vd">Annual fall visit</div><div class="vstatus given">✓ Given</div></div>
+    </div>
+    <div class="vage-lbl">Upcoming vaccines (24 months)</div>
+    <div class="vgrid">
+      <div class="vcard upcoming"><div class="vn">DTaP (4th dose)</div><div class="vd">Due at 24-month visit</div><div class="vstatus upcoming">Upcoming</div></div>
+      <div class="vcard upcoming"><div class="vn">Hepatitis A (2nd)</div><div class="vd">Due at 24-month visit</div><div class="vstatus upcoming">Upcoming</div></div>
+      <div class="vcard upcoming"><div class="vn">Influenza (annual)</div><div class="vd">Due this fall</div><div class="vstatus upcoming">Upcoming</div></div>
+    </div>
+  </div>
+
+  <!-- ===== MILESTONES ===== -->
+  <div class="page" id="page-milestones">
+    <div class="section-header"><h1>⭐ Developmental Milestones</h1><p>Child A at 18 months</p></div>
+    <div class="mage-hdr"><div class="mage-badge" style="background:var(--teal)">12–15 months</div><div class="mpbar-wrap"><div class="mpbar" style="width:100%;background:var(--teal)"></div></div><span class="mpct" style="color:var(--teal-dark)">100%</span></div>
+    <div class="mgrid" style="margin-bottom:16px">
+      <div class="mc achieved"><div class="mc-cat">Social</div><div class="mc-text">Waves bye-bye</div><div class="mc-status"><div class="mcheck g">✓</div>13 months</div></div>
+      <div class="mc achieved"><div class="mc-cat">Motor</div><div class="mc-text">Walks independently</div><div class="mc-status"><div class="mcheck g">✓</div>14 months</div></div>
+      <div class="mc achieved"><div class="mc-cat">Language</div><div class="mc-text">Says mama / dada</div><div class="mc-status"><div class="mcheck g">✓</div>12 months</div></div>
+      <div class="mc achieved"><div class="mc-cat">Cognitive</div><div class="mc-text">Points to objects</div><div class="mc-status"><div class="mcheck g">✓</div>13 months</div></div>
+    </div>
+    <div class="mage-hdr"><div class="mage-badge" style="background:var(--orange)">18 months</div><div class="mpbar-wrap"><div class="mpbar" style="width:60%;background:var(--orange)"></div></div><span class="mpct" style="color:var(--orange-dark)">60%</span></div>
+    <div class="mgrid">
+      <div class="mc achieved"><div class="mc-cat">Language</div><div class="mc-text">Says 10+ words</div><div class="mc-status"><div class="mcheck g">✓</div>16 months</div></div>
+      <div class="mc achieved"><div class="mc-cat">Social</div><div class="mc-text">Shows affection</div><div class="mc-status"><div class="mcheck g">✓</div>15 months</div></div>
+      <div class="mc pending"><div class="mc-cat">Self-care</div><div class="mc-text">Uses spoon/fork</div><div class="mc-status"><div class="mcheck gr">○</div>In progress</div></div>
+      <div class="mc pending"><div class="mc-cat">Language</div><div class="mc-text">2-step directions</div><div class="mc-status"><div class="mcheck gr">○</div>In progress</div></div>
+      <div class="mc pending"><div class="mc-cat">Cognitive</div><div class="mc-text">Sorts shapes/colors</div><div class="mc-status"><div class="mcheck gr">○</div>Not yet</div></div>
+    </div>
+    <button class="action-btn" style="background:var(--teal-light);color:var(--teal-dark);border-color:var(--teal)">+ Log a new milestone ↗</button>
+  </div>
+
+  <!-- ===== MESSAGES ===== -->
+  <div class="page" id="page-messages">
+    <div class="section-header"><h1>✉️ Messages</h1><p>Secure messaging with Broome Pediatrics care team</p></div>
+    <div class="alert-strip red"><span>⚠️</span>Do NOT use messaging for emergencies. Call 911 or (607) 770-1988.</div>
+    <div id="composeArea" style="display:none;background:var(--ocean-light);border:2.5px solid var(--ocean);border-radius:var(--r);padding:16px;margin-bottom:13px">
+      <div style="font-size:14px;font-weight:900;margin-bottom:12px;color:var(--ocean-dark)">New message</div>
+      <select class="compose-select"><option>-- Select recipient --</option><optgroup label="Clinical team"><option>Dr. Patel — Physician</option><option>Dr. Carter — Physician</option><option>Andrea, NP</option><option>Heather, RN</option></optgroup><optgroup label="Front desk"><option>Shelly — Scheduling</option><option>Tari — Billing</option><option>Ann — Records</option><option>Emily — Check-in</option><option>Lucy — Appointments</option></optgroup></select>
+      <input type="text" class="compose-input" placeholder="Subject...">
+      <textarea class="compose-textarea" placeholder="Type your message..."></textarea>
+      <div style="display:flex;gap:8px"><button class="sc-btn" onclick="sendCompose()">Send message</button><button class="q-btn" style="background:var(--border);color:var(--text)" onclick="document.getElementById('composeArea').style.display='none'">Cancel</button></div>
+    </div>
+    <button style="width:100%;padding:11px;background:var(--ocean);border:none;border-radius:var(--rs);color:white;font-weight:900;font-size:14px;cursor:pointer;font-family:var(--font);margin-bottom:13px" onclick="document.getElementById('composeArea').style.display=document.getElementById('composeArea').style.display==='none'?'block':'none'">+ New Message to Care Team</button>
+    <div class="msg-layout">
+      <div class="msg-sidebar">
+        <div class="msg-sidebar-hdr"><div style="font-size:13px;font-weight:900">Inbox <span style="background:var(--ocean);color:white;font-size:9px;font-weight:900;padding:2px 6px;border-radius:9px;margin-left:3px">2</span></div></div>
+        <div style="padding:7px 9px;border-bottom:1px solid var(--border)"><input type="text" style="width:100%;padding:6px 9px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:11px;font-family:var(--font);outline:none" placeholder="Search..."></div>
+        <div class="msg-list">
+          <div class="msg-thread-item active" onclick="openMsgThread(0)"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:12px;font-weight:900">Dr. Patel <span class="unread-dot" style="display:inline-block"></span></span><span style="font-size:10px;color:var(--muted)">Today 9:12 AM</span></div><div style="font-size:11px;font-weight:900;margin-bottom:2px">Pre-visit reminder</div><div style="font-size:10px;color:var(--muted)">Please complete screenings before Friday...</div></div>
+          <div class="msg-thread-item" onclick="openMsgThread(1)"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:12px;font-weight:900">Heather, RN <span class="unread-dot" style="display:inline-block"></span></span><span style="font-size:10px;color:var(--muted)">Yesterday</span></div><div style="font-size:11px;font-weight:900;margin-bottom:2px">Lab results available</div><div style="font-size:10px;color:var(--muted)">Child A's hemoglobin results are ready...</div></div>
+          <div class="msg-thread-item" onclick="openMsgThread(2)"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:12px;font-weight:900">Dr. Carter</span><span style="font-size:10px;color:var(--muted)">Mar 18</span></div><div style="font-size:11px;font-weight:900;margin-bottom:2px">Re: Fever question</div><div style="font-size:10px;color:var(--muted)">For temps under 102°F at this age...</div></div>
+          <div class="msg-thread-item" onclick="openMsgThread(3)"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:12px;font-weight:900">Lucy</span><span style="font-size:10px;color:var(--muted)">Mar 10</span></div><div style="font-size:11px;font-weight:900;margin-bottom:2px">Appointment confirmed</div><div style="font-size:10px;color:var(--muted)">Your Mar 28 appointment is confirmed...</div></div>
+          <div class="msg-thread-item" onclick="openMsgThread(4)"><div style="display:flex;justify-content:space-between;margin-bottom:2px"><span style="font-size:12px;font-weight:900">Tari</span><span style="font-size:10px;color:var(--muted)">Feb 28</span></div><div style="font-size:11px;font-weight:900;margin-bottom:2px">Insurance verified</div><div style="font-size:10px;color:var(--muted)">Your coverage has been verified...</div></div>
+        </div>
+      </div>
+      <div class="msg-main">
+        <div class="msg-main-hdr">
+          <div style="font-size:14px;font-weight:900;margin-bottom:2px" id="msgSubject">Pre-visit reminder</div>
+          <p style="font-size:11px;color:var(--muted)" id="msgFrom">From: Dr. Patel · Today 9:12 AM</p>
+        </div>
+        <div class="msg-body" id="msgBody">
+          <div class="msg-bubble recv"><div class="mb-from">Dr. Patel · Broome Pediatrics</div>Hi! Just a reminder that Child A's 18-month well visit is coming up on Friday, March 28 at 9:30 AM. Please complete the ASQ-3, M-CHAT-R/F, CDC Milestones, and EPDS screenings in the portal beforehand. See you Friday!<div class="mb-time">Today 9:12 AM</div></div>
+          <div class="msg-bubble sent">Thank you Dr. Patel! We'll get those done before Friday. Quick question — Child A has been pulling at their left ear. Should we call sooner?<div class="mb-time">Today 10:45 AM</div></div>
+          <div class="msg-bubble recv"><div class="mb-from">Dr. Patel · Broome Pediatrics</div>If no fever and acting normally, it's fine to mention at Friday's visit. If fever goes above 102°F, call us at (607) 770-1988 right away!<div class="mb-time">Today 11:02 AM</div></div>
+        </div>
+        <div class="msg-compose">
+          <textarea id="msgReply" placeholder="Type your reply to the care team..."></textarea>
+          <button class="msg-send-btn" onclick="sendMsgReply()">Send</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== DOSAGE ===== -->
+  <div class="page" id="page-dosage">
+    <div class="section-header"><h1>💊 Medication Dosage Guide</h1><p>Always confirm with Dr. Patel before giving medication</p></div>
+    <div class="alert-strip red"><span>⚠️</span>Never give aspirin to children. No ibuprofen under 6 months. No cold medicines under age 4.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px">
+      <div class="dose-calc">
+        <h3 style="font-family:var(--font);font-size:17px;margin-bottom:4px">Calculate by weight</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Enter weight to get a personalized dose.</p>
+        <label class="dc-label">Child's weight</label>
+        <div style="display:flex;gap:7px;margin-bottom:10px">
+          <input type="number" id="wVal" class="dc-input" style="flex:1;margin-bottom:0" placeholder="24.2" oninput="calcDose()">
+          <select id="wUnit" class="dc-input" style="width:72px;margin-bottom:0" onchange="calcDose()"><option>lbs</option><option>kg</option></select>
+        </div>
+        <label class="dc-label">Medication</label>
+        <select id="medSel" class="dc-input" onchange="calcDose()">
+          <option value="">Select medication...</option>
+          <optgroup label="Fever/Pain"><option value="tylenol">Acetaminophen (Tylenol) 160mg/5mL</option><option value="motrin">Ibuprofen (Motrin) 100mg/5mL</option></optgroup>
+          <optgroup label="Allergy"><option value="claritin">Loratadine (Claritin) 5mg/5mL</option><option value="zyrtec">Cetirizine (Zyrtec) 5mg/5mL</option></optgroup>
+          <optgroup label="Other"><option value="benadryl">Diphenhydramine (Benadryl) 12.5mg/5mL</option></optgroup>
+        </select>
+        <div class="dc-result" id="doseRes">
+          <div style="font-size:10px;font-weight:900;text-transform:uppercase;color:var(--orange);margin-bottom:2px">Recommended dose</div>
+          <div id="doseVal" style="font-family:var(--font);font-size:26px;font-weight:900"></div>
+          <div id="doseNote" style="font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5"></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px">
+        <div class="card">
+          <h3 style="font-family:var(--font);font-size:13px;font-weight:900;margin-bottom:9px">🌡️ Tylenol — 160mg/5mL</h3>
+          <table class="dose-table"><thead><tr style="background:var(--orange)"><th>Weight</th><th>Dose mg</th><th>Dose mL</th></tr></thead><tbody><tr><td>18–23 lbs</td><td>120 mg</td><td>3.75 mL</td></tr><tr><td style="font-weight:900;color:var(--coral)">24–35 lbs ←</td><td style="font-weight:900">160 mg</td><td style="font-weight:900">5 mL</td></tr><tr><td>36–47 lbs</td><td>240 mg</td><td>7.5 mL</td></tr><tr><td>48–59 lbs</td><td>320 mg</td><td>10 mL</td></tr></tbody></table>
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;font-weight:700">Every 4–6 hrs · Max 5 doses/day</div>
+        </div>
+        <div class="card">
+          <h3 style="font-family:var(--font);font-size:13px;font-weight:900;margin-bottom:9px">💊 Motrin — 100mg/5mL (ages 6 mo+)</h3>
+          <table class="dose-table"><thead><tr style="background:var(--blue)"><th>Weight</th><th>Dose mg</th><th>Dose mL</th></tr></thead><tbody><tr><td>18–23 lbs</td><td>75 mg</td><td>3.75 mL</td></tr><tr><td style="font-weight:900;color:var(--blue)">24–35 lbs ←</td><td style="font-weight:900">100 mg</td><td style="font-weight:900">5 mL</td></tr><tr><td>36–47 lbs</td><td>150 mg</td><td>7.5 mL</td></tr></tbody></table>
+          <div style="font-size:10px;color:var(--muted);margin-top:6px;font-weight:700">Every 6–8 hrs · Max 4 doses/day</div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px">
+      <div class="card">
+        <h3 style="font-family:var(--font);font-size:13px;font-weight:900;margin-bottom:9px">🌸 Claritin (Loratadine) 5mg/5mL</h3>
+        <table class="dose-table"><thead><tr style="background:var(--green-dark)"><th>Age</th><th>Dose</th><th>Frequency</th></tr></thead><tbody><tr><td>Under 2 yrs</td><td colspan="2">Ask Dr. Patel first</td></tr><tr><td>2–5 years</td><td>5 mg (5 mL)</td><td>Once daily</td></tr><tr><td>6–11 years</td><td>10 mg (10 mL)</td><td>Once daily</td></tr><tr><td>12+ years</td><td>10 mg (10 mL)</td><td>Once daily</td></tr></tbody></table>
+        <div style="font-size:10px;color:var(--muted);margin-top:6px;font-weight:700">Non-drowsy · Take at same time each day</div>
+      </div>
+      <div class="card">
+        <h3 style="font-family:var(--font);font-size:13px;font-weight:900;margin-bottom:9px">💜 Zyrtec (Cetirizine) 5mg/5mL</h3>
+        <table class="dose-table"><thead><tr style="background:var(--purple-dark)"><th>Age</th><th>Dose</th><th>Frequency</th></tr></thead><tbody><tr><td>Under 2 yrs</td><td colspan="2">Ask Dr. Patel first</td></tr><tr><td>2–5 years</td><td>2.5–5 mg</td><td>Once daily</td></tr><tr><td>6–11 years</td><td>5–10 mg</td><td>Once daily</td></tr><tr><td>12+ years</td><td>10 mg</td><td>Once daily</td></tr></tbody></table>
+        <div style="font-size:10px;color:var(--muted);margin-top:6px;font-weight:700">May cause mild drowsiness · Best at bedtime</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== HEALTH INFO ===== -->
+  <div class="page" id="page-health">
+    <div class="section-header"><h1>📖 Health Info Library</h1><p>Trusted care advice for common concerns</p></div>
+    <div class="health-grid">
+      <div class="health-card"><div class="health-icon">🌡️</div><div class="health-name">When to worry about a fever</div><div class="health-sub">Temperature guidelines, when to call, and comfort measures.</div><span class="badge orange" style="margin-top:8px;display:inline-block">Fever</span></div>
+      <div class="health-card"><div class="health-icon">🤧</div><div class="health-name">Managing cold symptoms in toddlers</div><div class="health-sub">Safe remedies, hydration tips, and warning signs.</div><span class="badge blue" style="margin-top:8px;display:inline-block">Cold &amp; Flu</span></div>
+      <div class="health-card"><div class="health-icon">🥗</div><div class="health-name">Introducing solid foods 12–24 months</div><div class="health-sub">What to feed, avoid, and picky eating guidance.</div><span class="badge green" style="margin-top:8px;display:inline-block">Nutrition</span></div>
+      <div class="health-card"><div class="health-icon">😴</div><div class="health-name">Healthy sleep habits at 18 months</div><div class="health-sub">Nap schedules, bedtime routines, and sleep regressions.</div><span class="badge purple" style="margin-top:8px;display:inline-block">Sleep</span></div>
+      <div class="health-card"><div class="health-icon">🧴</div><div class="health-name">Eczema care for babies &amp; toddlers</div><div class="health-sub">Moisturizing routines, triggers, and prescription options.</div><span class="badge yellow" style="margin-top:8px;display:inline-block">Skin</span></div>
+      <div class="health-card"><div class="health-icon">🏠</div><div class="health-name">Childproofing your home</div><div class="health-sub">Room-by-room checklist for your growing explorer.</div><span class="badge teal" style="margin-top:8px;display:inline-block">Safety</span></div>
+    </div>
+  </div>
+
+  <!-- ===== FORMS ===== -->
+  <div class="page" id="page-forms">
+    <div class="section-header"><h1>📄 Forms &amp; Documents</h1><p>Download, print, or fax completed forms to (607) 770-9086</p></div>
+    <div class="form-sec-lbl">General practice forms</div>
+    <div class="forms-grid">
+      <div class="form-card"><div class="form-icon" style="background:var(--teal-light)">📋</div><div><div style="font-size:12px;font-weight:900;margin-bottom:2px">New Patient Registration</div><div style="font-size:10px;color:var(--muted)">Insurance, history &amp; consent</div><div class="form-dl">↓ Download PDF</div></div></div>
+      <div class="form-card"><div class="form-icon" style="background:var(--coral-light)">💉</div><div><div style="font-size:12px;font-weight:900;margin-bottom:2px">Vaccine Consent Form</div><div style="font-size:10px;color:var(--muted)">Required before immunizations</div><div class="form-dl">↓ Download PDF</div></div></div>
+      <div class="form-card"><div class="form-icon" style="background:var(--yellow-light)">📄</div><div><div style="font-size:12px;font-weight:900;margin-bottom:2px">Medical Records Release</div><div style="font-size:10px;color:var(--muted)">Transfer to specialists</div><div class="form-dl">↓ Download PDF</div></div></div>
+      <div class="form-card"><div class="form-icon" style="background:var(--green-light)">💊</div><div><div style="font-size:12px;font-weight:900;margin-bottom:2px">Medication Authorization</div><div style="font-size:10px;color:var(--muted)">For school/daycare</div><div class="form-dl">↓ Download PDF</div></div></div>
+      <div class="form-card"><div class="form-icon" style="background:var(--orange-light)">🤧</div><div><div style="font-size:12px;font-weight:900;margin-bottom:2px">Sick Visit Intake</div><div style="font-size:10px;color:var(--muted)">Prepare for your visit</div><div class="form-dl">↓ Download PDF</div></div></div>
+      <div class="form-card"><div class="form-icon" style="background:var(--coral-light)">🍽️</div><div><div style="font-size:12px;font-weight:900;margin-bottom:2px">Allergy Action Plan</div><div style="font-size:10px;color:var(--muted)">Emergency allergy response</div><div class="form-dl">↓ Download PDF</div></div></div>
+      <div class="form-card"><div class="form-icon" style="background:var(--teal-light)">🏃</div><div><div style="font-size:12px;font-weight:900;margin-bottom:2px">Sports Clearance</div><div style="font-size:10px;color:var(--muted)">Required for organized sports</div><div class="form-dl">↓ Download PDF</div></div></div>
+      <div class="form-card"><div class="form-icon" style="background:var(--blue-light)">🏅</div><div><div style="font-size:12px;font-weight:900;margin-bottom:2px">Pre-Participation Physical</div><div style="font-size:10px;color:var(--muted)">Standard sports physical form</div><div class="form-dl">↓ Download PDF</div></div></div>
+    </div>
+    <div class="form-sec-lbl">🗽 New York State — school &amp; daycare forms</div>
+    <div class="state-card ny">
+      <div class="state-hdr"><div class="state-flag" style="background:#e8f0ff;color:#003DA5">NY</div><div><div class="state-name">New York State</div><div class="state-sub">Required forms for NY schools, daycares &amp; childcare programs</div></div><span class="badge navy" style="margin-left:auto">NYS DOH</span></div>
+      <div class="state-grid">
+        <div class="sf"><div class="sf-name">School Health Examination (DOH-2164)</div><div class="sf-desc">Required for NY K–12 school enrollment. Physician completed.</div><div class="sf-dl">↓ Download DOH-2164</div></div>
+        <div class="sf"><div class="sf-name">Immunization Record (DOH-2164a)</div><div class="sf-desc">Official NYS immunization documentation for school enrollment.</div><div class="sf-dl">↓ Download DOH-2164a</div></div>
+        <div class="sf"><div class="sf-name">Daycare Health Appraisal</div><div class="sf-desc">Required for NY licensed daycare / childcare enrollment. Annual.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">Pre-K &amp; Head Start Physical</div><div class="sf-desc">NYS health exam required for Pre-K and Head Start programs.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">NYS Sports Physical (NYSPHSAA)</div><div class="sf-desc">Required for interscholastic sports in New York State.</div><div class="sf-dl">↓ Download NYSPHSAA</div></div>
+        <div class="sf"><div class="sf-name">504 / IEP Medical Documentation</div><div class="sf-desc">Medical documentation for 504 plan or IEP requests in NY.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">School Medication Administration</div><div class="sf-desc">Authorization for NY school nurse to administer medications.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">Medical Exemption — Immunization</div><div class="sf-desc">Physician-signed medical exemption for required immunizations.</div><div class="sf-dl">↓ Download PDF</div></div>
+      </div>
+      <div style="margin-top:11px;background:#e8f0ff;border-radius:var(--rs);padding:9px 12px;font-size:11px;color:#003DA5;font-weight:700;line-height:1.5">📞 Need a form completed? Call (607) 770-1988 or fax to (607) 770-9086. Allow 3–5 business days.</div>
+    </div>
+    <div class="form-sec-lbl" style="margin-top:16px">🦅 Pennsylvania — school &amp; daycare forms</div>
+    <div class="state-card pa">
+      <div class="state-hdr"><div class="state-flag" style="background:#e8f0ff;color:#002868">PA</div><div><div class="state-name">Pennsylvania</div><div class="state-sub">Required forms for PA schools, daycares &amp; early childhood programs</div></div><span class="badge" style="background:#e8f0ff;color:#002868;margin-left:auto">PA DOE/DOH</span></div>
+      <div class="state-grid">
+        <div class="sf"><div class="sf-name">Health Inventory (H-28)</div><div class="sf-desc">Required PA school health exam. Grades K, 6, 11 required.</div><div class="sf-dl">↓ Download PA H-28</div></div>
+        <div class="sf"><div class="sf-name">Immunization Record (School)</div><div class="sf-desc">PA Certificate of Immunization for school and childcare.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">Childcare Health Assessment</div><div class="sf-desc">Required for PA licensed childcare and daycare. DHS form.</div><div class="sf-dl">↓ Download PA DHS</div></div>
+        <div class="sf"><div class="sf-name">PA Sports Physical (PIAA)</div><div class="sf-desc">PIAA-required form for PA interscholastic athletic participation.</div><div class="sf-dl">↓ Download PIAA</div></div>
+        <div class="sf"><div class="sf-name">Early Intervention Referral</div><div class="sf-desc">PA Early Intervention for children ages 0–3 with developmental concerns.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">504 Medical Documentation (PA)</div><div class="sf-desc">Supporting documentation for 504 accommodations in PA schools.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">PA School Medication Admin.</div><div class="sf-desc">Authorization for PA school nurse to administer medications.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">Medical Exemption (PA)</div><div class="sf-desc">PA physician-signed medical exemption for immunizations.</div><div class="sf-dl">↓ Download PDF</div></div>
+      </div>
+      <div style="margin-top:11px;background:#e8f0ff;border-radius:var(--rs);padding:9px 12px;font-size:11px;color:#002868;font-weight:700;line-height:1.5">📞 For PA form requests, call (607) 770-1988 or fax (607) 770-9086. Allow 3–5 business days.</div>
+    </div>
+    <div class="form-sec-lbl" style="margin-top:16px">🧒 Daycare &amp; childcare forms (NY &amp; PA)</div>
+    <div class="state-card dc">
+      <div class="state-hdr"><div class="state-flag" style="background:var(--orange-light);font-size:20px">🧒</div><div><div class="state-name">Daycare &amp; Childcare</div><div class="state-sub">Common forms for licensed daycare and home childcare programs</div></div></div>
+      <div class="state-grid">
+        <div class="sf"><div class="sf-name">Childcare Health Appraisal</div><div class="sf-desc">General health appraisal for NY and PA licensed daycare enrollment.</div><div class="sf-dl">↓ NY version</div></div>
+        <div class="sf"><div class="sf-name">Emergency Medical Authorization</div><div class="sf-desc">Parent consent for daycare to seek emergency medical treatment.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">Daily Medication Log (Daycare)</div><div class="sf-desc">Authorization and log for daycare staff to administer medications.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">Allergy &amp; Anaphylaxis Action Plan</div><div class="sf-desc">Emergency plan for daycare staff for known allergies. Physician signed.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">Asthma Action Plan</div><div class="sf-desc">Individualized asthma management plan for daycare and school.</div><div class="sf-dl">↓ Download PDF</div></div>
+        <div class="sf"><div class="sf-name">WIC Referral / Medical Necessity</div><div class="sf-desc">Medical documentation for WIC program eligibility and nutrition referrals.</div><div class="sf-dl">↓ Download PDF</div></div>
+      </div>
+      <div style="margin-top:11px;background:var(--orange-light);border-radius:var(--rs);padding:9px 12px;font-size:11px;color:var(--orange-dark);font-weight:700;line-height:1.5">💡 Not sure which form you need? Call our front desk at (607) 770-1988 — Shelly, Tari, Ann, Emily, or Lucy can help!</div>
+    </div>
+  </div>
+
+  <!-- ===== CONTACT ===== -->
+  <div class="page" id="page-contact">
+    <div class="section-header"><h1>📞 Contact Us</h1><p>Reach Broome Pediatrics</p></div>
+    <div class="contact-hero">
+      <div class="contact-fish-scene">
+        <svg width="206" height="140" viewBox="0 0 206 140"><rect width="206" height="140" fill="#0d4f6b"/><path d="M28 55 Q42 46 56 55 Q42 64 28 55Z" fill="#FF6B6B"/><circle cx="31" cy="54" r="1.8" fill="#fff"/><path d="M28 55 L21 50 L21 60Z" fill="#cc4444"/><path d="M128 40 Q144 32 160 40 Q144 49 128 40Z" fill="#ffd166"/><circle cx="131" cy="39" r="2" fill="#fff"/><path d="M128 40 L120 36 L120 44Z" fill="#e5b800"/><path d="M80 85 Q93 78 106 85 Q93 92 80 85Z" fill="#2ec4b6"/><circle cx="82.5" cy="84" r="1.8" fill="#fff"/><path d="M80 85 L73 81 L73 89Z" fill="#1a9b8f"/><path d="M168 58 Q178 53 188 58 Q178 63 168 58Z" fill="#9b72cf"/><circle cx="170" cy="57" r="1.6" fill="#fff"/><path d="M168 58 L162 55 L162 61Z" fill="#6a3fa6"/><circle cx="55" cy="20" r="2.5" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/><path d="M44 110 Q48 92 44 110" stroke="#2d9e5a" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M178 111 Q174 92 178 111" stroke="#2d9e5a" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <h2>Broome Pediatrics</h2>
+      <div class="contact-row"><div class="contact-icon">📍</div><div><div class="contact-label">Address</div><div class="contact-value">639 Main St, Johnson City, NY 13790</div></div></div>
+      <div class="contact-row"><div class="contact-icon">📞</div><div><div class="contact-label">Phone</div><div class="contact-value">(607) 770-1988</div></div></div>
+      <div class="contact-row"><div class="contact-icon">📠</div><div><div class="contact-label">Fax</div><div class="contact-value">(607) 770-9086</div></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+      <div class="card">
+        <h3 style="font-family:var(--font);font-size:14px;font-weight:900;margin-bottom:12px">🕐 Office Hours</h3>
+        <div class="hours-grid">
+          <div class="hday"><div class="hd-name">Mon</div><div class="hd-hours">8 AM–5 PM</div><div class="sick-badge">Sick calls 9–12</div></div>
+          <div class="hday"><div class="hd-name">Tue</div><div class="hd-hours">8 AM–5 PM</div><div class="sick-badge">Sick calls 9–12</div></div>
+          <div class="hday today"><div class="hd-name">Wed</div><div class="hd-hours">8 AM–5 PM</div><div class="sick-badge">Sick calls 9–12</div></div>
+          <div class="hday"><div class="hd-name">Thu</div><div class="hd-hours">8 AM–5 PM</div><div class="sick-badge">Sick calls 9–12</div></div>
+          <div class="hday"><div class="hd-name">Fri</div><div class="hd-hours">8 AM–4 PM</div><div class="sick-badge">Sick calls 9–12</div></div>
+          <div class="hday closed"><div class="hd-name">Sat</div><div class="hd-hours hd-closed">Closed</div></div>
+          <div class="hday closed"><div class="hd-name">Sun</div><div class="hd-hours hd-closed">Closed</div></div>
+        </div>
+        <div style="margin-top:10px;background:var(--orange-light);border:2px solid var(--orange);border-radius:var(--rs);padding:8px 11px;font-size:11px;color:var(--orange-dark);font-weight:900;line-height:1.5">Sick call window: 9:00 AM–12:00 PM, Mon–Fri. Call (607) 770-1988 during this window to schedule same-day sick visits.</div>
+        <div style="margin-top:8px;background:var(--teal-light);border-radius:var(--rs);padding:8px 11px;font-size:11px;color:var(--teal-dark);font-weight:700;line-height:1.5">After-hours: Call (607) 770-1988 · Answering service connects you with on-call provider.</div>
+      </div>
+      <div class="card">
+        <h3 style="font-family:var(--font);font-size:14px;font-weight:900;margin-bottom:11px">⚠️ Emergencies</h3>
+        <div style="background:var(--red-light);border:2px solid var(--red);border-radius:var(--rs);padding:11px;font-size:12px;color:var(--red-dark);font-weight:700;line-height:1.6;margin-bottom:10px">Do NOT use the portal for emergencies. Call 911 for life-threatening situations. For urgent after-hours concerns, call (607) 770-1988.</div>
+        <div style="display:flex;flex-direction:column;gap:7px;font-size:13px"><div style="font-weight:900">📞 <strong>911</strong> — Life-threatening emergencies</div><div style="font-weight:900">📞 <strong>(607) 770-1988</strong> — Urgent after-hours</div><div style="font-weight:900">📞 <strong>988</strong> — Mental health crisis</div><div style="font-weight:900">📞 <strong>741741</strong> — Crisis Text Line (text HOME)</div></div>
+      </div>
+    </div>
+    <div style="font-size:11px;font-weight:900;text-transform:uppercase;color:var(--muted);margin-bottom:9px">Clinical team</div>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-avatar" style="background:#e0faf8;color:var(--teal-dark);border-color:var(--teal)">DP</div><div class="team-name">Dr. Patel</div><div class="team-role">Pediatrician</div><span class="badge teal">Physician</span></div>
+      <div class="team-card"><div class="team-avatar" style="background:var(--blue-light);color:var(--blue);border-color:var(--blue)">DC</div><div class="team-name">Dr. Carter</div><div class="team-role">Pediatrician</div><span class="badge blue">Physician</span></div>
+      <div class="team-card"><div class="team-avatar" style="background:var(--purple-light);color:var(--purple-dark);border-color:var(--purple)">AN</div><div class="team-name">Andrea, NP</div><div class="team-role">Nurse Practitioner</div><span class="badge purple">NP</span></div>
+      <div class="team-card"><div class="team-avatar" style="background:var(--green-light);color:var(--green-dark);border-color:var(--green)">HR</div><div class="team-name">Heather, RN</div><div class="team-role">Registered Nurse</div><span class="badge green">RN</span></div>
+    </div>
+    <div style="font-size:11px;font-weight:900;text-transform:uppercase;color:var(--muted);margin-bottom:9px">Front desk</div>
+    <div class="team-grid">
+      <div class="team-card"><div class="team-avatar" style="background:var(--orange-light);color:var(--orange-dark);border-color:var(--orange)">SH</div><div class="team-name">Shelly</div><div class="team-role">Scheduling</div><span class="badge orange">Front desk</span></div>
+      <div class="team-card"><div class="team-avatar" style="background:var(--pink-light);color:#8b0046;border-color:var(--pink)">TR</div><div class="team-name">Tari</div><div class="team-role">Billing</div><span class="badge orange">Front desk</span></div>
+      <div class="team-card"><div class="team-avatar" style="background:var(--teal-light);color:var(--teal-dark);border-color:var(--teal)">AN</div><div class="team-name">Ann</div><div class="team-role">Records</div><span class="badge orange">Front desk</span></div>
+      <div class="team-card"><div class="team-avatar" style="background:var(--yellow-light);color:#7a5500;border-color:var(--yellow)">EM</div><div class="team-name">Emily</div><div class="team-role">Check-in</div><span class="badge orange">Front desk</span></div>
+      <div class="team-card"><div class="team-avatar" style="background:var(--purple-light);color:var(--purple-dark);border-color:var(--purple)">LU</div><div class="team-name">Lucy</div><div class="team-role">Appointments</div><span class="badge orange">Front desk</span></div>
+    </div>
+  </div>
+
+  <!-- ===== RESOURCES ===== -->
+  <div class="page" id="page-resources">
+    <div class="res-hero">
+      <div class="res-fish-scene">
+        <svg width="206" height="130" viewBox="0 0 206 130"><rect width="206" height="130" fill="#083f58"/><path d="M28 52 Q42 44 56 52 Q42 60 28 52Z" fill="#FF6B6B"/><circle cx="31" cy="51" r="1.8" fill="#fff"/><path d="M28 52 L21 47 L21 57Z" fill="#cc4444"/><path d="M120 36 Q136 28 152 36 Q136 45 120 36Z" fill="#ffd166"/><circle cx="123" cy="35" r="2" fill="#fff"/><path d="M120 36 L113 32 L113 40Z" fill="#e5b800"/><path d="M73 78 Q86 71 99 78 Q86 85 73 78Z" fill="#2ec4b6"/><circle cx="75.5" cy="77" r="1.8" fill="#fff"/><path d="M73 78 L66 74 L66 82Z" fill="#1a9b8f"/><path d="M163 52 Q172 47 181 52 Q172 57 163 52Z" fill="#9b72cf"/><circle cx="165" cy="51" r="1.6" fill="#fff"/><path d="M163 52 L157 49 L157 55Z" fill="#6a3fa6"/><path d="M42 104 Q46 88 42 104" stroke="#2d9e5a" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M177 106 Q173 88 177 106" stroke="#2d9e5a" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+      </div>
+      <h2>Useful Resources for Families</h2>
+      <p>Trusted pediatric and parenting websites selected by the Broome Pediatrics care team. More resources will be added — check back soon!</p>
+      <div style="background:rgba(255,255,255,.18);border:2px solid rgba(255,255,255,.35);border-radius:20px;padding:4px 14px;color:#fff;font-size:11px;font-weight:900;display:inline-flex;align-items:center;gap:6px">🔗 1 resource available · More coming soon!</div>
+    </div>
+    <div class="res-cat-pills">
+      <button class="res-cat-pill active" onclick="filterRes('all',this)">All</button>
+      <button class="res-cat-pill" onclick="filterRes('parenting',this)">Parenting</button>
+      <button class="res-cat-pill" onclick="filterRes('development',this)">Development</button>
+      <button class="res-cat-pill" onclick="filterRes('health',this)">Health &amp; Safety</button>
+      <button class="res-cat-pill" onclick="filterRes('mental',this)">Mental Health</button>
+      <button class="res-cat-pill" onclick="filterRes('nutrition',this)">Nutrition</button>
+    </div>
+    <div class="res-sec-lbl">Featured resource</div>
+    <div class="res-grid" style="margin-bottom:18px">
+      <div class="res-card featured" data-cats="parenting development health">
+        <div style="padding:9px 16px 0"><div class="featured-ribbon">⭐ Featured by Broome Pediatrics</div></div>
+        <div class="res-card-hdr">
+          <div class="res-logo" style="background:#fff5f5;border-color:#cc0000">
+            <svg width="40" height="40" viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#cc0000"/><rect x="15" y="5" width="10" height="30" fill="white"/><rect x="5" y="15" width="30" height="10" fill="white"/></svg>
+          </div>
+          <div>
+            <div class="res-name">Mount Sinai Parenting Center</div>
+            <div class="res-org">Icahn School of Medicine at Mount Sinai · New York</div>
+            <div class="res-desc">Comprehensive parenting resources and expert guidance from Mount Sinai pediatric specialists. Covers newborns through teenagers with evidence-based content on development, health, and family wellbeing.</div>
+          </div>
+        </div>
+        <div class="res-card-ftr">
+          <div class="res-tags"><span class="res-tag">Parenting</span><span class="res-tag">Development</span><span class="res-tag">Family health</span><span class="res-tag">Expert advice</span></div>
+          <a class="res-visit-btn" href="https://www.mountsinai.org/care/parenting-center" target="_blank" rel="noopener">Visit site ↗</a>
+        </div>
+      </div>
+    </div>
+    <div class="res-sec-lbl">More resources coming soon</div>
+    <div class="alert-strip blue" style="margin-bottom:13px"><span>ℹ️</span>Our care team is curating trusted resources for you. More links will be added soon — ask Dr. Patel or Dr. Carter at your next visit!</div>
+    <div class="res-grid">
+      <div class="res-placeholder"><div class="ph-icon">🏥</div><div class="ph-text">Pediatric health resource</div><div class="ph-sub">Coming soon!</div></div>
+      <div class="res-placeholder"><div class="ph-icon">👶</div><div class="ph-text">Child development resource</div><div class="ph-sub">Coming soon!</div></div>
+      <div class="res-placeholder"><div class="ph-icon">🧠</div><div class="ph-text">Mental health resource</div><div class="ph-sub">Coming soon!</div></div>
+      <div class="res-placeholder"><div class="ph-icon">🥗</div><div class="ph-text">Nutrition &amp; feeding resource</div><div class="ph-sub">Coming soon!</div></div>
+      <div class="res-placeholder"><div class="ph-icon">🔐</div><div class="ph-text">Child safety resource</div><div class="ph-sub">Coming soon!</div></div>
+      <div class="res-placeholder"><div class="ph-icon">📚</div><div class="ph-text">Educational resource</div><div class="ph-sub">Coming soon!</div></div>
+    </div>
+    <div class="suggest-box">
+      <div style="font-size:26px;flex-shrink:0">💡</div>
+      <div>
+        <div style="font-size:14px;font-weight:900;margin-bottom:4px">Know a great resource?</div>
+        <p>If you've found a helpful website or tool, send us a message through the Messages tab and we'll review it for inclusion!</p>
+        <button class="suggest-btn" onclick="showPage('messages',nthTab(6))">Send a suggestion →</button>
+      </div>
+    </div>
+    <div class="fish-fact" style="margin-top:14px">
+      <svg width="50" height="31" viewBox="0 0 50 31"><ellipse cx="25" cy="15.5" rx="14" ry="9.5" fill="#ff8c00"/><path d="M11 15.5 L2 9 L2 22Z" fill="#b85e00"/><circle cx="32" cy="11" r="2.5" fill="#fff"/><circle cx="32.4" cy="11" r="1.2" fill="#0a4f6e"/></svg>
+      <p>🔗 <strong>All resources listed here have been reviewed by Broome Pediatrics.</strong> Links open in a new tab. Always discuss health questions with Dr. Patel or Dr. Carter directly.</p>
+    </div>
+  </div>
+
+  <!-- ===== ACCOUNT ===== -->
+  <div class="page" id="page-account">
+    <div class="section-header"><h1>👤 My Account</h1><p>Manage your portal access and settings</p></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px">
+      <div class="card">
+        <h3 style="font-family:var(--font);font-size:14px;font-weight:900;margin-bottom:13px">🔐 Account Information</h3>
+        <div class="qr-row"><span class="qr-label">Name</span><span class="qr-value">Demo Family</span></div>
+        <div class="qr-row"><span class="qr-label">Email</span><span class="qr-value">demo@broomepediatrics.com</span></div>
+        <div class="qr-row"><span class="qr-label">Access</span><span><span class="badge green">Active</span></span></div>
+        <div class="qr-row"><span class="qr-label">Since</span><span class="qr-value">Mar 24, 2026</span></div>
+        <div class="qr-row"><span class="qr-label">Invited by</span><span class="qr-value">Dr. Patel</span></div>
+        <div class="qr-row" style="border:none"><span class="qr-label">Patients</span><span class="qr-value">Child A · Child B</span></div>
+        <button class="action-btn">Change password</button>
+      </div>
+      <div class="card">
+        <h3 style="font-family:var(--font);font-size:14px;font-weight:900;margin-bottom:13px">🔔 Notification Preferences</h3>
+        <div class="notif-row"><div><div style="font-size:12px;font-weight:900">Appointment reminders</div><div style="font-size:11px;color:var(--muted)">Email 48 hrs before visit</div></div><div class="notif-on">ON</div></div>
+        <div class="notif-row"><div><div style="font-size:12px;font-weight:900">New message alerts</div><div style="font-size:11px;color:var(--muted)">Email when care team replies</div></div><div class="notif-on">ON</div></div>
+        <div class="notif-row"><div><div style="font-size:12px;font-weight:900">Screening reminders</div><div style="font-size:11px;color:var(--muted)">Reminder before well visits</div></div><div class="notif-on">ON</div></div>
+        <div class="notif-row"><div><div style="font-size:12px;font-weight:900">Lab result notifications</div><div style="font-size:11px;color:var(--muted)">When results are available</div></div><div class="notif-on">ON</div></div>
+      </div>
+    </div>
+    <div class="card" style="border:2.5px solid var(--red-light)">
+      <h3 style="font-family:var(--font);font-size:14px;font-weight:900;margin-bottom:7px;color:var(--red-dark)">⚠️ Leave Practice / Deactivate Account</h3>
+      <p style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:12px">If you are leaving Broome Pediatrics, contact us to deactivate your portal access. Your login will be immediately revoked and a confirmation email sent. You may request copies of records at any time.</p>
+      <div style="background:var(--red-light);border-radius:var(--rs);padding:11px;margin-bottom:12px;font-size:11px;color:var(--red-dark);line-height:1.7">When revoked: portal login disabled · all sessions terminated · invitation invalidated · confirmation email sent · records available on request via fax (607) 770-9086</div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap">
+        <button class="action-btn" style="width:auto;margin-top:0;border-color:var(--red);color:var(--red-dark);background:var(--red-light);padding:9px 17px" onclick="alert('Please call (607) 770-1988 or send a message through the portal to request deactivation.')">Request deactivation ↗</button>
+        <button class="action-btn" style="width:auto;margin-top:0;padding:9px 17px" onclick="alert('Please fax your records request to (607) 770-9086 or call (607) 770-1988.')">Request records ↗</button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end appScreen -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script>
+/* ========================================
+   BROOME PEDIATRICS PORTAL — DEMO JS
+   ======================================== */
+
+// LOGIN
+function doLogin(){
+  document.getElementById('loginScreen').style.display='none';
+  document.getElementById('appScreen').style.display='block';
+  buildAquarium();
+  setTimeout(()=>{updateArrows();updateDots();},100);
+}
+function doLogout(){
+  document.getElementById('appScreen').style.display='none';
+  document.getElementById('loginScreen').style.display='flex';
+}
+
+// TAB ARROW NAVIGATION
+const SCROLL_STEP=200;
+let tabOffset=0;
+function getMaxOffset(){const area=document.getElementById('navScrollArea');const tabs=document.getElementById('navTabs');return Math.max(0,tabs.scrollWidth-area.offsetWidth);}
+function scrollTabs(dir){tabOffset+=dir*SCROLL_STEP;tabOffset=Math.max(0,Math.min(tabOffset,getMaxOffset()));document.getElementById('navTabs').style.transform=`translateX(-${tabOffset}px)`;updateArrows();updateDots();}
+function updateArrows(){const max=getMaxOffset();document.getElementById('navLeft').disabled=tabOffset<=0;document.getElementById('navRight').disabled=tabOffset>=max;}
+function updateDots(){const dotsEl=document.getElementById('tabDots');const area=document.getElementById('navScrollArea');const tabs=document.getElementById('navTabs');const total=tabs.scrollWidth;const visible=area.offsetWidth;const pages=Math.ceil(total/visible);const cur=Math.round(tabOffset/visible);dotsEl.innerHTML='';if(pages<=1){dotsEl.style.display='none';return;}dotsEl.style.display='flex';for(let i=0;i<pages;i++){const d=document.createElement('div');d.style.cssText=`width:${i===cur?18:7}px;height:7px;border-radius:4px;background:${i===cur?'var(--ocean)':'var(--border)'};transition:all .25s;cursor:pointer`;d.onclick=()=>{tabOffset=i*visible;document.getElementById('navTabs').style.transform=`translateX(-${tabOffset}px)`;updateArrows();updateDots();};dotsEl.appendChild(d);}}
+function scrollActiveTabIntoView(btn){if(!btn)return;const area=document.getElementById('navScrollArea');const tabs=document.getElementById('navTabs');const btnL=btn.offsetLeft;const btnR=btnL+btn.offsetWidth;const aW=area.offsetWidth;if(btnL<tabOffset)tabOffset=Math.max(0,btnL-16);else if(btnR>tabOffset+aW)tabOffset=Math.min(getMaxOffset(),btnR-aW+16);tabs.style.transform=`translateX(-${tabOffset}px)`;updateArrows();updateDots();}
+window.addEventListener('resize',()=>{updateArrows();updateDots();});
+
+// PAGE NAVIGATION
+function showPage(id,btn){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.querySelectorAll('.nav-tab').forEach(b=>b.classList.remove('active'));document.getElementById('page-'+id).classList.add('active');if(btn){btn.classList.add('active');scrollActiveTabIntoView(btn);}if(id==='growth')setTimeout(()=>initWHOChart('length'),80);window.scrollTo({top:0,behavior:'smooth'});}
+function nthTab(n){return document.querySelectorAll('.nav-tab')[n];}
+
+// SCREENING CATEGORIES
+function switchScrCat(cat,btn){document.querySelectorAll('.scr-tab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');['dev','mental','adhd','safety','eating'].forEach(x=>{const el=document.getElementById('scat-'+x);if(el)el.style.display=(x===cat?'block':'none');});document.getElementById('qPanel').classList.remove('open');document.getElementById('qResult').classList.remove('open');}
+
+// GROWTH CHARTS
+let whoInst=null,cdcInst=null,curWHO='length',curCDC='stature';
+function switchGrowthMode(mode,btn){document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');if(mode==='who'){document.getElementById('who-section').style.display='block';document.getElementById('cdc-section').style.display='none';setTimeout(()=>initWHOChart(curWHO),50);}else{document.getElementById('who-section').style.display='none';document.getElementById('cdc-section').style.display='block';setTimeout(()=>initCDCChart(curCDC),50);}}
+function switchWHO(type,btn){document.querySelectorAll('#who-section .wtab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');curWHO=type;initWHOChart(type);}
+function switchCDC(type,btn){document.querySelectorAll('#cdc-section .wtab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');curCDC=type;initCDCChart(type);}
+const FONT="'Comic Sans MS',cursive";
+const WHO={
+  length:{lbl:'Length (cm)',ages:[0,3,6,9,12,15,18,21,24],p3:[45.6,55.3,62.1,67.3,71.8,74.4,79.0,82.1,84.9],p15:[47.3,57.5,64.5,69.9,74.5,77.1,81.9,85.1,88.0],p50:[49.1,59.8,67.2,72.8,77.5,80.3,85.2,88.4,91.4],p85:[51.0,62.1,69.8,75.6,80.4,83.2,88.2,91.5,94.5],p97:[52.7,64.2,72.1,78.2,83.1,86.0,91.1,94.4,97.3],child:[49.5,null,67.3,null,74.9,null,79.9,null,null]},
+  weight:{lbl:'Weight (kg)',ages:[0,3,6,9,12,15,18,21,24],p3:[2.4,4.6,5.9,6.8,7.5,7.9,8.6,9.1,9.5],p15:[2.7,5.2,6.5,7.5,8.3,8.7,9.5,10.1,10.6],p50:[3.2,5.8,7.3,8.2,8.9,9.4,10.2,10.9,11.5],p85:[3.7,6.6,8.3,9.5,10.4,10.9,11.9,12.7,13.4],p97:[4.2,7.5,9.5,10.9,12.0,12.7,13.9,14.8,15.7],child:[3.4,null,7.6,null,9.7,null,11.0,null,null]},
+  hcfa:{lbl:'Head Circ. (cm)',ages:[0,3,6,9,12,15,18,21,24],p3:[31.9,37.2,39.7,41.3,42.5,43.1,44.2,44.8,45.4],p15:[33.1,38.5,41.0,42.6,43.8,44.5,45.4,46.1,46.7],p50:[34.5,40.2,42.8,44.5,45.7,46.4,47.5,48.1,48.7],p85:[35.9,41.8,44.6,46.3,47.5,48.2,49.2,49.9,50.5],p97:[37.2,43.2,46.1,47.9,49.1,49.8,50.9,51.5,52.1],child:[34.0,null,43.2,null,45.2,null,46.2,null,null]},
+  bmi:{lbl:'BMI (kg/m²)',ages:[0,3,6,9,12,15,18,21,24],p3:[11.2,13.1,12.5,12.0,11.7,11.7,11.8,12.0,12.2],p15:[12.4,14.4,13.8,13.2,12.9,12.9,13.0,13.2,13.3],p50:[13.5,15.6,15.0,14.5,14.2,14.2,14.3,14.5,14.7],p85:[15.0,17.3,16.4,15.8,15.5,15.5,15.7,15.9,16.2],p97:[16.5,19.1,17.9,17.1,16.8,16.8,17.1,17.4,17.7],child:[14.1,null,15.6,null,15.8,null,15.8,null,null]}
+};
+const CDC={
+  stature:{lbl:'Stature (cm)',ages:[2,4,6,8,10,12,14,16,18,20],p5:[81.6,94.4,105.8,115.9,124.8,133.2,142.1,147.3,149.2,149.7],p10:[83.5,96.6,108.2,118.6,127.8,136.7,145.9,151.1,152.9,153.4],p25:[86.5,100.0,112.3,123.1,133.0,142.7,152.2,157.1,158.7,159.1],p50:[90.2,104.3,117.1,128.6,139.1,149.6,158.8,163.0,164.2,164.6],p75:[93.9,108.6,121.9,134.1,145.4,156.8,165.5,169.0,169.8,170.1],p90:[97.0,112.2,126.0,138.7,150.7,162.7,171.1,174.0,174.5,174.8],p95:[99.0,114.6,128.7,141.7,154.1,166.5,174.5,177.0,177.4,177.7]},
+  weight:{lbl:'Weight (kg)',ages:[2,4,6,8,10,12,14,16,18,20],p5:[10.5,14.0,17.0,20.1,24.0,28.7,35.7,42.1,46.2,48.0],p10:[11.1,14.8,18.0,21.3,25.5,30.7,38.3,45.3,49.8,52.0],p25:[12.0,16.2,19.8,23.6,28.5,35.0,43.7,51.5,56.4,59.0],p50:[13.5,18.2,22.5,26.9,32.9,41.1,51.0,59.2,64.3,67.4],p75:[15.5,21.0,26.3,32.1,40.0,50.0,61.0,69.7,75.3,78.9],p90:[17.7,24.4,31.0,38.5,48.5,60.3,72.3,81.3,87.3,91.5],p95:[19.3,27.0,34.5,43.2,54.5,67.3,79.9,89.3,95.6,100.2]},
+  bmi:{lbl:'BMI (kg/m²)',ages:[2,4,6,8,10,12,14,16,18,20],p5:[14.7,13.9,13.2,12.9,13.0,13.4,14.2,15.2,16.0,16.4],p10:[15.1,14.3,13.7,13.4,13.5,14.0,14.9,15.9,16.7,17.1],p25:[15.8,15.1,14.6,14.5,14.7,15.5,16.5,17.5,18.2,18.6],p50:[16.9,16.2,15.8,15.9,16.3,17.2,18.4,19.3,20.0,20.6],p75:[18.3,17.7,17.4,17.8,18.6,19.9,21.4,22.5,23.3,23.9],p90:[19.9,19.5,19.6,20.4,21.8,23.6,25.4,26.7,27.6,28.2],p95:[21.1,20.9,21.2,22.3,24.0,26.1,28.1,29.4,30.3,31.0]}
+};
+function makeDS(d,isWHO){const ks=isWHO?['p3','p15','p50','p85','p97']:['p5','p10','p25','p50','p75','p90','p95'];const lbls=isWHO?['3rd','15th','50th','85th','97th']:['5th','10th','25th','50th','75th','90th','95th'];const clrs={'p3':'#e53935','p15':'#ff8c00','p10':'#e53935','p25':'#ff8c00','p50':'#4cbb6a','p75':'#ff8c00','p85':'#ff8c00','p90':'#ff8c00','p95':'#e53935','p97':'#e53935'};const ds=ks.map((k,i)=>({label:lbls[i]+' %ile',data:d[k],borderColor:clrs[k]||'#ccc',borderWidth:k==='p50'?2.5:1.5,borderDash:k==='p50'?[]:[5,4],pointRadius:0,tension:.4,fill:false}));if(d.child)ds.push({label:'Child A',data:d.child,borderColor:'#9b59b6',borderWidth:2.5,borderDash:[6,3],pointRadius:5,pointBackgroundColor:'#9b59b6',pointBorderColor:'white',pointBorderWidth:2,tension:.4,fill:false});return ds;}
+function cOpts(xl,yl){return{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'bottom',labels:{font:{size:10,family:FONT},color:'#5c6675',boxWidth:20,usePointStyle:true}}},scales:{y:{title:{display:true,text:yl,font:{size:10,family:FONT},color:'#5c6675'},grid:{color:'#f1f5f9'},ticks:{font:{size:9,family:FONT},color:'#94a3b8'}},x:{title:{display:true,text:xl,font:{size:10,family:FONT},color:'#5c6675'},grid:{color:'#f1f5f9'},ticks:{font:{size:9,family:FONT},color:'#94a3b8'}}}};}
+function initWHOChart(type){if(whoInst)whoInst.destroy();const d=WHO[type];const ctx=document.getElementById('whoChart');if(!ctx)return;whoInst=new Chart(ctx,{type:'line',data:{labels:d.ages.map(a=>a+' mo'),datasets:makeDS(d,true)},options:cOpts('Age (months)',d.lbl)});}
+function initCDCChart(type){if(cdcInst)cdcInst.destroy();const d=CDC[type];const ctx=document.getElementById('cdcChart');if(!ctx)return;cdcInst=new Chart(ctx,{type:'line',data:{labels:d.ages.map(a=>a+' yr'),datasets:makeDS(d,false)},options:cOpts('Age (years)',d.lbl)});}
+
+// DOSAGE CALCULATOR
+function calcDose(){const w=parseFloat(document.getElementById('wVal').value);const u=document.getElementById('wUnit').value;const med=document.getElementById('medSel').value;const res=document.getElementById('doseRes');if(!w||!med){res.classList.remove('show');return;}const kg=u==='lbs'?w/2.205:w;const lbs=u==='lbs'?w:w*2.205;let dose='',note='';
+if(med==='tylenol'){const mg=Math.round(kg*15);const ml=(mg/32).toFixed(1);dose=ml+' mL ('+mg+' mg)';note='Acetaminophen 160mg/5mL · Every 4–6 hrs · Max 5 doses/day';}
+else if(med==='motrin'){const mg=Math.round(kg*10);const ml=(mg/20).toFixed(1);dose=ml+' mL ('+mg+' mg)';note='Ibuprofen 100mg/5mL · Every 6–8 hrs · Ages 6 months+ only · Max 4 doses/day';}
+else if(med==='benadryl'){const mg=Math.round(kg*1.25);const ml=(mg/2.5).toFixed(1);dose=ml+' mL ('+mg+' mg)';note='Diphenhydramine 12.5mg/5mL · Every 6 hrs · Consult Dr. Patel for under 2 years';}
+else if(med==='claritin'){if(lbs<23){dose='Ask Dr. Patel';note='Not recommended under 2 years without physician guidance';}else if(lbs<48){dose='5 mg (5 mL)';note='Loratadine 5mg/5mL · Once daily · Ages 2–5 years';}else{dose='10 mg (10 mL)';note='Loratadine 5mg/5mL · Once daily · Ages 6+ years';}}
+else if(med==='zyrtec'){if(lbs<23){dose='Ask Dr. Patel';note='Not recommended under 2 years without physician guidance';}else if(lbs<48){dose='2.5–5 mg (2.5–5 mL)';note='Cetirizine 5mg/5mL · Once daily · Ages 2–5 · Max 5 mg/day';}else{dose='5–10 mg (5–10 mL)';note='Cetirizine 5mg/5mL · Once daily · Ages 6+ · Max 10 mg/day';}}
+document.getElementById('doseVal').textContent=dose;document.getElementById('doseNote').textContent=note;res.classList.add('show');}
+
+// MESSAGES
+const msgThreads=[
+  {sub:'Pre-visit reminder',from:'Dr. Patel · Today 9:12 AM',msgs:[{f:'Dr. Patel',t:"Hi! Just a reminder that Child A's 18-month well visit is on Friday March 28 at 9:30 AM. Please complete the ASQ-3, M-CHAT-R/F, CDC Milestones, and EPDS screenings in the portal beforehand. See you Friday!",tm:'9:12 AM',s:false},{f:'',t:"Thank you Dr. Patel! We'll get those done before Friday. Quick question — Child A has been pulling at their left ear. Should we call sooner?",tm:'10:45 AM',s:true},{f:'Dr. Patel',t:'If no fever and acting normally, it\'s fine to mention at Friday\'s visit. If fever goes above 102°F or they become very fussy, call (607) 770-1988 right away!',tm:'11:02 AM',s:false}]},
+  {sub:'Lab results available',from:'Heather, RN · Yesterday',msgs:[{f:'Heather, RN',t:"Child A's hemoglobin 11.8 g/dL (normal for age). Ferritin 14 ng/mL — slightly on the lower side. Dr. Patel recommends discussing iron-rich foods at the upcoming visit.",tm:'Yesterday 2:30 PM',s:false}]},
+  {sub:'Re: Fever question',from:'Dr. Carter · Mar 18',msgs:[{f:'',t:"Child A has had a fever of 101.5°F since this morning. They're acting normally and eating. Should I give Tylenol?",tm:'Mar 18 8:45 AM',s:true},{f:'Dr. Carter',t:"For a temperature under 102°F in a child this age who is acting normally and eating, you can give Tylenol per the weight-based dosage guide in the portal. Call (607) 770-1988 if it climbs above 103°F.",tm:'Mar 18 9:20 AM',s:false}]},
+  {sub:'Appointment confirmed',from:'Lucy · Mar 10',msgs:[{f:'Lucy',t:"Your appointment on March 28 at 9:30 AM with Dr. Patel has been confirmed for Child A's 18-month well visit. Please arrive 10 minutes early and complete portal screenings beforehand!",tm:'Mar 10 3:15 PM',s:false}]},
+  {sub:'Insurance verified',from:'Tari · Feb 28',msgs:[{f:'Tari',t:'Your insurance coverage has been verified for the upcoming visit. Your copay will be $20. For billing questions call (607) 770-1988.',tm:'Feb 28 11:00 AM',s:false}]},
+];
+function openMsgThread(i){const t=msgThreads[i];document.querySelectorAll('.msg-thread-item').forEach((x,j)=>{x.classList.toggle('active',j===i);});document.getElementById('msgSubject').textContent=t.sub;document.getElementById('msgFrom').textContent='From: '+t.from;const body=document.getElementById('msgBody');body.innerHTML=t.msgs.map(m=>`<div class="msg-bubble ${m.s?'sent':'recv'}">${!m.s?`<div class="mb-from">${m.f} · Broome Pediatrics</div>`:''}${m.t}<div class="mb-time">${m.tm}</div></div>`).join('');body.scrollTop=body.scrollHeight;}
+function sendMsgReply(){const ta=document.getElementById('msgReply');const txt=ta.value.trim();if(!txt)return;const body=document.getElementById('msgBody');body.innerHTML+=`<div class="msg-bubble sent">${txt}<div class="mb-time">Just now</div></div>`;ta.value='';body.scrollTop=body.scrollHeight;setTimeout(()=>{body.innerHTML+=`<div class="msg-bubble recv"><div class="mb-from">Broome Pediatrics</div>Thank you for your message. Our care team will respond within one business day. For urgent concerns call (607) 770-1988.<div class="mb-time">Just now</div></div>`;body.scrollTop=body.scrollHeight;},1200);}
+function sendCompose(){alert('Message sent to Broome Pediatrics! Our care team will respond within one business day. For urgent concerns call (607) 770-1988.');document.getElementById('composeArea').style.display='none';}
+
+// QUESTIONNAIRE ENGINE
+const QS={
+  asq18:{tag:'ASQ-3',tc:'#4a42b5',tb:'#eef0ff',title:'ASQ-3 — 18 months',sub:'Answer based on what Child A does regularly now.',sections:[{lbl:'Communication',items:[{q:'Does your child point to things they want or to show you something?',opts:['Yes','Sometimes','Not yet']},{q:'Does your child say two or more words besides mama and dada?',opts:['Yes','Sometimes','Not yet']},{q:'Does your child try to say words you say?',opts:['Yes','Sometimes','Not yet']}]},{lbl:'Motor',items:[{q:'Does your child walk well without holding on?',opts:['Yes','Sometimes','Not yet']},{q:'Can your child stack three or more small blocks?',opts:['Yes','Sometimes','Not yet']},{q:'Can your child scribble with a crayon?',opts:['Yes','Sometimes','Not yet']}]},{lbl:'Problem Solving',items:[{q:'Does your child point to pictures in a book when you name them?',opts:['Yes','Sometimes','Not yet']},{q:'Does your child put small objects into a container and dump them out?',opts:['Yes','Sometimes','Not yet']}]},{lbl:'Personal-Social',items:[{q:'Does your child help with dressing by pushing arms through sleeves?',opts:['Yes','Sometimes','Not yet']},{q:'Does your child feed themselves with a spoon, even if they spill?',opts:['Yes','Sometimes','Not yet']}]}]},
+  mchat:{tag:'M-CHAT-R/F',tc:'#8b2fa3',tb:'#fce8ff',title:'M-CHAT-R/F — Autism Screening',sub:'Answer yes or no based on what Child A typically does.',sections:[{lbl:'Social communication',items:[{q:'If you point at something across the room, does your child look at it?',opts:['Yes','No'],flagOn:'No'},{q:'Does your child play pretend or make-believe?',opts:['Yes','No'],flagOn:'No'},{q:'Does your child make unusual finger movements near their eyes?',opts:['Yes','No'],flagOn:'Yes'},{q:'Does your child point with one finger to ask for something?',opts:['Yes','No'],flagOn:'No'},{q:'Does your child respond to their name when you call?',opts:['Yes','No'],flagOn:'No'}]},{lbl:'Responsiveness',items:[{q:'When you smile at your child, do they smile back?',opts:['Yes','No'],flagOn:'No'},{q:'Does your child look you in the eye when you are talking or playing?',opts:['Yes','No'],flagOn:'No'},{q:'Does your child try to copy what you do?',opts:['Yes','No'],flagOn:'No'},{q:'Is your child interested in other children?',opts:['Yes','No'],flagOn:'No'},{q:'Does your child show you things by holding them up for you to see?',opts:['Yes','No'],flagOn:'No'}]}]},
+  cdc18:{tag:'CDC Milestones',tc:'#2a7a45',tb:'#dcf5e5',title:'CDC Milestones — 18 months',sub:'Check what Child A is doing now. Updated 2022 checklist.',sections:[{lbl:'Social & emotional',items:[{q:'Moves away from you but looks to make sure you are close by',opts:['Doing this','Not yet']},{q:'Points to show you something interesting',opts:['Doing this','Not yet']},{q:'Helps you dress them by pushing arm through sleeve',opts:['Doing this','Not yet']}]},{lbl:'Language',items:[{q:'Tries to say 3+ words besides mama or dada',opts:['Doing this','Not yet']},{q:'Follows one-step directions without gestures',opts:['Doing this','Not yet']}]},{lbl:'Movement',items:[{q:'Walks without holding on to anyone',opts:['Doing this','Not yet']},{q:'Tries to use a spoon',opts:['Doing this','Not yet']},{q:'Scribbles',opts:['Doing this','Not yet']}]}]},
+  epds:{tag:'EPDS',tc:'#b85e00',tb:'#fff3dc',title:'Edinburgh Postnatal Depression Scale',sub:'For the caregiver — how have you felt in the past 7 days?',sections:[{lbl:'Past 7 days',items:[{q:'I have been able to laugh and see the funny side of things',opts:['As much as I always could','Not quite so much','Definitely not so much','Not at all']},{q:'I have looked forward with enjoyment to things',opts:['As much as I ever did','Rather less than I used to','Definitely less than I used to','Hardly at all']},{q:'I have felt scared or panicky for no very good reason',opts:['No not at all','No not much','Yes sometimes','Yes quite a lot'],flagOn:'Yes quite a lot'},{q:'I have felt sad or miserable',opts:['No not at all','Not very often','Yes quite often','Yes most of the time'],flagOn:'Yes most of the time'},{q:'The thought of harming myself has occurred to me',note:'Please tell your doctor right away if this applies.',opts:['Never','Hardly ever','Sometimes','Yes quite often'],flagOn:'Sometimes',isCritical:true}]}]},
+  gad7:{tag:'GAD-7',tc:'#1976d2',tb:'#e3f2fd',title:'GAD-7 — Generalized Anxiety',sub:'Over the last 2 weeks, how often have you been bothered by the following?',sections:[{lbl:'Last 2 weeks',items:[{q:'Feeling nervous, anxious, or on edge',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'Not being able to stop or control worrying',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'Worrying too much about different things',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'Trouble relaxing',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'Feeling afraid as if something awful might happen',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'}]}]},
+  phq9:{tag:'PHQ-9/A',tc:'#6c3483',tb:'#f3e9ff',title:'PHQ-9 — Depression Screen',sub:'Over the last 2 weeks. Ages 12+.',sections:[{lbl:'Last 2 weeks',items:[{q:'Little interest or pleasure in doing things',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'Feeling down, depressed, irritable, or hopeless',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'Trouble falling or staying asleep, or sleeping too much',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'Thoughts that you would be better off dead or of hurting yourself',note:'If anything other than "Not at all" — please tell your doctor right away.',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Several days',isCritical:true}]}]},
+  scared:{tag:'SCARED',tc:'#b85e00',tb:'#fff3dc',title:'SCARED — Child Anxiety Screen',sub:'How often is each statement true? Ages 8–18.',sections:[{lbl:'Anxiety symptoms',items:[{q:'When I feel frightened, it is hard to breathe',opts:['Not true','Sometimes true','Often true'],flagOn:'Often true'},{q:'I am nervous',opts:['Not true','Sometimes true','Often true']},{q:'I worry about going to school',opts:['Not true','Sometimes true','Often true'],flagOn:'Often true'},{q:'I get stomachaches at school',opts:['Not true','Sometimes true','Often true']},{q:'I do not like to be with people I do not know well',opts:['Not true','Sometimes true','Often true']}]}]},
+  vand_parent:{tag:'Vanderbilt (Parent)',tc:'#8b0046',tb:'#ffe0f3',title:'Vanderbilt ADHD — Parent Rating',sub:'Rate each behavior: Never / Occasionally / Often / Very often. Ages 6–12.',sections:[{lbl:'Inattention',items:[{q:'Fails to give close attention to details or makes careless mistakes',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Has difficulty sustaining attention in tasks or play',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Does not seem to listen when spoken to directly',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Has difficulty organizing tasks and activities',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Hyperactivity/Impulsivity',items:[{q:'Fidgets with hands or feet or squirms in seat',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Blurts out answers before questions are completed',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Has difficulty awaiting turn',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Academic performance',items:[{q:'Overall school performance',opts:['Excellent','Above average','Average','Somewhat problematic','Problematic'],flagOn:'Problematic'},{q:'Relationship with peers',opts:['Excellent','Above average','Average','Somewhat problematic','Problematic'],flagOn:'Problematic'}]}]},
+  vand_teacher:{tag:'Vanderbilt (Teacher)',tc:'#8b0046',tb:'#ffe0f3',title:'Vanderbilt ADHD — Teacher Rating',sub:'Rate each behavior. Ages 6–12. Teacher completes this form.',sections:[{lbl:'Classroom behavior',items:[{q:'Fails to give close attention to details or makes careless mistakes in schoolwork',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Has difficulty sustaining attention',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Fidgets with hands or feet or squirms in seat',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Academic performance',items:[{q:'Reading — current performance',opts:['Excellent','Above average','Average','Somewhat problematic','Problematic'],flagOn:'Problematic'},{q:'Mathematics — current performance',opts:['Excellent','Above average','Average','Somewhat problematic','Problematic'],flagOn:'Problematic'}]}]},
+  asrs_a:{tag:'ASRS-v1.1 Part A',tc:'#0f2d48',tb:'#e8f2fa',title:'Adult ADHD Self-Report Scale — Part A',sub:'6 questions. How have you felt over the past 6 months? For adults 18+.',sections:[{lbl:'Over the past 6 months',items:[{q:'How often do you have trouble wrapping up the final details of a project?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty getting things in order for tasks that require organization?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have problems remembering appointments or obligations?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'When you have to do a task requiring thought, how often do you avoid or delay getting started?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you fidget or squirm when you have to sit down for a long time?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you feel overly active and compelled to do things, like driven by a motor?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'}]}]},
+  asrs_full:{tag:'ASRS-v1.1 Full',tc:'#0f2d48',tb:'#e8f2fa',title:'Adult ADHD Self-Report Scale — Full (18 questions)',sub:'Complete ASRS v1.1 — Part A (Q1-6) validated screener + Part B (Q7-18). For adults 18+.',sections:[{lbl:'Part A — validated screener (Q1–6)',items:[{q:'How often do you have trouble wrapping up the final details of a project?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty getting things in order when you have to do a task that requires organization?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have problems remembering appointments or obligations?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'When you have a task that requires a lot of thought, how often do you avoid or delay getting started?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you feel overly active and compelled to do things, like you were driven by a motor?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'}]},{lbl:'Part B — additional symptoms (Q7–18)',items:[{q:'How often do you make careless mistakes when you have to work on a boring or difficult project?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty keeping your attention when doing boring or repetitive work?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty concentrating on what people say to you?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you misplace or have difficulty finding things at home or at work?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often are you distracted by activity or noise around you?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you leave your seat in meetings when remaining seated is expected?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you feel restless or fidgety?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty unwinding and relaxing when you have time to yourself?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you find yourself talking too much in social situations?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you finish sentences of people before they can finish them?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you have difficulty waiting your turn when turn taking is required?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you interrupt others when they are busy?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'}]}]},
+  asq_suicide:{tag:'ASQ',tc:'#a93226',tb:'#fdecea',title:'Ask Suicide-Screening Questions (ASQ)',sub:'4 validated questions for pediatric primary care. Ages 10+. Results reviewed by Dr. Patel.',sections:[{lbl:'Lifetime & recent',items:[{q:'In your lifetime, have you ever had thoughts of killing yourself?',opts:['No','Yes'],flagOn:'Yes'},{q:'Have you ever done anything, started to do anything, or prepared to do anything to end your life?',opts:['No','Yes'],flagOn:'Yes',isCritical:true},{q:'In the past few weeks, have you been having thoughts of killing yourself?',opts:['No','Yes'],flagOn:'Yes',isCritical:true},{q:'Right now, are you having thoughts of killing yourself?',opts:['No','Yes'],flagOn:'Yes',isCritical:true}]}]},
+  cssrs:{tag:'C-SSRS',tc:'#a93226',tb:'#fdecea',title:'Columbia Suicide Severity Rating Scale (Screener)',sub:'Validated for ages 12+. Results reviewed by Dr. Patel within 24 hours.',sections:[{lbl:'Ideation — lifetime',items:[{q:'Have you wished you were dead or wished you could go to sleep and not wake up?',opts:['No','Yes'],flagOn:'Yes'},{q:'Have you had any actual thoughts of killing yourself?',opts:['No','Yes'],flagOn:'Yes'},{q:'Have you been thinking about how you might do this?',opts:['No','Yes'],flagOn:'Yes',isCritical:true},{q:'Have you had these thoughts and had some intention of acting on them?',opts:['No','Yes'],flagOn:'Yes',isCritical:true}]}]},
+  scoff:{tag:'SCOFF',tc:'#8b1a5c',tb:'#ffe0f3',title:'SCOFF Questionnaire',sub:'5 questions for eating disorder screening. Ages 10+. No right or wrong answers.',sections:[{lbl:'Please answer honestly',items:[{q:'Do you make yourself Sick (vomit) because you feel uncomfortably full?',opts:['No','Yes'],flagOn:'Yes'},{q:'Do you worry you have lost Control over how much you eat?',opts:['No','Yes'],flagOn:'Yes'},{q:'Have you recently lost more than One stone (14 lbs) in a 3-month period?',opts:['No','Yes'],flagOn:'Yes'},{q:'Do you believe yourself to be Fat when others say you are too thin?',opts:['No','Yes'],flagOn:'Yes'},{q:'Would you say that Food dominates your life?',opts:['No','Yes'],flagOn:'Yes'}]}]},
+  edeq:{tag:'EDE-Q (Brief)',tc:'#8b1a5c',tb:'#ffe0f3',title:'EDE-Q Brief — Eating Disorder Exam',sub:'Over the past 28 days. Ages 12+. Please answer honestly.',sections:[{lbl:'Dietary restraint',items:[{q:'Have you been deliberately trying to limit the amount of food you eat to influence your shape or weight?',opts:['Not at all','A few days','Less than half','Half the days','More than half','Most days','Every day'],flagOn:'Every day'},{q:'Have you gone for long periods without eating to influence your shape or weight?',opts:['Not at all','A few days','Less than half','Half the days','More than half','Most days','Every day'],flagOn:'Most days'},{q:'Have you tried to exclude foods from your diet that you like?',opts:['Not at all','A few days','Less than half','Half the days','More than half','Most days','Every day'],flagOn:'Most days'}]},{lbl:'Eating & shape concern',items:[{q:'Have you had a definite fear of losing control over eating?',opts:['Not at all','A few days','Less than half','Half the days','More than half','Most days','Every day'],flagOn:'Half the days'},{q:'Has your weight or shape influenced how you think about yourself as a person?',opts:['Not at all','A few days','Less than half','Half the days','More than half','Most days','Every day'],flagOn:'Most days'},{q:'How dissatisfied have you felt about your weight?',opts:['Not at all','Slightly','Moderately','Markedly'],flagOn:'Markedly'},{q:'How dissatisfied have you felt about your shape?',opts:['Not at all','Slightly','Moderately','Markedly'],flagOn:'Markedly'}]}]},
+  arfid:{tag:'ARFID Screen',tc:'#8b1a5c',tb:'#ffe0f3',title:'ARFID Brief Screen',sub:'Avoidant/Restrictive Food Intake Disorder. Ages 8+. Answer about your child.',sections:[{lbl:'Food behaviors',items:[{q:'Does your child eat a very limited variety of foods (fewer than 20 different foods)?',opts:['No','Sometimes','Yes'],flagOn:'Yes'},{q:'Does your child avoid foods based on texture, color, smell, or appearance?',opts:['No','Sometimes','Yes'],flagOn:'Yes'},{q:'Has your child lost weight or failed to gain weight as expected due to eating habits?',opts:['No','Unsure','Yes'],flagOn:'Yes'},{q:"Does your child's eating cause significant problems at home, school, or socially?",opts:['No','Sometimes','Yes'],flagOn:'Yes'},{q:'Does your child show fear or distress when expected to eat new or feared foods?',opts:['No','Sometimes','Yes'],flagOn:'Yes'},{q:'Has your child ever choked or vomited and now avoids eating because of that fear?',opts:['No','Yes'],flagOn:'Yes'}]}]},
+};
+let curQ=null,curSec=0,qAns={};
+function openQ(id){const q=QS[id];if(!q)return;curQ=id;curSec=0;qAns={};document.getElementById('qResult').classList.remove('open');document.getElementById('qTag').textContent=q.tag;document.getElementById('qTag').style.background=q.tb;document.getElementById('qTag').style.color=q.tc;document.getElementById('qTitle').textContent=q.title;document.getElementById('qSub').textContent=q.sub;const p=document.getElementById('qPanel');p.classList.add('open');renderSec();p.scrollIntoView({behavior:'smooth',block:'start'});}
+function renderSec(){const q=QS[curQ];const sec=q.sections[curSec];const tot=q.sections.length;const pct=Math.round((curSec/tot)*100);document.getElementById('qProgLbl').textContent='Section '+(curSec+1)+' of '+tot+' — '+sec.lbl;document.getElementById('qProgPct').textContent=pct+'%';document.getElementById('qProgFill').style.width=pct+'%';document.getElementById('qPrevBtn').style.opacity=curSec===0?'.4':'1';document.getElementById('qPrevBtn').disabled=curSec===0;const isLast=curSec===tot-1;const nb=document.getElementById('qNextBtn');nb.textContent=isLast?'Submit ✓':'Next →';nb.className='q-btn '+(isLast?'q-submit':'q-next');let h='<div class="q-sec-lbl">'+sec.lbl+'</div>';sec.items.forEach((item,i)=>{const k=curSec+'-'+i;const sel=qAns[k];const isF=item.flagOn&&sel===item.flagOn;h+='<div class="q-item '+(sel?(isF?'answered':'answered'):'')+'">';h+='<div class="q-num">Q'+(i+1)+'</div><div class="q-text">'+item.q+'</div>';if(item.note)h+='<div class="q-note">'+item.note+'</div>';h+='<div class="q-opts">';item.opts.forEach(opt=>{const isSel=sel===opt;const isFlagOpt=item.flagOn&&opt===item.flagOn;h+='<button class="q-opt '+(isSel?(isFlagOpt?'sel-flag':'sel'):'')+'" onclick="selA(\''+k+'\',\''+opt.replace(/'/g,"\\'")+'\')">'+opt+'</button>';});h+='</div></div>';});document.getElementById('qBody').innerHTML=h;}
+function selA(k,v){qAns[k]=v;renderSec();}
+function qNav(dir){const q=QS[curQ];const next=curSec+dir;if(next<0)return;if(next>=q.sections.length){submitQ();return;}curSec=next;renderSec();document.getElementById('qPanel').scrollIntoView({behavior:'smooth',block:'start'});}
+function submitQ(){document.getElementById('qPanel').classList.remove('open');const q=QS[curQ];let flagged=[];q.sections.forEach((sec,si)=>sec.items.forEach((item,ii)=>{const v=qAns[si+'-'+ii];if(item.flagOn&&v===item.flagOn)flagged.push({q:item.q,a:v,crit:!!item.isCritical});}));const total=Object.keys(qAns).length;const poss=q.sections.reduce((a,s)=>a+s.items.length,0);const lvl=flagged.length===0?'pass':flagged.length<=2?'monitor':'refer';const titles={pass:'Screening looks great!',monitor:'A few items to review',refer:'Follow-up recommended'};const subs={pass:'No concerns flagged. Dr. Patel will review at your visit.',monitor:flagged.length+' items flagged for discussion at your next visit.',refer:flagged.length+' items flagged. Please discuss with Dr. Patel or Dr. Carter promptly.'};document.getElementById('rBanner').className='rb '+lvl;document.getElementById('rIcon').className='rb-icon '+lvl;document.getElementById('rIcon').textContent=lvl==='pass'?'✓':lvl==='monitor'?'!':'⚠';document.getElementById('rTitle').textContent=titles[lvl];document.getElementById('rSub').textContent=subs[lvl];document.getElementById('rDetails').innerHTML='<div style="background:#f9f3e3;border-radius:10px;padding:10px"><div style="font-size:9px;font-weight:900;text-transform:uppercase;color:'+( lvl==='pass'?'var(--green-dark)':lvl==='monitor'?'var(--orange-dark)':'var(--red-dark)')+';margin-bottom:2px">Result</div><div style="font-family:var(--font);font-size:20px;font-weight:900;color:'+(lvl==='pass'?'var(--green-dark)':lvl==='monitor'?'var(--orange-dark)':'var(--red-dark)')+'">'+(lvl==='pass'?'Clear':lvl==='monitor'?'Monitor':'Refer')+'</div></div><div style="background:#f9f3e3;border-radius:10px;padding:10px"><div style="font-size:9px;font-weight:900;text-transform:uppercase;color:var(--muted);margin-bottom:2px">Answered</div><div style="font-family:var(--font);font-size:20px;font-weight:900">'+total+'/'+poss+'</div></div><div style="background:#f9f3e3;border-radius:10px;padding:10px"><div style="font-size:9px;font-weight:900;text-transform:uppercase;color:var(--muted);margin-bottom:2px">Flagged</div><div style="font-family:var(--font);font-size:20px;font-weight:900;color:'+(lvl==='pass'?'var(--green-dark)':'var(--red-dark)')+'">'+flagged.length+'</div></div>';let fh='';if(flagged.length>0){fh='<div style="font-size:11px;font-weight:900;color:var(--red);margin-bottom:6px">Flagged responses</div>';flagged.forEach(f=>{fh+='<div style="display:flex;align-items:flex-start;gap:6px;padding:6px;background:var(--red-light);border-radius:var(--rs);margin-bottom:4px;font-size:11px"><div style="width:5px;height:5px;border-radius:50%;background:var(--red);flex-shrink:0;margin-top:4px"></div><div><strong>'+f.q+'</strong><br>Response: '+f.a+'</div></div>';});}document.getElementById('rFlagged').innerHTML=fh;const res=document.getElementById('qResult');res.classList.add('open');res.scrollIntoView({behavior:'smooth',block:'start'});}
+function closeQ(){document.getElementById('qPanel').classList.remove('open');}
+function closeResult(){document.getElementById('qResult').classList.remove('open');}
+
+// RESOURCES FILTER
+function filterRes(cat,btn){document.querySelectorAll('.res-cat-pill').forEach(b=>b.classList.remove('active'));btn.classList.add('active');document.querySelectorAll('.res-card').forEach(c=>{const cats=(c.dataset.cats||'').split(' ');c.style.display=(cat==='all'||cats.includes(cat))?'flex':'none';});}
+
+// AQUARIUM BUILDER
+function buildAquarium(){
+  const tank=document.getElementById('tankGlass');
+  if(tank._built)return;tank._built=true;
+  const W=tank.offsetWidth||900;
+  const swStyle=document.createElement('style');
+  swStyle.textContent='@keyframes sway1{0%{transform:rotate(-12deg)}50%{transform:rotate(10deg)}100%{transform:rotate(-12deg)}}@keyframes sway2{0%{transform:rotate(10deg)}50%{transform:rotate(-14deg)}100%{transform:rotate(10deg)}}@keyframes sway3{0%{transform:rotate(-8deg)}50%{transform:rotate(12deg)}100%{transform:rotate(-8deg)}}';
+  document.head.appendChild(swStyle);
+  [{x:55,col:'#1db87a',sw:3,anim:'sway1 3.5s ease-in-out infinite',h:60},{x:130,col:'#25d08a',sw:3.5,anim:'sway2 4s ease-in-out infinite',h:75},{x:W*.28,col:'#0fa866',sw:2.5,anim:'sway3 2.8s ease-in-out infinite',h:55},{x:W*.52,col:'#1dc27e',sw:3,anim:'sway1 3.2s ease-in-out infinite',h:68},{x:W*.73,col:'#22cf85',sw:3,anim:'sway2 3.8s ease-in-out infinite',h:62},{x:W-85,col:'#18b06e',sw:2.5,anim:'sway3 3s ease-in-out infinite',h:52},{x:W-155,col:'#20c87c',sw:3.5,anim:'sway1 4.2s ease-in-out infinite',h:72}].forEach(s=>{const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('width',28);svg.setAttribute('height',s.h);svg.setAttribute('viewBox',`0 0 28 ${s.h}`);svg.style.cssText=`position:absolute;bottom:20px;left:${s.x}px;animation:${s.anim};transform-origin:bottom center`;svg.innerHTML=`<path d="M14 ${s.h} Q4 ${s.h*.7} 14 ${s.h*.5} Q24 ${s.h*.3} 14 0" fill="none" stroke="${s.col}" stroke-width="${s.sw}" stroke-linecap="round"/>`;tank.appendChild(svg);});
+  [[W*.2,'#ff6b6b','#ff4444'],[W*.44,'#ff9a3c','#e07820'],[W*.82,'#ff6b6b','#cc3333']].forEach(c=>{const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('width',40);svg.setAttribute('height',30);svg.setAttribute('viewBox','0 0 40 30');svg.style.cssText=`position:absolute;bottom:18px;left:${c[0]}px`;svg.innerHTML=`<ellipse cx="20" cy="25" rx="18" ry="5" fill="${c[2]}" opacity=".5"/><rect x="8" y="10" width="5" height="15" rx="3" fill="${c[1]}"/><rect x="17" y="5" width="5" height="20" rx="3" fill="${c[1]}"/><rect x="26" y="12" width="5" height="13" rx="3" fill="${c[1]}"/><circle cx="10.5" cy="9" r="4" fill="${c[2]}"/><circle cx="19.5" cy="4" r="4.5" fill="${c[2]}"/><circle cx="28.5" cy="11" r="3.5" fill="${c[2]}"/>`;tank.appendChild(svg);});
+  [{body:'#FF5252',fin:'#FF1744',tail:'#D32F2F',stripe:'#FFD600',size:1.2,top:'32%',dur:12,delay:0,dir:'ltr'},{body:'#FFD600',fin:'#FFC107',tail:'#FF6F00',spotCol:'#FF5252',size:.85,top:'52%',dur:9,delay:-3,dir:'rtl'},{body:'#00BCD4',fin:'#006064',tail:'#0097A7',stripe:'#FFFFFF',size:1.0,top:'22%',dur:15,delay:-5,dir:'ltr'},{body:'#FF9800',fin:'#E65100',tail:'#BF360C',stripe:'#FFFFFF',size:.7,top:'62%',dur:11,delay:-7,dir:'rtl'},{body:'#9C27B0',fin:'#6A1B9A',tail:'#7B1FA2',spotCol:'#FFD600',size:.9,top:'40%',dur:13,delay:-4,dir:'ltr'},{body:'#4CAF50',fin:'#1B5E20',tail:'#2E7D32',stripe:'#C8E6C9',size:.75,top:'70%',dur:10,delay:-8,dir:'rtl'},{body:'#F06292',fin:'#C2185B',tail:'#E91E63',stripe:'#FFFFFF',size:1.1,top:'16%',dur:14,delay:-2,dir:'ltr'},{body:'#26C6DA',fin:'#00838F',tail:'#00BCD4',spotCol:'#FF5722',size:.65,top:'78%',dur:8,delay:-6,dir:'rtl'}].forEach(f=>{
+    const sc=f.size;const W2=Math.round(80*sc);const H2=Math.round(50*sc);const bx=Math.round(45*sc);const by=Math.round(25*sc);const brx=Math.round(30*sc);const bry=Math.round(16*sc);const ep=Math.round(4.5*sc);const ey=Math.round(16*sc);const er=Math.round(4*sc);const epr=Math.round(2*sc);const tp=`${Math.round(12*sc)},${Math.round(25*sc)} ${Math.round(2*sc)},${Math.round(8*sc)} ${Math.round(2*sc)},${Math.round(42*sc)}`;
+    const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('width',W2);svg.setAttribute('height',H2);svg.setAttribute('viewBox',`0 0 ${W2} ${H2}`);
+    let inner=`<polygon points="${tp}" fill="${f.tail}" class="fish-tail"/>`;inner+=`<ellipse cx="${bx}" cy="${by}" rx="${brx}" ry="${bry}" fill="${f.body}"/>`;if(f.stripe)inner+=`<ellipse cx="${bx}" cy="${by}" rx="${Math.round(brx*.5)}" ry="${bry}" fill="${f.stripe}" opacity=".35"/>`;if(f.spotCol){inner+=`<circle cx="${Math.round(bx-8*sc)}" cy="${Math.round(by-3*sc)}" r="${Math.round(5*sc)}" fill="${f.spotCol}" opacity=".6"/>`;inner+=`<circle cx="${Math.round(bx+5*sc)}" cy="${Math.round(by+4*sc)}" r="${Math.round(4*sc)}" fill="${f.spotCol}" opacity=".5"/>`;}inner+=`<ellipse cx="${bx}" cy="${Math.round(by-bry+2)}" rx="${Math.round(brx*.55)}" ry="${Math.round(12*sc)}" fill="${f.fin}" opacity=".8" class="fish-fin"/>`;inner+=`<circle cx="${ep}" cy="${ey}" r="${er}" fill="rgba(255,255,255,.85)"/>`;inner+=`<circle cx="${ep}" cy="${ey}" r="${epr}" fill="#111"/>`;inner+=`<circle cx="${Math.round(ep+sc)}" cy="${Math.round(ey-sc)}" r="${Math.round(sc)}" fill="rgba(255,255,255,.9)"/>`;svg.innerHTML=inner;
+    const wrap=document.createElement('div');wrap.className=f.dir==='ltr'?'fish-wrap':'fish-wrap rtl';wrap.style.cssText=`position:absolute;top:${f.top};animation-duration:${f.dur}s;animation-delay:${f.delay}s;`;const body=document.createElement('div');body.className='fish-body';body.appendChild(svg);wrap.appendChild(body);tank.appendChild(wrap);
+  });
+  [[W*.35,85,'#FF9800'],[W*.72,78,'#E91E63']].forEach(s=>{const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');svg.setAttribute('width',24);svg.setAttribute('height',24);svg.setAttribute('viewBox','0 0 24 24');svg.style.cssText=`position:absolute;bottom:${s[1]}px;left:${s[0]}px;animation:starSpin ${6+Math.random()*4}s linear infinite,starFloat ${3+Math.random()*2}s ease-in-out infinite alternate;`;svg.innerHTML=`<polygon points="12,2 15,9 22,9 17,14 19,21 12,17 5,21 7,14 2,9 9,9" fill="${s[2]}" opacity=".85"/>`;tank.appendChild(svg);});
+  for(let i=0;i<20;i++){const div=document.createElement('div');const size=4+Math.random()*8;div.className='bubble';div.style.cssText=`width:${size}px;height:${size}px;bottom:${10+Math.random()*30}%;left:${Math.random()*100}%;animation-duration:${3+Math.random()*4}s;animation-delay:${-Math.random()*6}s;`;tank.appendChild(div);}
+  for(let i=0;i<5;i++){const div=document.createElement('div');div.style.cssText=`position:absolute;top:0;left:${12+i*18+Math.random()*8}%;width:${2+Math.random()*3}px;height:60%;background:rgba(255,255,255,.06);transform:rotate(${-5+Math.random()*10}deg);transform-origin:top center;animation:shimmer ${3+Math.random()*2}s ease-in-out ${-Math.random()*3}s infinite alternate;border-radius:2px`;tank.appendChild(div);}
+}
+
+// LOGIN TANK BUILD
+(function buildLoginTank(){
+  const s=document.getElementById('loginTank');
+  const fc=['#ff6b6b','#ffd166','#2ec4b6','#6bcb77','#9b72cf','#ff9a3c'];
+  const tc=['#cc4444','#e5b800','#1a9b8f','#3a9944','#6a3fa6','#cc7a20'];
+  for(let i=0;i<5;i++){const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');const ci=i%fc.length;const sz=16+Math.random()*12;svg.setAttribute('width',sz*2.2);svg.setAttribute('height',sz*1.4);svg.setAttribute('viewBox','0 0 44 28');svg.innerHTML=`<ellipse cx="24" cy="14" rx="13" ry="9" fill="${fc[ci]}" opacity=".65"/><path d="M11 14 L2 8 L2 20Z" fill="${tc[ci]}" opacity=".65"/><circle cx="30" cy="11" r="2" fill="rgba(255,255,255,.8)"/><circle cx="30.4" cy="11" r=".9" fill="rgba(0,0,0,.3)"/>`;svg.style.cssText=`position:absolute;top:${5+Math.random()*85}%;left:${Math.random()*88}%;animation:fishSwimLR ${4+Math.random()*6}s ease-in-out infinite alternate;animation-delay:${-Math.random()*8}s;`;s.appendChild(svg);}
+  for(let i=0;i<10;i++){const b=document.createElement('div');const bs=3+Math.random()*6;b.style.cssText=`position:absolute;width:${bs}px;height:${bs}px;border-radius:50%;border:1.5px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);bottom:${Math.random()*60}%;left:${Math.random()*100}%;animation:brise ${2+Math.random()*4}s linear infinite;animation-delay:${-Math.random()*5}s;`;s.appendChild(b);}
+})();
+</script>
+</body>
+</html>
