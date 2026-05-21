@@ -461,6 +461,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .vcu-c{padding:8px 10px;font-size:10px;font-weight:700;text-align:center;vertical-align:top;white-space:nowrap}
 .vcu-n{padding:8px 12px;font-size:10px;font-weight:700;color:#555;line-height:1.5;vertical-align:top}
 
+.vax-cell-btn:hover{opacity:.75!important}
 </style>
 </head>
 <body>
@@ -810,8 +811,18 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="alert-strip blue"><span>ℹ️</span>Vanderbilt for ages 6–12 · ASRS v1.1 for adults 18+</div>
       <div style="font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Children ages 6–12 (Vanderbilt)</div>
       <div class="sc-grid" style="margin-bottom:16px">
-        <div class="screen-card due" style="border-color:var(--pink)"><div class="sc-tag" style="background:var(--pink-light);color:#8b0046">Vanderbilt</div><div class="sc-name">Vanderbilt ADHD — Parent Rating</div><div class="sc-sub">55 items · Ages 6–12 · ADHD + anxiety, depression, conduct</div><button class="sc-btn" style="background:var(--purple-dark)" onclick="openQ('vand_parent')">Start →</button></div>
-        <div class="screen-card due" style="border-color:var(--pink)"><div class="sc-tag" style="background:var(--pink-light);color:#8b0046">Vanderbilt</div><div class="sc-name">Vanderbilt ADHD — Teacher Rating</div><div class="sc-sub">43 items · Ages 6–12 · Teacher completes</div><button class="sc-btn" style="background:var(--purple-dark)" onclick="openQ('vand_teacher')">Start →</button></div>
+        <div class="screen-card due" style="border-color:var(--pink);grid-column:1/-1">
+          <div class="sc-tag" style="background:var(--pink-light);color:#8b0046">Vanderbilt · NICHQ</div>
+          <div class="sc-name">Vanderbilt ADHD Diagnostic Rating Scale — Parent</div>
+          <div class="sc-sub">55 items · Ages 6–12 · ADHD inattentive (1–9) + hyperactive/impulsive (10–18) + ODD (19–26) + conduct (27–40) + anxiety/mood (41–47) + performance (48–55) · Based on past 6 months · ©2002 AAP/NICHQ</div>
+          <div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:9px">
+            <button class="sc-btn" style="background:var(--purple-dark)" onclick="openQ('vand_parent')">✏️ Start in portal →</button>
+            <button class="sc-btn" style="background:#0a6b3a" onclick="openGovForm('https://ncpal.org/sites/default/files/2023-09/A4_Vanderbilt_English.pdf')">↓ Download Official PDF</button>
+          </div>
+          <div style="margin-top:9px;background:#ffe0f3;border-radius:var(--rs);padding:8px 11px;font-size:11px;color:#8b0046;font-weight:700;line-height:1.5">
+            <strong>Scoring guide:</strong> Positive ADHD screen = ≥6 items scored Often/Very Often in items 1–9 (inattentive) OR ≥6 in items 10–18 (hyperactive/impulsive). Items scored Often/Very Often in ODD, conduct, or anxiety/mood sections indicate co-occurring concerns. Performance items scored 4–5 flag academic or social difficulties. Share results with Dr. Patel or Dr. Carter for clinical interpretation.
+          </div>
+        </div>
       </div>
       <div style="font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:8px">Adults &amp; adolescents 18+ (ASRS-v1.1)</div>
       <div class="sc-grid">
@@ -947,6 +958,22 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <span style="font-size:10px;color:var(--muted);font-weight:700;margin-left:auto">Scroll table horizontally →</span>
       </div>
 
+      <!-- ABBREVIATION LEGEND -->
+      <div style="padding:10px 18px;background:#f8f9fa;border-bottom:2px solid var(--border);display:flex;flex-wrap:wrap;gap:6px;align-items:center">
+        <span style="font-size:10px;font-weight:900;text-transform:uppercase;color:var(--muted);margin-right:4px">Cell labels:</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#16a34a">D1</span> = Dose 1</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#16a34a">D2</span> = Dose 2</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#16a34a">D3</span> = Dose 3</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#16a34a">D4</span> = Dose 4</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#16a34a">D5</span> = Dose 5</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#16a34a">Ann</span> = Annual dose</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#7c3aed">CU</span> = Catch-up dose</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#b45309">HR</span> = High-risk groups</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#b45309">+D</span> = Optional extra dose</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#b45309">1x</span> = Single dose</span>
+        <span style="background:white;border:1.5px solid #d1d5db;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:900"><span style="color:#1565c0">&#x271a;</span> = Click to log</span>
+      </div>
+
       <!-- SCHEDULE TABLE -->
       <div style="overflow-x:auto;-webkit-overflow-scrolling:touch">
         <table id="vaxSchedTable" style="border-collapse:collapse;min-width:900px;width:100%">
@@ -1033,20 +1060,63 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="vax-prog-card upcoming"><div class="vax-prog-num" id="vaxProgUpcoming">0</div><div class="vax-prog-lbl">Upcoming</div></div>
     </div>
 
-    <!-- FILTER PILLS -->
-    <div class="vax-filters">
-      <button class="vax-pill active" id="vaxpill_all" onclick="setVaxFilter('all')">All vaccines</button>
-      <button class="vax-pill" id="vaxpill_overdue" onclick="setVaxFilter('overdue')">Overdue</button>
-      <button class="vax-pill" id="vaxpill_due" onclick="setVaxFilter('due')">Due now</button>
-      <button class="vax-pill" id="vaxpill_upcoming" onclick="setVaxFilter('upcoming')">Upcoming</button>
-      <button class="vax-pill" id="vaxpill_done" onclick="setVaxFilter('done')">Received</button>
-    </div>
-
     <!-- DISCLAIMER -->
-    <div class="alert-strip blue" style="margin-bottom:12px"><span>ℹ️</span>This tracker is for reference and parent education. Your child’s official immunization record is maintained by Broome Pediatrics. Always confirm your child’s vaccine status with Dr. Patel or Dr. Carter at your next visit. Based on the AAP/CDC 2024 recommended immunization schedule.</div>
+    <div class="alert-strip blue" style="margin-bottom:14px"><span>ℹ️</span>Click any colored cell in the schedule table to log a vaccine. Your child’s official record is maintained by Broome Pediatrics — always confirm with Dr. Patel or Dr. Carter. Based on the AAP 2026 immunization schedule.</div>
 
-    <!-- VACCINE CARDS -->
-    <div class="vax-grid" id="vaxCardGrid"></div>
+    <!-- NY STATE SCHOOL REQUIREMENTS -->
+    <div style="background:var(--white);border-radius:var(--r);box-shadow:var(--sh);margin-bottom:16px;overflow:hidden">
+      <div style="background:linear-gradient(135deg,#b91c1c,#991b1b);padding:13px 18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">
+        <div>
+          <div style="color:white;font-size:14px;font-weight:900">🗽 New York State School Immunization Requirements</div>
+          <div style="color:rgba(255,255,255,.8);font-size:11px;font-weight:700">2025–2026 School Year · NYC Department of Education · Required for school enrollment</div>
+        </div>
+        <button onclick="openGovForm('https://pwsblobprd.schools.nyc/prd-pws/docs/default-source/default-document-library/health-and-wellness/immunization-requirements-and-letter-for-school-year-2025-26.pdf?sfvrsn=cd6989d7_2')" style="background:white;color:#b91c1c;border:none;border-radius:var(--rs);padding:7px 14px;font-size:11px;font-weight:900;cursor:pointer;font-family:var(--font);white-space:nowrap">↓ Download Official PDF</button>
+      </div>
+      <div style="padding:14px 18px">
+        <div style="font-size:11px;font-weight:700;color:#555;margin-bottom:12px;line-height:1.6">The following vaccines are required by New York State for school enrollment for the 2025–26 school year. Children who do not meet requirements may be excluded from school. Download the official NYC DOE PDF above for the complete requirements list and parent letter.</div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:9px">
+          <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 12px">
+            <div style="font-size:11px;font-weight:900;color:#b91c1c;margin-bottom:3px">Hepatitis B</div>
+            <div style="font-size:10px;font-weight:700;color:#555">3-dose series required for all grades</div>
+          </div>
+          <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 12px">
+            <div style="font-size:11px;font-weight:900;color:#b91c1c;margin-bottom:3px">DTaP / Tdap</div>
+            <div style="font-size:10px;font-weight:700;color:#555">4–5 doses DTaP (PreK–5th grade); 1 Tdap booster (6th grade+)</div>
+          </div>
+          <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 12px">
+            <div style="font-size:11px;font-weight:900;color:#b91c1c;margin-bottom:3px">Polio (IPV)</div>
+            <div style="font-size:10px;font-weight:700;color:#555">3–4 doses required for all grades</div>
+          </div>
+          <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 12px">
+            <div style="font-size:11px;font-weight:900;color:#b91c1c;margin-bottom:3px">MMR</div>
+            <div style="font-size:10px;font-weight:700;color:#555">2-dose series required for all grades</div>
+          </div>
+          <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 12px">
+            <div style="font-size:11px;font-weight:900;color:#b91c1c;margin-bottom:3px">Varicella (Chickenpox)</div>
+            <div style="font-size:10px;font-weight:700;color:#555">2-dose series or documented disease history</div>
+          </div>
+          <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 12px">
+            <div style="font-size:11px;font-weight:900;color:#b91c1c;margin-bottom:3px">MenACWY (Meningococcal)</div>
+            <div style="font-size:10px;font-weight:700;color:#555">1 dose required for 6th grade; booster for 11th grade</div>
+          </div>
+          <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 12px">
+            <div style="font-size:11px;font-weight:900;color:#b91c1c;margin-bottom:3px">HPV</div>
+            <div style="font-size:10px;font-weight:700;color:#555">Required for 7th grade (2–3 dose series)</div>
+          </div>
+          <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 12px">
+            <div style="font-size:11px;font-weight:900;color:#b91c1c;margin-bottom:3px">Hib (PK only)</div>
+            <div style="font-size:10px;font-weight:700;color:#555">Required for Pre-K enrollment</div>
+          </div>
+          <div style="background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 12px">
+            <div style="font-size:11px;font-weight:900;color:#b91c1c;margin-bottom:3px">PCV (PK only)</div>
+            <div style="font-size:10px;font-weight:700;color:#555">Pneumococcal conjugate required for Pre-K</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;background:#fff5f5;border:2px solid #fca5a5;border-radius:var(--rs);padding:10px 13px;font-size:10px;font-weight:700;color:#7f1d1d;line-height:1.6">
+          ⚠️ Requirements vary by grade level. Medical exemptions require a physician signature on the NYS DOH-5077 form. Religious exemptions are not accepted in New York State. For questions contact Broome Pediatrics at (607) 770-1988 or through the Messages tab.
+        </div>
+      </div>
+    </div>
 
     <!-- CATCH-UP BANNER -->
     <div class="vax-catchup-banner">
@@ -1272,8 +1342,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="state-hdr"><div class="state-flag" style="background:#e8f0ff;color:#003DA5">NY</div><div><div class="state-name">New York State</div><div class="state-sub">Required forms for NY schools, daycares &amp; childcare programs</div></div><span class="badge navy" style="margin-left:auto">NYS DOH</span></div>
       <div class="state-grid">
         <div class="sf" onclick="openGovForm('https://www.nysed.gov/sites/default/files/programs/student-support-services/health-exam-form.pdf')"><div class="sf-name">School Health Examination (DOH-2164)</div><div class="sf-desc">Required for NY K–12 school enrollment. Physician completed. Official NYSED form.</div><div class="sf-dl">↓ Download Official NYS PDF</div></div>
-        <div class="sf" onclick="openGovForm('https://www.health.ny.gov/prevention/immunization/schools/docs/2024-2025_school_immunization_requirements.pdf')"><div class="sf-name">Immunization Requirements & Record</div><div class="sf-desc">Official NYS 2024–25 immunization requirements and documentation guide for school enrollment.</div><div class="sf-dl">↓ Download NYS DOH Immunization PDF</div></div>
-        <div class="sf" onclick="openGovForm('https://www.health.ny.gov/regulations/public_health_law/article_47/')"><div class="sf-name">Daycare Health Appraisal (NY)</div><div class="sf-desc">NYS DOH Article 47 — required for licensed daycare and childcare center enrollment. Annual renewal.</div><div class="sf-dl">↓ Visit NYS DOH Childcare Page ↗</div></div>
+        <div class="sf"><div class="sf-name">Immunization Requirements & Record</div><div class="sf-desc">Official NYS 2025–26 immunization requirements and documentation guide for school enrollment.</div><div style="display:flex;flex-wrap:wrap;gap:7px;margin-top:8px"><button onclick="openGovForm('https://files.smartsites.parentsquare.com/5428/2025-26_school_year_nys_immunization_requirements_1.pdf')" style="background:#1565c0;color:white;border:none;border-radius:6px;padding:5px 10px;font-size:10px;font-weight:900;cursor:pointer;font-family:inherit">↓ 2025–26 Requirements PDF</button></div></div>
+        <div class="sf" onclick="openGovForm('https://nycid.org/wp-content/uploads/2019/12/Medical-Form.pdf')"><div class="sf-name">Daycare Health Appraisal (NY)</div><div class="sf-desc">NYS DOH Article 47 — required for licensed daycare and childcare center enrollment. Annual renewal.</div><div class="sf-dl">↓ Visit NYS DOH Childcare Page ↗</div></div>
         <div class="sf" onclick="openGovForm('https://www.nysed.gov/sites/default/files/programs/student-support-services/health-exam-form.pdf')"><div class="sf-name">Pre-K &amp; Head Start Physical</div><div class="sf-desc">Same required NYS Health Examination form used for Pre-K and Head Start program enrollment.</div><div class="sf-dl">↓ Download NYS Health Exam PDF</div></div>
         <div class="sf" onclick="generateForm('504_iep')"><div class="sf-name">504 / IEP Medical Documentation</div><div class="sf-desc">Broome Pediatrics medical documentation form for 504 plan or IEP referral requests in NY schools.</div><div class="sf-dl">↓ Open &amp; Print Form</div></div>
         <div class="sf" onclick="generateForm('school_med_auth')"><div class="sf-name">School Medication Administration</div><div class="sf-desc">Authorization for NY school nurse to administer prescription or OTC medication during school hours.</div><div class="sf-dl">↓ Open &amp; Print Form</div></div>
@@ -1300,7 +1370,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     <div class="state-card dc">
       <div class="state-hdr"><div class="state-flag" style="background:var(--orange-light);font-size:20px">🧒</div><div><div class="state-name">Daycare &amp; Childcare</div><div class="state-sub">Common forms for licensed daycare and home childcare programs</div></div></div>
       <div class="state-grid">
-        <div class="sf" onclick="openGovForm('https://www.health.ny.gov/regulations/public_health_law/article_47/')"><div class="sf-name">Childcare Health Appraisal (NY)</div><div class="sf-desc">NYS DOH Article 47 — required health appraisal for all NY licensed daycare and childcare programs. Annual renewal.</div><div class="sf-dl">↓ Visit NYS DOH Childcare Page ↗</div></div>
+        <div class="sf" onclick="openGovForm('https://nycid.org/wp-content/uploads/2019/12/Medical-Form.pdf')"><div class="sf-name">Childcare Health Appraisal (NY)</div><div class="sf-desc">NYS DOH Article 47 — required health appraisal for all NY licensed daycare and childcare programs. Annual renewal.</div><div class="sf-dl">↓ Visit NYS DOH Childcare Page ↗</div></div>
         <div class="sf" onclick="generateForm('emergency_auth')"><div class="sf-name">Emergency Medical Authorization</div><div class="sf-desc">Broome Pediatrics form authorizing daycare to seek emergency medical treatment if parents cannot be reached.</div><div class="sf-dl">↓ Open &amp; Print Form</div></div>
         <div class="sf" onclick="generateForm('daily_med_log')"><div class="sf-name">Daily Medication Log (Daycare)</div><div class="sf-desc">Broome Pediatrics log for daycare staff to record daily medication administration. Accompanies medication auth form.</div><div class="sf-dl">↓ Open &amp; Print Form</div></div>
         <div class="sf" onclick="generateForm('allergy_daycare')"><div class="sf-name">Allergy &amp; Anaphylaxis Action Plan</div><div class="sf-desc">Broome Pediatrics physician-signed emergency action plan for daycare and school staff. Physician signature required.</div><div class="sf-dl">↓ Open &amp; Print Form</div></div>
@@ -1581,8 +1651,8 @@ const QS={
   gad7:{tag:'GAD-7',tc:'#1976d2',tb:'#e3f2fd',title:'GAD-7 — Generalized Anxiety Disorder Scale',sub:'Over the last 2 weeks, how often have you been bothered by any of the following problems?',sections:[{lbl:'Last 2 weeks — all 7 questions',items:[{q:'1. Feeling nervous, anxious, or on edge',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'2. Not being able to stop or control worrying',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'3. Worrying too much about different things',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'4. Trouble relaxing',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'5. Being so restless that it is hard to sit still',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'6. Becoming easily annoyed or irritable',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'7. Feeling afraid as if something awful might happen',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'}]}]},
   phq9:{tag:'PHQ-9/A',tc:'#6c3483',tb:'#f3e9ff',title:'PHQ-9 — Patient Health Questionnaire',sub:'Over the last 2 weeks, how often have you been bothered by any of the following problems? (Ages 12+)',sections:[{lbl:'Last 2 weeks — all 9 questions',items:[{q:'1. Little interest or pleasure in doing things',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'2. Feeling down, depressed, irritable, or hopeless',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'3. Trouble falling or staying asleep, or sleeping too much',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'4. Feeling tired or having little energy',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'5. Poor appetite or overeating',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'6. Feeling bad about yourself — or that you are a failure, or have let yourself or your family down',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'7. Trouble concentrating on things, such as reading the newspaper or watching television',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'8. Moving or speaking so slowly that other people have noticed? Or the opposite — being so fidgety or restless that you have been moving around a lot more than usual',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Nearly every day'},{q:'9. Thoughts that you would be better off dead, or of hurting yourself in some way',note:'If anything other than "Not at all" — please tell your doctor right away.',opts:['Not at all','Several days','More than half the days','Nearly every day'],flagOn:'Several days',isCritical:true}]}]},
   scared:{tag:'SCARED',tc:'#b85e00',tb:'#fff3dc',title:'SCARED — Child Anxiety Screen',sub:'How often is each statement true? Ages 8–18.',sections:[{lbl:'Anxiety symptoms',items:[{q:'When I feel frightened, it is hard to breathe',opts:['Not true','Sometimes true','Often true'],flagOn:'Often true'},{q:'I am nervous',opts:['Not true','Sometimes true','Often true']},{q:'I worry about going to school',opts:['Not true','Sometimes true','Often true'],flagOn:'Often true'},{q:'I get stomachaches at school',opts:['Not true','Sometimes true','Often true']},{q:'I do not like to be with people I do not know well',opts:['Not true','Sometimes true','Often true']}]}]},
-  vand_parent:{tag:'Vanderbilt (Parent)',tc:'#8b0046',tb:'#ffe0f3',title:'Vanderbilt ADHD — Parent Rating',sub:'Rate each behavior: Never / Occasionally / Often / Very often. Ages 6–12.',sections:[{lbl:'Inattention',items:[{q:'Fails to give close attention to details or makes careless mistakes',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Has difficulty sustaining attention in tasks or play',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Does not seem to listen when spoken to directly',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Has difficulty organizing tasks and activities',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Hyperactivity/Impulsivity',items:[{q:'Fidgets with hands or feet or squirms in seat',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Blurts out answers before questions are completed',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Has difficulty awaiting turn',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Academic performance',items:[{q:'Overall school performance',opts:['Excellent','Above average','Average','Somewhat problematic','Problematic'],flagOn:'Problematic'},{q:'Relationship with peers',opts:['Excellent','Above average','Average','Somewhat problematic','Problematic'],flagOn:'Problematic'}]}]},
-  vand_teacher:{tag:'Vanderbilt (Teacher)',tc:'#8b0046',tb:'#ffe0f3',title:'Vanderbilt ADHD — Teacher Rating',sub:'Rate each behavior. Ages 6–12. Teacher completes this form.',sections:[{lbl:'Classroom behavior',items:[{q:'Fails to give close attention to details or makes careless mistakes in schoolwork',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Has difficulty sustaining attention',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'Fidgets with hands or feet or squirms in seat',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Academic performance',items:[{q:'Reading — current performance',opts:['Excellent','Above average','Average','Somewhat problematic','Problematic'],flagOn:'Problematic'},{q:'Mathematics — current performance',opts:['Excellent','Above average','Average','Somewhat problematic','Problematic'],flagOn:'Problematic'}]}]},
+  vand_parent:{tag:'Vanderbilt (Parent)',tc:'#8b0046',tb:'#ffe0f3',title:'NICHQ Vanderbilt Assessment Scale — Parent Informant',sub:'Rate each behavior based on the past 6 months. Think about what is appropriate for your child’s age. Items 1–18 assess ADHD symptoms. Items 19–40 assess conduct/ODD. Items 41–47 assess anxiety/mood. Items 48–55 rate performance (1=Excellent to 5=Problematic). Positive screen: ≥6 items scored Often/Very Often in items 1–9 (inattentive) OR ≥6 in items 10–18 (hyperactive/impulsive). Source: NICHQ Vanderbilt, AAP/NICHQ ©2002. Ages 6–12.',sections:[{lbl:'Part 1 — Inattentive Symptoms (Items 1–9)',items:[{q:'1. Does not pay attention to details or makes careless mistakes with, for example, homework',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'2. Has difficulty keeping attention to what needs to be done',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'3. Does not seem to listen when spoken to directly',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'4. Does not follow through when given directions and fails to finish activities (not due to refusal or failure to understand)',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'5. Has difficulty organizing tasks and activities',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'6. Avoids, dislikes, or does not want to start tasks that require ongoing mental effort',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'7. Loses things necessary for tasks or activities (toys, assignments, pencils, or books)',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'8. Is easily distracted by noises or other stimuli',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'9. Is forgetful in daily activities',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Part 1 — Hyperactive/Impulsive Symptoms (Items 10–18)',items:[{q:'10. Fidgets with hands or feet or squirms in seat',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'11. Leaves seat when remaining seated is expected',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'12. Runs about or climbs too much when remaining seated is expected',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'13. Has difficulty playing or beginning quiet play activities',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'14. Is “on the go” or often acts as if “driven by a motor”',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'15. Talks too much',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'16. Blurts out answers before questions have been completed',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'17. Has difficulty waiting his or her turn',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'18. Interrupts or intrudes on others’ conversations and/or activities',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Part 2 — Oppositional Defiant Disorder Symptoms (Items 19–26)',items:[{q:'19. Argues with adults',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'20. Loses temper',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'21. Actively defies or refuses to go along with adults’ requests or rules',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'22. Deliberately annoys people',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'23. Blames others for his or her mistakes or misbehaviors',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'24. Is touchy or easily annoyed by others',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'25. Is angry or resentful',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'26. Is spiteful and wants to get even',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Part 3 — Conduct Disorder Symptoms (Items 27–40)',items:[{q:'27. Bullies, threatens, or intimidates others',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'28. Starts physical fights',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'29. Lies to get out of trouble or to avoid obligations (“cons” others)',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'30. Is truant from school (skips school) without permission',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'31. Is physically cruel to people',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'32. Has stolen things that have value',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'33. Deliberately destroys others’ property',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'34. Has used a weapon that can cause serious harm (bat, knife, brick, gun)',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often',isCritical:true},{q:'35. Is physically cruel to animals',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'36. Has deliberately set fires to cause damage',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often',isCritical:true},{q:'37. Has broken into someone else’s home, business, or car',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'38. Has stayed out at night without permission',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'39. Has run away from home overnight',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'40. Has forced someone into sexual activity',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often',isCritical:true}]},{lbl:'Part 4 — Anxiety/Mood Symptoms (Items 41–47)',items:[{q:'41. Is fearful, anxious, or worried',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'42. Is afraid to try new things for fear of making mistakes',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'43. Feels worthless or inferior',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'44. Blames self for problems, feels guilty',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'45. Feels lonely, unwanted, or unloved; complains that “no one loves him or her”',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'46. Is sad, unhappy, or depressed',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'},{q:'47. Is self-conscious or easily embarrassed',opts:['Never','Occasionally','Often','Very often'],flagOn:'Very often'}]},{lbl:'Part 5 — Performance (Items 48–55) — Rate current level',items:[{q:'48. Overall school performance',opts:['Excellent','Above average','Average','Somewhat of a problem','Problematic'],flagOn:'Somewhat of a problem'},{q:'49. Reading',opts:['Excellent','Above average','Average','Somewhat of a problem','Problematic'],flagOn:'Somewhat of a problem'},{q:'50. Writing',opts:['Excellent','Above average','Average','Somewhat of a problem','Problematic'],flagOn:'Somewhat of a problem'},{q:'51. Mathematics',opts:['Excellent','Above average','Average','Somewhat of a problem','Problematic'],flagOn:'Somewhat of a problem'},{q:'52. Relationship with parents',opts:['Excellent','Above average','Average','Somewhat of a problem','Problematic'],flagOn:'Somewhat of a problem'},{q:'53. Relationship with siblings',opts:['Excellent','Above average','Average','Somewhat of a problem','Problematic'],flagOn:'Somewhat of a problem'},{q:'54. Relationship with peers',opts:['Excellent','Above average','Average','Somewhat of a problem','Problematic'],flagOn:'Somewhat of a problem'},{q:'55. Participation in organized activities (e.g., teams)',opts:['Excellent','Above average','Average','Somewhat of a problem','Problematic'],flagOn:'Somewhat of a problem'}]}]},
+  
   asrs_a:{tag:'ASRS-v1.1 Part A',tc:'#0f2d48',tb:'#e8f2fa',title:'Adult ADHD Self-Report Scale — Part A',sub:'6 questions. How have you felt over the past 6 months? For adults 18+.',sections:[{lbl:'Over the past 6 months',items:[{q:'How often do you have trouble wrapping up the final details of a project?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty getting things in order for tasks that require organization?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have problems remembering appointments or obligations?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'When you have to do a task requiring thought, how often do you avoid or delay getting started?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you fidget or squirm when you have to sit down for a long time?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you feel overly active and compelled to do things, like driven by a motor?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'}]}]},
   asrs_full:{tag:'ASRS-v1.1 Full',tc:'#0f2d48',tb:'#e8f2fa',title:'Adult ADHD Self-Report Scale — Full (18 questions)',sub:'Complete ASRS v1.1 — Part A (Q1-6) validated screener + Part B (Q7-18). For adults 18+.',sections:[{lbl:'Part A — validated screener (Q1–6)',items:[{q:'How often do you have trouble wrapping up the final details of a project?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty getting things in order when you have to do a task that requires organization?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have problems remembering appointments or obligations?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'When you have a task that requires a lot of thought, how often do you avoid or delay getting started?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you fidget or squirm with your hands or feet when you have to sit down for a long time?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you feel overly active and compelled to do things, like you were driven by a motor?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'}]},{lbl:'Part B — additional symptoms (Q7–18)',items:[{q:'How often do you make careless mistakes when you have to work on a boring or difficult project?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty keeping your attention when doing boring or repetitive work?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty concentrating on what people say to you?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you misplace or have difficulty finding things at home or at work?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often are you distracted by activity or noise around you?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you leave your seat in meetings when remaining seated is expected?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you feel restless or fidgety?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you have difficulty unwinding and relaxing when you have time to yourself?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you find yourself talking too much in social situations?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Very often'},{q:'How often do you finish sentences of people before they can finish them?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you have difficulty waiting your turn when turn taking is required?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'},{q:'How often do you interrupt others when they are busy?',opts:['Never','Rarely','Sometimes','Often','Very often'],flagOn:'Often'}]}]},
   asq_suicide:{tag:'ASQ',tc:'#a93226',tb:'#fdecea',title:'Ask Suicide-Screening Questions (ASQ)',sub:'4 validated questions for pediatric primary care. Ages 10+. Results reviewed by Dr. Patel.',sections:[{lbl:'Lifetime & recent',items:[{q:'In your lifetime, have you ever had thoughts of killing yourself?',opts:['No','Yes'],flagOn:'Yes'},{q:'Have you ever done anything, started to do anything, or prepared to do anything to end your life?',opts:['No','Yes'],flagOn:'Yes',isCritical:true},{q:'In the past few weeks, have you been having thoughts of killing yourself?',opts:['No','Yes'],flagOn:'Yes',isCritical:true},{q:'Right now, are you having thoughts of killing yourself?',opts:['No','Yes'],flagOn:'Yes',isCritical:true}]}]},
@@ -2379,7 +2449,22 @@ function generateForm(type){
   const form=forms[type];
   if(!form){alert('Form not found. Please contact Broome Pediatrics at (607) 770-1988.');return;}
   const win=window.open('','_blank');
-  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${form.title} — Broome Pediatrics</title><style>${css}</style></head><body>${printBtn}<div class="form-num">Form: ${form.num} &nbsp;|&nbsp; Broome Pediatrics &nbsp;|&nbsp; (607) 770-1988 &nbsp;|&nbsp; Fax: (607) 770-9086</div>${form.html}<div style="margin-top:30px;padding-top:14px;border-top:1.5px solid #d4e6ef;font-size:10px;color:#5c6675;text-align:center">Broome Pediatrics · 639 Main St, Johnson City, NY 13790 · (607) 770-1988 · Fax: (607) 770-9086<br>Return completed form to our office or fax to (607) 770-9086 · Form ${form.num} · Generated ${new Date().toLocaleDateString()}</div>${printBtn}</body></html>`);
+  win.document.write(`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${form.title} — Broome Pediatrics</title><style>${css}</style></head><body>${printBtn}<div class="form-num">Form: ${form.num} &nbsp;|&nbsp; Broome Pediatrics &nbsp;|&nbsp; (607) 770-1988 &nbsp;|&nbsp; Fax: (607) 770-9086</div>${form.html}<div style="margin-top:30px;padding-top:14px;border-top:1.5px solid #d4e6ef;font-size:10px;color:#5c6675;text-align:center">Broome Pediatrics · 639 Main St, Johnson City, NY 13790 · (607) 770-1988 · Fax: (607) 770-9086<br>Return completed form to our office or fax to (607) 770-9086 · Form ${form.num} · Generated ${new Date().toLocaleDateString()}</div>${printBtn}
+<!-- VAX DATE MODAL -->
+<div id="vaxModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:white;border-radius:var(--r);box-shadow:0 20px 60px rgba(0,0,0,.35);padding:22px 24px;max-width:360px;width:90%;margin:auto">
+    <div style="font-size:13px;font-weight:900;margin-bottom:4px" id="vaxModalTitle">Log Vaccine</div>
+    <div style="font-size:11px;color:var(--muted);font-weight:700;margin-bottom:14px" id="vaxModalSub"></div>
+    <label style="font-size:11px;font-weight:900;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px">Date Given</label>
+    <input type="date" id="vaxModalDate" style="width:100%;border:2px solid var(--border);border-radius:var(--rs);padding:9px 12px;font-size:14px;font-family:var(--font);outline:none;box-sizing:border-box;margin-bottom:14px">
+    <div style="display:flex;gap:9px">
+      <button onclick="vaxModalSave()" style="flex:1;background:#16a34a;color:white;border:none;border-radius:var(--rs);padding:10px;font-size:13px;font-weight:900;cursor:pointer;font-family:var(--font)">✓ Save</button>
+      <button onclick="vaxModalClear()" style="background:#fee2e2;color:#b91c1c;border:none;border-radius:var(--rs);padding:10px 14px;font-size:12px;font-weight:900;cursor:pointer;font-family:var(--font)">✕ Clear</button>
+      <button onclick="document.getElementById('vaxModal').style.display='none'" style="background:var(--bg);color:var(--muted);border:2px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;font-weight:900;cursor:pointer;font-family:var(--font)">Cancel</button>
+    </div>
+  </div>
+</div>
+</body></html>`);
   win.document.close();
 }
 
@@ -2507,81 +2592,11 @@ function vaxStatusLabel(st){
 
 function buildVaxPage(){
   const ageM = vaxAgeMonths();
-  const ageY = Math.floor(ageM / 12);
-  const ageRem = Math.round(ageM % 12);
-  const ageStr = ageY > 0 ? ageY + ' yr ' + ageRem + ' mo' : Math.round(ageM) + ' months';
-
+  const ageY = Math.floor(ageM/12);
+  const ageRem = Math.round(ageM%12);
+  const ageStr = ageY>0 ? ageY+' yr '+ageRem+' mo' : Math.round(ageM)+' months';
   document.getElementById('vaxAgeBadge').textContent = ageStr;
-
-  let counts = {done:0,due:0,overdue:0,upcoming:0,soon:0,missed:0};
-
-  // Assign keys and compute statuses
-  VAX_SCHEDULE.forEach(vax => {
-    vax.doses.forEach((dose, di) => {
-      dose._key = vax.id + '_' + di;
-      const st = vaxStatus(dose, ageM);
-      dose._status = st;
-      if(counts[st] !== undefined) counts[st]++;
-    });
-  });
-
-  // Progress cards
-  const totalDue = counts.due + counts.soon;
-  document.getElementById('vaxProgDone').textContent = counts.done;
-  document.getElementById('vaxProgOverdue').textContent = counts.overdue;
-  document.getElementById('vaxProgDue').textContent = totalDue;
-  document.getElementById('vaxProgUpcoming').textContent = counts.upcoming;
-
-  // Build vaccine grid
-  const grid = document.getElementById('vaxCardGrid');
-  grid.innerHTML = '';
-
-  VAX_SCHEDULE.forEach(vax => {
-    // Check if any dose matches the filter
-    const anyVisible = vax.doses.some(d => {
-      if(vaxFilter === 'all') return true;
-      if(vaxFilter === 'done') return d._status === 'done';
-      if(vaxFilter === 'overdue') return d._status === 'overdue';
-      if(vaxFilter === 'due') return d._status === 'due' || d._status === 'soon';
-      if(vaxFilter === 'upcoming') return d._status === 'upcoming';
-      return true;
-    });
-    if(!anyVisible) return;
-
-    const hasOverdue = vax.doses.some(d => d._status === 'overdue');
-    const hasDue = vax.doses.some(d => d._status === 'due' || d._status === 'soon');
-    const allDone = vax.doses.every(d => d._status === 'done');
-    const borderColor = hasOverdue ? '#e53935' : hasDue ? '#f59e0b' : allDone ? '#16a34a' : 'var(--border)';
-
-    let dosesHtml = '';
-    vax.doses.forEach((dose, di) => {
-      const st = dose._status;
-      const rec = vaxRecords[dose._key] || '';
-      const badgeClass = {done:'badge-done',overdue:'badge-overdue',due:'badge-due',soon:'badge-due',upcoming:'badge-upcoming',missed:'badge-overdue'}[st];
-      const recRange = dose.recMin < 12
-        ? dose.recMin + '\u2013' + (dose.recMax < 12 ? dose.recMax + ' months' : Math.round(dose.recMax/12*10)/10 + ' years')
-        : (dose.recMax > 200 ? 'Annual from ' + Math.round(dose.recMin/12) + ' years' : Math.round(dose.recMin/12*10)/10 + '\u2013' + Math.round(dose.recMax/12*10)/10 + ' years');
-
-      dosesHtml += '<div class="vax-dose ' + st + '" id="dose_' + dose._key + '">';
-      dosesHtml += '<div class="vax-dose-row"><span class="vax-dose-lbl">' + dose.label + '</span><span class="vax-dose-badge ' + badgeClass + '">' + vaxStatusLabel(st) + '</span></div>';
-      dosesHtml += '<div class="vax-dose-rec">📅 Recommended: ' + recRange + '</div>';
-      if(dose.note) dosesHtml += '<div class="vax-dose-rec" style="color:#555">' + dose.note + '</div>';
-      if(st !== 'done') dosesHtml += '<div class="vax-dose-catchup">🔄 Catch-up: ' + dose.catchup + '</div>';
-      dosesHtml += '<div class="vax-dose-daterow">';
-      dosesHtml += '<input type="date" class="vax-dose-dateinput" id="dateinput_' + dose._key + '" value="' + rec + '" placeholder="Date given...">';
-      dosesHtml += '<button class="vax-save-btn" onclick="saveVaxDate(\'' + dose._key + '\')">Save</button>';
-      if(rec) dosesHtml += '<span style="font-size:10px;color:#16a34a;font-weight:900">✓ ' + rec + '</span>';
-      dosesHtml += '</div></div>';
-    });
-
-    const card = '<div class="vax-card" style="border-color:' + borderColor + '">' +
-      '<div class="vax-card-hdr">' +
-      '<div class="vax-card-icon" style="background:' + vax.bg + '">' + vax.icon + '</div>' +
-      '<div><div class="vax-card-name">' + vax.name + ' (' + vax.abbr + ')</div>' +
-      '<div class="vax-card-prevents">Prevents: ' + vax.prevents + '</div></div></div>' +
-      '<div class="vax-doses">' + dosesHtml + '</div></div>';
-    grid.insertAdjacentHTML('beforeend', card);
-  });
+  buildSchedTable();
 }
 
 function saveVaxDate(key){
@@ -2606,67 +2621,151 @@ function updateVaxDOB(){
 // ===== AAP SCHEDULE TABLE BUILDER =====
 // Columns: Birth(0), 1mo, 2mo, 4mo, 6mo, 9mo, 12mo, 15mo, 18mo, 24mo, 2-3yr, 4-6yr, 7-10yr, 11-12yr, 13-15yr, 16yr, 17-18yr
 // Values: '' empty, 'r' recommended (green), 'c' catch-up (purple), 'g' certain groups (yellow), 'p' recommended if not prev vaccinated (blue)
-const SCHED_ROWS = [
-  {v:'HepB (3 doses)', abbr:'HepB',
-   cells:['r','r','r','c','c','c','c','c','c','c','c','c','c','c','c','c','c']},
-  {v:'Rotavirus (2-3 doses)', abbr:'RV',
-   cells:['','','r','r','r','','','','','','','','','','','','']},
-  {v:'DTaP (5 doses)', abbr:'DTaP',
-   cells:['','','r','r','r','','','r','r','','','r','','','','','']},
-  {v:'Hib (3-4 doses)', abbr:'Hib',
-   cells:['','','r','r','r','','r','r','','','','','','','','','']},
-  {v:'PCV15/20 (4 doses)', abbr:'PCV',
-   cells:['','','r','r','r','','r','r','','','','','','','','','']},
-  {v:'IPV/Polio (4 doses)', abbr:'IPV',
-   cells:['','','r','r','r','','','','r','','','r','c','c','c','c','c']},
-  {v:'COVID-19 (annual)', abbr:'COVID-19',
-   cells:['','','','','','','r','r','r','r','r','r','r','r','r','r','r']},
-  {v:'Influenza (annual)', abbr:'Flu',
-   cells:['','','','','','r','r','r','r','r','r','r','r','r','r','r','r']},
-  {v:'MMR (2 doses)', abbr:'MMR',
-   cells:['','','','','','','r','r','','','','r','c','c','c','c','c']},
-  {v:'Varicella (2 doses)', abbr:'VAR',
-   cells:['','','','','','','r','r','','','','r','c','c','c','c','c']},
-  {v:'HepA (2 doses)', abbr:'HepA',
-   cells:['','','','','','','r','r','r','r','c','c','c','c','c','c','c']},
-  {v:'RSV — Nirsevimab', abbr:'RSV-mAb',
-   cells:['g','g','g','g','g','g','g','','','','','','','','','','']},
-  {v:'Tdap (booster)', abbr:'Tdap',
-   cells:['','','','','','','','','','','','','','r','c','c','c']},
-  {v:'HPV (2-3 doses)', abbr:'HPV',
-   cells:['','','','','','','','','','','','','g','r','c','c','c']},
-  {v:'MenACWY (2 doses)', abbr:'MenACWY',
-   cells:['','','','','','','','','','','','','g','r','p','r','p']},
-  {v:'MenB (2-3 doses)', abbr:'MenB',
-   cells:['','','','','','','','','','','','','g','g','g','r','r']},
-  {v:'Dengue (3 doses)', abbr:'DEN',
-   cells:['','','','','','','','','','','','','','g','g','g','g']},
+
+const COL_LABELS=['Birth','1 mo','2 mo','4 mo','6 mo','9 mo','12 mo','15 mo','18 mo','24 mo','2-3 yr','4-6 yr','7-10 yr','11-12 yr','13-15 yr','16 yr','17-18 yr'];
+const COL_MID   =[    0,    1,    2,    4,    6,    9,   12,   15,   18,   24,    30,    60,    96,   138,   168,   192,   210];
+
+const SCHED_ROWS=[
+  {v:'Hepatitis B',abbr:'HepB',
+   cells:[{t:'r',d:'D1'},{t:'r',d:'D2'},{t:'r',d:'D2'},{t:'g',d:'+D'},{t:'r',d:'D3'},{t:'c',d:'D3'},{t:'c',d:'D3'},{t:'c',d:'D3'},{t:'c',d:'D3'},{t:'c',d:'D3'},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''}]},
+  {v:'Rotavirus',abbr:'RV',
+   cells:[null,null,{t:'r',d:'D1'},{t:'r',d:'D2'},{t:'r',d:'D3'},null,null,null,null,null,null,null,null,null,null,null,null]},
+  {v:'DTaP',abbr:'DTaP',
+   cells:[null,null,{t:'r',d:'D1'},{t:'r',d:'D2'},{t:'r',d:'D3'},{t:'c',d:'D3'},{t:'c',d:'D3'},{t:'r',d:'D4'},{t:'r',d:'D4'},{t:'c',d:'D4'},{t:'c',d:'D4'},{t:'r',d:'D5'},null,null,null,null,null]},
+  {v:'Hib',abbr:'Hib',
+   cells:[null,null,{t:'r',d:'D1'},{t:'r',d:'D2'},{t:'r',d:'D3'},{t:'c',d:'D3'},{t:'r',d:'D4'},{t:'r',d:'D4'},null,{t:'c',d:'D4'},null,null,null,null,null,null,null]},
+  {v:'PCV20 (Pneumococcal)',abbr:'PCV20',
+   cells:[null,null,{t:'r',d:'D1'},{t:'r',d:'D2'},{t:'r',d:'D3'},{t:'c',d:'D3'},{t:'r',d:'D4'},{t:'r',d:'D4'},null,{t:'c',d:'D4'},{t:'c',d:''},null,null,null,null,null,null]},
+  {v:'IPV / Polio',abbr:'IPV',
+   cells:[null,null,{t:'r',d:'D1'},{t:'r',d:'D2'},{t:'r',d:'D3'},{t:'c',d:'D3'},{t:'c',d:'D3'},{t:'c',d:'D3'},{t:'r',d:'D3'},{t:'c',d:'D3'},{t:'c',d:'D3'},{t:'r',d:'D4'},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''}]},
+  {v:'COVID-19',abbr:'COVID',
+   cells:[null,null,null,null,null,null,{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'}]},
+  {v:'Influenza',abbr:'Flu',
+   cells:[null,null,null,null,null,null,{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'},{t:'r',d:'Ann'}]},
+  {v:'MMR',abbr:'MMR',
+   cells:[null,null,null,null,null,null,{t:'r',d:'D1'},{t:'r',d:'D1'},{t:'c',d:'D1'},{t:'c',d:'D1'},{t:'c',d:'D1'},{t:'r',d:'D2'},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''}]},
+  {v:'Varicella',abbr:'VAR',
+   cells:[null,null,null,null,null,null,{t:'r',d:'D1'},{t:'r',d:'D1'},{t:'c',d:'D1'},{t:'c',d:'D1'},{t:'c',d:'D1'},{t:'r',d:'D2'},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''}]},
+  {v:'Hepatitis A',abbr:'HepA',
+   cells:[null,null,null,null,null,null,{t:'r',d:'D1'},{t:'r',d:'D1'},{t:'r',d:'D2'},{t:'r',d:'D2'},{t:'c',d:'D2'},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''},{t:'c',d:''}]},
+  {v:'RSV Nirsevimab',abbr:'RSV-mAb',
+   cells:[{t:'g',d:'1x'},{t:'g',d:'1x'},{t:'g',d:'1x'},{t:'g',d:'1x'},{t:'g',d:'1x'},{t:'g',d:'1x'},null,null,null,null,null,null,null,null,null,null,null]},
+  {v:'Tdap',abbr:'Tdap',
+   cells:[null,null,null,null,null,null,null,null,null,null,null,null,{t:'c',d:'CU'},{t:'r',d:'D1'},{t:'c',d:'CU'},{t:'c',d:'CU'},{t:'c',d:'CU'}]},
+  {v:'HPV',abbr:'HPV',
+   cells:[null,null,null,null,null,null,null,null,null,null,null,null,{t:'g',d:'D1'},{t:'r',d:'D1'},{t:'c',d:'D2'},{t:'c',d:'D2'},{t:'c',d:'D3'}]},
+  {v:'MenACWY',abbr:'MenACWY',
+   cells:[null,null,null,null,null,null,null,null,null,null,null,null,{t:'g',d:'HR'},{t:'r',d:'D1'},{t:'p',d:'CU'},{t:'r',d:'D2'},{t:'p',d:'CU'}]},
+  {v:'MenB',abbr:'MenB',
+   cells:[null,null,null,null,null,null,null,null,null,null,null,null,{t:'g',d:'HR'},{t:'g',d:'HR'},{t:'g',d:'HR'},{t:'r',d:'D1'},{t:'r',d:'D2'}]},
 ];
 
-const SCHED_COLORS = {r:'#16a34a',c:'#7c3aed',g:'#b45309',p:'#1565c0'};
-const SCHED_BG = {r:'#dcfce7',c:'#ede9fe',g:'#fef3c7',p:'#dbeafe'};
+const SCHED_COLORS={r:'#16a34a',c:'#7c3aed',g:'#b45309',p:'#1565c0'};
+const SCHED_BG    ={r:'#dcfce7',c:'#ede9fe',g:'#fef3c7',p:'#dbeafe'};
 
-function buildSchedTable(){
-  const tbody = document.getElementById('vaxSchedBody');
-  if(!tbody) return;
-  tbody.innerHTML = '';
-  SCHED_ROWS.forEach((row, ri) => {
-    const tr = document.createElement('tr');
-    tr.style.cssText = ri%2===0 ? 'background:white' : 'background:#fafafa';
-    // Vaccine name cell
-    let html = '<td style="padding:7px 12px;font-size:11px;font-weight:900;white-space:nowrap;position:sticky;left:0;z-index:1;border-right:2px solid var(--border);background:inherit">' + row.v + '</td>';
-    row.cells.forEach(cell => {
-      if(!cell){
-        html += '<td style="border:1px solid #f0f0f0;min-width:46px"></td>';
-      } else {
-        html += '<td style="border:1px solid #f0f0f0;min-width:46px;background:' + SCHED_BG[cell] + ';text-align:center;font-size:9px;font-weight:900;color:' + SCHED_COLORS[cell] + ';padding:4px 2px">&#9646;</td>';
-      }
-    });
-    tr.innerHTML = html;
-    tbody.appendChild(tr);
-  });
+let vaxTableRecs={};
+let vaxModalKey='';
+
+function openVaxModal(ri,ci){
+  var row=SCHED_ROWS[ri];
+  var cell=row.cells[ci];
+  if(!cell||!cell.t) return;
+  vaxModalKey=ri+'_'+ci;
+  var doseLabel={D1:'Dose 1',D2:'Dose 2',D3:'Dose 3',D4:'Dose 4',D5:'Dose 5',Ann:'Annual dose',CU:'Catch-up dose',HR:'High-risk dose','1x':'Single dose','+D':'Optional 4th dose (combination vaccines)'}[cell.d]||cell.d||'';
+  document.getElementById('vaxModalTitle').textContent=row.v+' ('+row.abbr+')';
+  document.getElementById('vaxModalSub').textContent='Age column: '+COL_LABELS[ci]+(doseLabel?' | '+doseLabel:'');
+  var existing=vaxTableRecs[vaxModalKey]||'';
+  document.getElementById('vaxModalDate').value=existing||new Date().toISOString().slice(0,10);
+  document.getElementById('vaxModal').style.display='flex';
 }
 
+function vaxModalSave(){
+  var d=document.getElementById('vaxModalDate').value;
+  if(d) vaxTableRecs[vaxModalKey]=d;
+  document.getElementById('vaxModal').style.display='none';
+  buildSchedTable();
+}
+
+function vaxModalClear(){
+  delete vaxTableRecs[vaxModalKey];
+  document.getElementById('vaxModal').style.display='none';
+  buildSchedTable();
+}
+
+function updateVaxProgress(){
+  var ageM=vaxAgeMonths();
+  var done=0,overdue=0,due=0,upcoming=0;
+  SCHED_ROWS.forEach(function(row,ri){
+    row.cells.forEach(function(cell,ci){
+      if(!cell||!cell.t) return;
+      var key=ri+'_'+ci;
+      if(vaxTableRecs[key]){done++;return;}
+      if(cell.t!=='r') return;
+      var cm=COL_MID[ci];
+      if(ageM>cm+3) overdue++;
+      else if(ageM>=cm-2) due++;
+      else upcoming++;
+    });
+  });
+  document.getElementById('vaxProgDone').textContent=done;
+  document.getElementById('vaxProgOverdue').textContent=overdue;
+  document.getElementById('vaxProgDue').textContent=due;
+  document.getElementById('vaxProgUpcoming').textContent=upcoming;
+}
+
+function buildSchedTable(){
+  var tbody=document.getElementById('vaxSchedBody');
+  if(!tbody) return;
+  tbody.innerHTML='';
+  SCHED_ROWS.forEach(function(row,ri){
+    var tr=document.createElement('tr');
+    tr.style.background=ri%2===0?'white':'#fafafa';
+    var html='<td style="padding:7px 10px;font-size:10px;font-weight:900;white-space:nowrap;position:sticky;left:0;z-index:1;border-right:2px solid #e0e0e0;background:inherit;min-width:110px">'
+            +'<div style="font-size:11px">'+row.v+'</div>'
+            +'<div style="font-size:9px;color:#888;font-weight:700">('+row.abbr+')</div></td>';
+    row.cells.forEach(function(cell,ci){
+      var key=ri+'_'+ci;
+      var rec=vaxTableRecs[key];
+      if(!cell||!cell.t){
+        html+='<td style="border:1px solid #f0f0f0;min-width:50px;background:inherit"></td>';
+      } else if(rec){
+        var short=rec.slice(5).replace('-','/');
+        html+='<td onclick="openVaxModal('+ri+','+ci+')" '
+             +'style="border:1px solid #bbf7d0;min-width:50px;background:#dcfce7;cursor:pointer;text-align:center;vertical-align:middle;padding:3px 2px">'
+             +'<div style="font-size:14px">&#9989;</div>'
+             +'<div style="font-size:8px;font-weight:900;color:#15803d;line-height:1.2">'+short+'</div></td>';
+      } else {
+        var bg=SCHED_BG[cell.t];
+        var fg=SCHED_COLORS[cell.t];
+        var tip=cell.d||'+';
+        html+='<td onclick="openVaxModal('+ri+','+ci+')" '
+             +'style="border:1px solid #e0e0e0;min-width:50px;background:'+bg+';cursor:pointer;text-align:center;vertical-align:middle;padding:4px 2px">'
+             +'<div style="font-size:9px;font-weight:900;color:'+fg+';line-height:1.3">'+tip+'</div>'
+             +'<div style="font-size:9px;color:'+fg+';line-height:1">&#x271a;</div></td>';
+      }
+    });
+    tr.innerHTML=html;
+    tbody.appendChild(tr);
+  });
+  updateVaxProgress();
+}
+
+// ===== END OF SCRIPT =====
 </script>
+
+<!-- VAX DATE MODAL -->
+<div id="vaxModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:white;border-radius:var(--r);box-shadow:0 20px 60px rgba(0,0,0,.35);padding:22px 24px;max-width:360px;width:90%;margin:auto">
+    <div style="font-size:13px;font-weight:900;margin-bottom:4px" id="vaxModalTitle">Log Vaccine</div>
+    <div style="font-size:11px;color:var(--muted);font-weight:700;margin-bottom:14px" id="vaxModalSub"></div>
+    <label style="font-size:11px;font-weight:900;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:5px">Date Given</label>
+    <input type="date" id="vaxModalDate" style="width:100%;border:2px solid var(--border);border-radius:var(--rs);padding:9px 12px;font-size:14px;font-family:var(--font);outline:none;box-sizing:border-box;margin-bottom:14px">
+    <div style="display:flex;gap:9px">
+      <button onclick="vaxModalSave()" style="flex:1;background:#16a34a;color:white;border:none;border-radius:var(--rs);padding:10px;font-size:13px;font-weight:900;cursor:pointer;font-family:var(--font)">✓ Save</button>
+      <button onclick="vaxModalClear()" style="background:#fee2e2;color:#b91c1c;border:none;border-radius:var(--rs);padding:10px 14px;font-size:12px;font-weight:900;cursor:pointer;font-family:var(--font)">✕ Clear</button>
+      <button onclick="document.getElementById('vaxModal').style.display='none'" style="background:var(--bg);color:var(--muted);border:2px solid var(--border);border-radius:var(--rs);padding:10px 14px;font-size:12px;font-weight:900;cursor:pointer;font-family:var(--font)">Cancel</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
