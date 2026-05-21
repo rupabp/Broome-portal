@@ -4,7 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Broome Pediatrics — Patient Portal (Demo)</title>
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,400;0,700;1,400;1,700&family=Patrick+Hand&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
    BROOME PEDIATRICS PATIENT PORTAL — DEMO VERSION
@@ -27,7 +29,7 @@
   --text:#1a1a2e;--muted:#5c6675;--border:#d4e6ef;
   --white:#ffffff;--bg:#f0fbff;
   --r:18px;--rs:10px;--sh:0 4px 18px rgba(0,0,0,.1);--shhov:0 8px 32px rgba(0,0,0,.18);
-  --font:'Comic Sans MS','Comic Sans',cursive,'Patrick Hand',sans-serif;
+  --font:'Comic Sans MS','Comic Sans','Chalkboard SE','Chalkboard','Comic Neue',cursive,sans-serif;
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh}
 
@@ -1256,14 +1258,42 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   <!-- ===== HEALTH INFO ===== -->
   <div class="page" id="page-health">
     <div class="section-header"><h1>📖 Health Info Library</h1><p>Trusted care advice for common concerns</p></div>
+
+    <div class="form-sec-lbl">Health Library</div>
     <div class="health-grid">
-      <div class="health-card"><div class="health-icon">🌡️</div><div class="health-name">When to worry about a fever</div><div class="health-sub">Temperature guidelines, when to call, and comfort measures.</div><span class="badge orange" style="margin-top:8px;display:inline-block">Fever</span></div>
-      <div class="health-card"><div class="health-icon">🤧</div><div class="health-name">Managing cold symptoms in toddlers</div><div class="health-sub">Safe remedies, hydration tips, and warning signs.</div><span class="badge blue" style="margin-top:8px;display:inline-block">Cold &amp; Flu</span></div>
-      <div class="health-card"><div class="health-icon">🥗</div><div class="health-name">Introducing solid foods 12–24 months</div><div class="health-sub">What to feed, avoid, and picky eating guidance.</div><span class="badge green" style="margin-top:8px;display:inline-block">Nutrition</span></div>
-      <div class="health-card"><div class="health-icon">😴</div><div class="health-name">Healthy sleep habits at 18 months</div><div class="health-sub">Nap schedules, bedtime routines, and sleep regressions.</div><span class="badge purple" style="margin-top:8px;display:inline-block">Sleep</span></div>
-      <div class="health-card"><div class="health-icon">🧴</div><div class="health-name">Eczema care for babies &amp; toddlers</div><div class="health-sub">Moisturizing routines, triggers, and prescription options.</div><span class="badge yellow" style="margin-top:8px;display:inline-block">Skin</span></div>
-      <div class="health-card"><div class="health-icon">🏠</div><div class="health-name">Childproofing your home</div><div class="health-sub">Room-by-room checklist for your growing explorer.</div><span class="badge teal" style="margin-top:8px;display:inline-block">Safety</span></div>
+      <div class="health-card" onclick="window.open('https://www.childrenscolorado.org/conditions-and-advice/','_blank')" style="cursor:pointer;border:2.5px solid #0047ba;background:#f0f7ff">
+        <div class="health-icon">🏥</div>
+        <div class="health-name">Children's Colorado — Conditions & Advice</div>
+        <div class="health-sub">Comprehensive A–Z library of pediatric conditions, symptoms, treatments, and parenting advice from Children's Hospital Colorado specialists.</div>
+        <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+          <span class="badge blue" style="display:inline-block">Health Library</span>
+          <span style="font-size:10px;font-weight:900;color:#0047ba">Visit site ↗</span>
+        </div>
+      </div>
     </div>
+
+    <div class="form-sec-lbl">Symptom Checkers</div>
+    <div class="health-grid">
+      <div class="health-card" onclick="window.open('https://www.chop.edu/symptom-checker#/app/symptom-checker','_blank')" style="cursor:pointer;border:2.5px solid #0047ba;background:#f0f7ff">
+        <div class="health-icon">🔍</div>
+        <div class="health-name">CHOP Symptom Checker</div>
+        <div class="health-sub">Interactive symptom checker from Children's Hospital of Philadelphia. Helps parents identify possible causes of their child's symptoms and decide next steps.</div>
+        <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+          <span class="badge blue" style="display:inline-block">Symptoms</span>
+          <span style="font-size:10px;font-weight:900;color:#0047ba">Visit site ↗</span>
+        </div>
+      </div>
+      <div class="health-card" onclick="window.open('https://www.healthychildren.org/english/tips-tools/symptom-checker/Pages/default.aspx','_blank')" style="cursor:pointer;border:2.5px solid #2e7d32;background:#f0fdf4">
+        <div class="health-icon">🩺</div>
+        <div class="health-name">AAP Symptom Checker</div>
+        <div class="health-sub">Interactive symptom checker from the American Academy of Pediatrics. Helps parents decide when to call the doctor, go to urgent care, or head to the emergency room.</div>
+        <div style="margin-top:8px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px">
+          <span class="badge green" style="display:inline-block">AAP · HealthyChildren.org</span>
+          <span style="font-size:10px;font-weight:900;color:#2e7d32">Visit site ↗</span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
   <!-- ===== FORMS ===== -->
@@ -1465,7 +1495,41 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         </div>
         <div class="res-card-ftr">
           <div class="res-tags"><span class="res-tag">Parenting</span><span class="res-tag">Development</span><span class="res-tag">Family health</span><span class="res-tag">Expert advice</span></div>
-          <a class="res-visit-btn" href="https://www.mountsinai.org/care/parenting-center" target="_blank" rel="noopener">Visit site ↗</a>
+          <a class="res-visit-btn" href="https://parenting.mountsinai.org" target="_blank" rel="noopener">Visit site ↗</a>
+        </div>
+      </div>
+      <div class="res-card featured" data-cats="parenting health">
+        <div style="padding:9px 16px 0"><div class="featured-ribbon">⭐ Featured by Broome Pediatrics</div></div>
+        <div class="res-card-hdr">
+          <div class="res-logo" style="background:#e8f4ff;border-color:#1565c0">
+            <svg width="40" height="40" viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#1565c0"/><text x="20" y="27" text-anchor="middle" font-size="20" fill="white">👨‍👩‍👧</text></svg>
+          </div>
+          <div>
+            <div class="res-name">AAP Parenting</div>
+            <div class="res-org">American Academy of Pediatrics · HealthyChildren.org</div>
+            <div class="res-desc">The AAP's official parent resource hub. Covers nutrition, safety, development, behavior, immunizations, and more — all reviewed and approved by AAP pediatric experts for families with children of all ages.</div>
+          </div>
+        </div>
+        <div class="res-card-ftr">
+          <div class="res-tags"><span class="res-tag">Parenting</span><span class="res-tag">AAP</span><span class="res-tag">Nutrition</span><span class="res-tag">Safety</span><span class="res-tag">Development</span></div>
+          <a class="res-visit-btn" href="https://www.healthychildren.org/English/Pages/default.aspx" target="_blank" rel="noopener">Visit site ↗</a>
+        </div>
+      </div>
+      <div class="res-card featured" data-cats="mental health parenting">
+        <div style="padding:9px 16px 0"><div class="featured-ribbon">⭐ Featured by Broome Pediatrics</div></div>
+        <div class="res-card-hdr">
+          <div class="res-logo" style="background:#f3e5f5;border-color:#6a1b9a">
+            <svg width="40" height="40" viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#6a1b9a"/><text x="20" y="27" text-anchor="middle" font-size="20" fill="white">🧠</text></svg>
+          </div>
+          <div>
+            <div class="res-name">American Academy of Child and Adolescent Psychiatry</div>
+            <div class="res-org">AACAP · Families & Youth Resource Center</div>
+            <div class="res-desc">Trusted mental health resources for families from the nation's leading child psychiatry organization. Covers anxiety, ADHD, depression, behavioral issues, autism, and more — written for parents and caregivers.</div>
+          </div>
+        </div>
+        <div class="res-card-ftr">
+          <div class="res-tags"><span class="res-tag">Mental health</span><span class="res-tag">ADHD</span><span class="res-tag">Anxiety</span><span class="res-tag">Behavior</span><span class="res-tag">AACAP</span></div>
+          <a class="res-visit-btn" href="https://www.aacap.org/AACAP/Families_Youth/AACAP/Families_and_Youth/Home.aspx?hkey=fb0befff-aae9-4867-958b-d8b45f5ecb2f" target="_blank" rel="noopener">Visit site ↗</a>
         </div>
       </div>
     </div>
@@ -1488,6 +1552,27 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         </div>
       </div>
     </div>
+
+    <div class="res-sec-lbl">Developmental resources</div>
+    <div class="res-grid">
+      <div class="res-card" data-cats="development parenting" onclick="window.open('https://www.zerotothree.org/resources/for-families/','_blank')">
+        <div class="res-card-hdr">
+          <div class="res-logo" style="background:#fff8e1;border-color:#f57f17">
+            <svg width="40" height="40" viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#f57f17"/><text x="20" y="27" text-anchor="middle" font-size="20" fill="white">👶</text></svg>
+          </div>
+          <div>
+            <div class="res-name">Zero to Three</div>
+            <div class="res-org">ZERO TO THREE · National Nonprofit</div>
+            <div class="res-desc">Expert resources on infant and toddler development from birth to age 3. Covers brain development, social-emotional growth, language, sleep, feeding, and parenting strategies — backed by science and written for families.</div>
+          </div>
+        </div>
+        <div class="res-card-ftr">
+          <div class="res-tags"><span class="res-tag">Development</span><span class="res-tag">Infants</span><span class="res-tag">Toddlers</span><span class="res-tag">0–3 years</span></div>
+          <a class="res-visit-btn" href="https://www.zerotothree.org/resources/for-families/" target="_blank" rel="noopener">Visit site ↗</a>
+        </div>
+      </div>
+    </div>
+
     <div class="suggest-box">
       <div style="font-size:26px;flex-shrink:0">💡</div>
       <div>
